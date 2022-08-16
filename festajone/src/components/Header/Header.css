@@ -1,0 +1,15 @@
+.header {
+  padding: 10px 0;
+  font-size: 20px;
+  background-color: #535761;
+  text-align: center;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.header .userIcon {
+  margin-top: 8px;
+}/*# sourceMappingURL=Header.css.map */
