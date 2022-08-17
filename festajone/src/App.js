@@ -12,6 +12,7 @@ import RestaurantList from './components/RestaurantList/RestaurantList';
 import Mypage from './components/Mypage/Mypage';
 import Login from './components/Login/Login';
 import Join from './components/Join/Join';
+import FestivalDetail from './components/FestivalDetail/FestivalDetail';
 
 
 const App = () => {
@@ -30,6 +31,8 @@ const App = () => {
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
+        <Route path="/festivaldetail" element={<FestivalDetail />} />
+
       </Routes>
       <Footer />
     </div>
