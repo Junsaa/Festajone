@@ -23,6 +23,7 @@ const FestivalList = () => {
         </div>
         <div className='classify'>
           <div className='title'>분류</div>
+          
           <div className='classfyOption'>
             <select name="" id="">
               <option value="">문화</option>
