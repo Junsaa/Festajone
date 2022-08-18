@@ -36,7 +36,7 @@ const Login = () => {
           window.sessionStorage.setItem('id', idRef.current.value);
           Navigate('/MainPage');
         } else {
-          Navigate('/sdf');
+          Navigate('/');
         } 
         var id = document.getElementById('username');
         var pw = document.getElementById('password');
