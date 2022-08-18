@@ -1,11 +1,73 @@
-import React from 'react'
+import React from 'react';
+import './MainPage.css';
 
 const MainPage = () => {
-  return (
-    <div>
-      메인 첫 페이지
-    </div>
-  )
-}
+  const sampleFestival = {
+    title: '행사 이름',
+    content: '행사 내용',
+    firstimage2: '',
+    eventstartdate: '행사 시작 날짜',
+    eventenddate: '행사 종료 날짜'
+  };
 
-export default MainPage
+  console.log(sampleFestival);
+
+  return (
+    <div className="box" align="center">
+      <div className="ftblock">
+        <div className="ftimage">
+          <div>{sampleFestival.firstimage2}</div>
+        </div>
+        <div className="ftcontent">
+          <div>{sampleFestival.title}</div>
+          <div>{sampleFestival.content}</div>
+          <div>{sampleFestival.firstimage2}</div>
+          <div>{sampleFestival.eventenddate}</div>
+          <div>{sampleFestival.eventstartdate}</div>
+          {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
+        </div>
+      </div>
+      <div className="ftblock">
+        <div className="ftimage">
+          <div>{sampleFestival.firstimage2}</div>
+        </div>
+        <div className="ftcontent">
+          <div>{sampleFestival.title}</div>
+          <div>{sampleFestival.content}</div>
+          <div>{sampleFestival.firstimage2}</div>
+          <div>{sampleFestival.eventenddate}</div>
+          <div>{sampleFestival.eventstartdate}</div>
+          {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
+        </div>
+      </div>
+      <div className="ftblock">
+        <div className="ftimage">
+          <div>{sampleFestival.firstimage2}</div>
+        </div>
+        <div className="ftcontent">
+          <div>{sampleFestival.title}</div>
+          <div>{sampleFestival.content}</div>
+          <div>{sampleFestival.firstimage2}</div>
+          <div>{sampleFestival.eventenddate}</div>
+          <div>{sampleFestival.eventstartdate}</div>
+          {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
+        </div>
+      </div>
+      <div className="ftblock">
+        <div className="ftimage">
+          <div>{sampleFestival.firstimage2}</div>
+        </div>
+        <div className="ftcontent">
+          <div>{sampleFestival.title}</div>
+          <div>{sampleFestival.content}</div>
+          <div>{sampleFestival.firstimage2}</div>
+          <div>{sampleFestival.eventenddate}</div>
+          <div>{sampleFestival.eventstartdate}</div>
+          {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MainPage;
