@@ -14,17 +14,12 @@ const Join = () => {
 
   const handleJoin = () => {
     if (idRef.current.value === '' || idRef.current.value === undefined) {
-      // if (idRef.length < 8) {
-      //   alert('8자 이상 입력하세요');
-      //   idRef.current.focus();
-      //   return;
-      // }
       alert('아이디를 입력하세요');
       idRef.current.focus();
       return false;
     } else {
       if (idRef.current.value.length >= 8) {
-        alert('8자 이하로 입력하세요');
+        alert('아이디를 8자 이하로 입력하세요');
         idRef.current.focus();
         return;
       }
@@ -33,6 +28,12 @@ const Join = () => {
       alert('비밀번호를 입력하세요');
       pwRef.current.focus();
       return false;
+    } else {
+      if (pwRef.current.value.length >= 10) {
+        alert('비밀번호를 10자 이하로 입력하세요');
+        pwRef.current.focus();
+        return;
+      }
     }
     if (emailRef.current.value === '' || emailRef.current.value === undefined) {
       alert('이메일을 입력하세요');
@@ -50,15 +51,6 @@ const Join = () => {
       return false;
     }
 
-    function handleputLength(el, min) {
-      if (el.value.length > min) {
-        el.value = el.value.substr(0, min);
-      } else {
-        alert('8자 이상 입력하세요');
-        return false;
-      }
-    }
-
     axios
       .post('http://localhost:8008/join', {
         id: idRef.current.value,
@@ -69,15 +61,9 @@ const Join = () => {
       })
       .then((res) => {
         console.log('handleJoin =>', res);
-        if (res.data.affectedRows === 1) {
-          alert('회원가입이 되었습니다');
-          navigate('/');
-        }
-        else {
-          alert('회원가입이 되지 않았습니다.');
-          navigate('/join');
-        } 
-        
+        if (res.data.affectedRows === 1) alert('회원가입이 되었습니다');
+        else alert('회원가입이 되지 않았습니다.');
+        navigate('/');
       })
       .catch((e) => {
         console.error(e);
@@ -96,7 +82,7 @@ const Join = () => {
             className="text_input"
             ref={idRef}
             defaultValue=""
-            minLength="8"
+            // minLength="8"
           />
           <div className="text-area">
             <input
@@ -106,7 +92,7 @@ const Join = () => {
               className="text_input"
               ref={pwRef}
               defaultValue=""
-              minLength="10"
+              // minLength="10"
             />
           </div>
           <div className="text-area">
