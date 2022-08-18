@@ -13,60 +13,62 @@ const MainPage = () => {
   console.log(sampleFestival);
 
   return (
-    <div>
-      <div className="ftblock">
-        <div className="ftimage">
-          <div>{sampleFestival.firstimage2}</div>
+    <table>
+      <div>
+        <div className="ftblock">
+          <div className="ftimage">
+            <div>{sampleFestival.firstimage2}</div>
+          </div>
+          <div className="ftcontent">
+            <div>{sampleFestival.title}</div>
+            <div>{sampleFestival.content}</div>
+            <div>{sampleFestival.firstimage2}</div>
+            <div>{sampleFestival.eventenddate}</div>
+            <div>{sampleFestival.eventstartdate}</div>
+            {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
+          </div>
         </div>
-        <div className="ftcontent">
-          <div>{sampleFestival.title}</div>
-          <div>{sampleFestival.content}</div>
-          <div>{sampleFestival.firstimage2}</div>
-          <div>{sampleFestival.eventenddate}</div>
-          <div>{sampleFestival.eventstartdate}</div>
-          {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
+        <div className="ftblock">
+          <div className="ftimage">
+            <div>{sampleFestival.firstimage2}</div>
+          </div>
+          <div className="ftcontent">
+            <div>{sampleFestival.title}</div>
+            <div>{sampleFestival.content}</div>
+            <div>{sampleFestival.firstimage2}</div>
+            <div>{sampleFestival.eventenddate}</div>
+            <div>{sampleFestival.eventstartdate}</div>
+            {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
+          </div>
+        </div>
+        <div className="ftblock">
+          <div className="ftimage">
+            <div>{sampleFestival.firstimage2}</div>
+          </div>
+          <div className="ftcontent">
+            <div>{sampleFestival.title}</div>
+            <div>{sampleFestival.content}</div>
+            <div>{sampleFestival.firstimage2}</div>
+            <div>{sampleFestival.eventenddate}</div>
+            <div>{sampleFestival.eventstartdate}</div>
+            {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
+          </div>
+        </div>
+        <div className="ftblock">
+          <div className="ftimage">
+            <div>{sampleFestival.firstimage2}</div>
+          </div>
+          <div className="ftcontent">
+            <div>{sampleFestival.title}</div>
+            <div>{sampleFestival.content}</div>
+            <div>{sampleFestival.firstimage2}</div>
+            <div>{sampleFestival.eventenddate}</div>
+            <div>{sampleFestival.eventstartdate}</div>
+            {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
+          </div>
         </div>
       </div>
-      <div className="ftblock">
-        <div className="ftimage">
-          <div>{sampleFestival.firstimage2}</div>
-        </div>
-        <div className="ftcontent">
-          <div>{sampleFestival.title}</div>
-          <div>{sampleFestival.content}</div>
-          <div>{sampleFestival.firstimage2}</div>
-          <div>{sampleFestival.eventenddate}</div>
-          <div>{sampleFestival.eventstartdate}</div>
-          {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
-        </div>
-      </div>
-      <div className="ftblock">
-        <div className="ftimage">
-          <div>{sampleFestival.firstimage2}</div>
-        </div>
-        <div className="ftcontent">
-          <div>{sampleFestival.title}</div>
-          <div>{sampleFestival.content}</div>
-          <div>{sampleFestival.firstimage2}</div>
-          <div>{sampleFestival.eventenddate}</div>
-          <div>{sampleFestival.eventstartdate}</div>
-          {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
-        </div>
-      </div>
-      <div className="ftblock">
-        <div className="ftimage">
-          <div>{sampleFestival.firstimage2}</div>
-        </div>
-        <div className="ftcontent">
-          <div>{sampleFestival.title}</div>
-          <div>{sampleFestival.content}</div>
-          <div>{sampleFestival.firstimage2}</div>
-          <div>{sampleFestival.eventenddate}</div>
-          <div>{sampleFestival.eventstartdate}</div>
-          {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
-        </div>
-      </div>
-    </div>
+    </table>
   );
 };
 
