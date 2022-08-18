@@ -13,62 +13,60 @@ const MainPage = () => {
   console.log(sampleFestival);
 
   return (
-    <table>
-      <div>
-        <div className="ftblock">
-          <div className="ftimage">
-            <div>{sampleFestival.firstimage2}</div>
-          </div>
-          <div className="ftcontent">
-            <div>{sampleFestival.title}</div>
-            <div>{sampleFestival.content}</div>
-            <div>{sampleFestival.firstimage2}</div>
-            <div>{sampleFestival.eventenddate}</div>
-            <div>{sampleFestival.eventstartdate}</div>
-            {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
-          </div>
+    <div className="box" align="center">
+      <div className="ftblock">
+        <div className="ftimage">
+          <div>{sampleFestival.firstimage2}</div>
         </div>
-        <div className="ftblock">
-          <div className="ftimage">
-            <div>{sampleFestival.firstimage2}</div>
-          </div>
-          <div className="ftcontent">
-            <div>{sampleFestival.title}</div>
-            <div>{sampleFestival.content}</div>
-            <div>{sampleFestival.firstimage2}</div>
-            <div>{sampleFestival.eventenddate}</div>
-            <div>{sampleFestival.eventstartdate}</div>
-            {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
-          </div>
-        </div>
-        <div className="ftblock">
-          <div className="ftimage">
-            <div>{sampleFestival.firstimage2}</div>
-          </div>
-          <div className="ftcontent">
-            <div>{sampleFestival.title}</div>
-            <div>{sampleFestival.content}</div>
-            <div>{sampleFestival.firstimage2}</div>
-            <div>{sampleFestival.eventenddate}</div>
-            <div>{sampleFestival.eventstartdate}</div>
-            {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
-          </div>
-        </div>
-        <div className="ftblock">
-          <div className="ftimage">
-            <div>{sampleFestival.firstimage2}</div>
-          </div>
-          <div className="ftcontent">
-            <div>{sampleFestival.title}</div>
-            <div>{sampleFestival.content}</div>
-            <div>{sampleFestival.firstimage2}</div>
-            <div>{sampleFestival.eventenddate}</div>
-            <div>{sampleFestival.eventstartdate}</div>
-            {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
-          </div>
+        <div className="ftcontent">
+          <div>{sampleFestival.title}</div>
+          <div>{sampleFestival.content}</div>
+          <div>{sampleFestival.firstimage2}</div>
+          <div>{sampleFestival.eventenddate}</div>
+          <div>{sampleFestival.eventstartdate}</div>
+          {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
         </div>
       </div>
-    </table>
+      <div className="ftblock">
+        <div className="ftimage">
+          <div>{sampleFestival.firstimage2}</div>
+        </div>
+        <div className="ftcontent">
+          <div>{sampleFestival.title}</div>
+          <div>{sampleFestival.content}</div>
+          <div>{sampleFestival.firstimage2}</div>
+          <div>{sampleFestival.eventenddate}</div>
+          <div>{sampleFestival.eventstartdate}</div>
+          {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
+        </div>
+      </div>
+      <div className="ftblock">
+        <div className="ftimage">
+          <div>{sampleFestival.firstimage2}</div>
+        </div>
+        <div className="ftcontent">
+          <div>{sampleFestival.title}</div>
+          <div>{sampleFestival.content}</div>
+          <div>{sampleFestival.firstimage2}</div>
+          <div>{sampleFestival.eventenddate}</div>
+          <div>{sampleFestival.eventstartdate}</div>
+          {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
+        </div>
+      </div>
+      <div className="ftblock">
+        <div className="ftimage">
+          <div>{sampleFestival.firstimage2}</div>
+        </div>
+        <div className="ftcontent">
+          <div>{sampleFestival.title}</div>
+          <div>{sampleFestival.content}</div>
+          <div>{sampleFestival.firstimage2}</div>
+          <div>{sampleFestival.eventenddate}</div>
+          <div>{sampleFestival.eventstartdate}</div>
+          {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
+        </div>
+      </div>
+    </div>
   );
 };
 
