@@ -1,0 +1,45 @@
+
+
+.block{
+    display: block;
+    text-align: left;
+}
+
+.inline{
+    display: inline;
+}
+.list_img{
+    width:70px;
+    height:70px;
+    float: left;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: white;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: black
+}
+
+ 
+.nav-link {
+    color: black;
+    
+}
+
+@media (max-width:700px){
+    .nav-link {
+        display: inline;
+    };
+}
+
+.nav {
+    --bs-nav-link-hover-color: pink;
+}
+
+.profile{
+    padding: 20px;
+}
+.table{
+    width:100%;
+}
