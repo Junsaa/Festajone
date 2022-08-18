@@ -37,7 +37,11 @@ const Login = () => {
           Navigate('/MainPage');
         } else {
           Navigate('/');
-        }
+        } 
+        var id = document.getElementById('username');
+        var pw = document.getElementById('password');
+        id.value = '';
+        pw.value = '';
       })
       .catch((e) => {
         alert('회원정보가 없습니다');
