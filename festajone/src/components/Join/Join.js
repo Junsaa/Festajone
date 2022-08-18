@@ -40,7 +40,7 @@ const Join = () => {
     }
 
     axios
-      .post('http://localhost:3000/join', {
+      .post('http://localhost:8008/join', {
         id: idRef.current.value,
         pw: pwRef.current.value,
         email: emailRef.current.value,
