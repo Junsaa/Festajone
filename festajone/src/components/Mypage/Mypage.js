@@ -12,6 +12,8 @@ const Mypage = () => {
         <i class="bi bi-person-circle" style={{ fontSize: '80px' }}></i>
         {/* 프로필 사진이 있을 때
         <img style={{ width: '100px', height: '100px', borderRadius: '50%' }} /> */}
+
+        {/* 요리죠리 해보아도 로그아웃 버튼 위치가 맘에 안든다.. */}
       </div>
 
       <div width="100%" align="center" style={{ padding: '10px' }}>
@@ -103,7 +105,7 @@ const Mypage = () => {
             </Col>
           </Row>
         </Tab.Container>
-        {/* 페이지 */}
+        {/* 페이지 넘버 버튼 */}
       </div>
     </>
   );
