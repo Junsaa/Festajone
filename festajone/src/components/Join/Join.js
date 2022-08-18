@@ -64,6 +64,16 @@ const Join = () => {
         if (res.data.affectedRows === 1) alert('회원가입이 되었습니다');
         else alert('회원가입이 되지 않았습니다.');
         navigate('/');
+        var id = document.getElementById('username');
+        var pw = document.getElementById('password');
+        var email = document.getElementById('email');
+        var name = document.getElementById('name');
+        var nick = document.getElementById('nick');
+        id.value = '';
+        pw.value = '';
+        email.value = '';
+        name.value = '';
+        nick.value = '';
       })
       .catch((e) => {
         console.error(e);
