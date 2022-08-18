@@ -1,73 +1,49 @@
 import React from 'react';
 import './MainPage.css';
+import { usestate, setusestate } from 'react';
+import MainPageItem from './MainPageItem';
+import { AiFillCaretRight } from 'react-icons/ai';
+import { AiFillCaretLeft } from 'react-icons/ai';
 
 const MainPage = () => {
-  const sampleFestival = {
-    title: '행사 이름',
-    content: '행사 내용',
-    firstimage2: '',
-    eventstartdate: '행사 시작 날짜',
-    eventenddate: '행사 종료 날짜'
+  const slideElementalList = [slide1, slide2, slide3, slide4, slide5];
+
+  const [currentSlide, setCurrentSlide] = usestate(0);
+
+  const slideElementalStyle = css`
+    width: 50%;
+    height: 70%;
+    background-image: url(${slideElementalList[currentSlide]});
+    backgroun-size: cover;
+    background-repeat: no-repeat;
+  `;
+
+  const slideArrowRStyle = <AiFillCaretRight width="50px" height="50px" />;
+  const slideArrowLStyle = <AiFillCaretLeft width="50px" height="50px" />;
+
+  const slideshow = (idx) => {
+    const listLength = slideElementalList.length - 1;
+
+    if (idx < 0) {
+      setCurrentSlide(listLength);
+    } else if (idx > listLength) {
+      setCurrentSlide(0);
+    } else if (idx <= listLength) {
+      currentSlide(idx);
+    }
   };
 
-  console.log(sampleFestival);
+  const onPrev = () => {
+    slideshow(currentSlide - 1);
+  };
 
-  return (
-    <div className="box" align="center">
-      <div className="ftblock">
-        <div className="ftimage">
-          <div>{sampleFestival.firstimage2}</div>
-        </div>
-        <div className="ftcontent">
-          <div>{sampleFestival.title}</div>
-          <div>{sampleFestival.content}</div>
-          <div>{sampleFestival.firstimage2}</div>
-          <div>{sampleFestival.eventenddate}</div>
-          <div>{sampleFestival.eventstartdate}</div>
-          {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
-        </div>
-      </div>
-      <div className="ftblock">
-        <div className="ftimage">
-          <div>{sampleFestival.firstimage2}</div>
-        </div>
-        <div className="ftcontent">
-          <div>{sampleFestival.title}</div>
-          <div>{sampleFestival.content}</div>
-          <div>{sampleFestival.firstimage2}</div>
-          <div>{sampleFestival.eventenddate}</div>
-          <div>{sampleFestival.eventstartdate}</div>
-          {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
-        </div>
-      </div>
-      <div className="ftblock">
-        <div className="ftimage">
-          <div>{sampleFestival.firstimage2}</div>
-        </div>
-        <div className="ftcontent">
-          <div>{sampleFestival.title}</div>
-          <div>{sampleFestival.content}</div>
-          <div>{sampleFestival.firstimage2}</div>
-          <div>{sampleFestival.eventenddate}</div>
-          <div>{sampleFestival.eventstartdate}</div>
-          {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
-        </div>
-      </div>
-      <div className="ftblock">
-        <div className="ftimage">
-          <div>{sampleFestival.firstimage2}</div>
-        </div>
-        <div className="ftcontent">
-          <div>{sampleFestival.title}</div>
-          <div>{sampleFestival.content}</div>
-          <div>{sampleFestival.firstimage2}</div>
-          <div>{sampleFestival.eventenddate}</div>
-          <div>{sampleFestival.eventstartdate}</div>
-          {/* 현재날짜에서 가까운 순으로 정렬 4개*/}
-        </div>
-      </div>
-    </div>
-  );
+  const onNext = () => {
+    slideshow(currentSlide + 1);
+  };
+
+  console.log();
+
+  return <div></div>;
 };
 
 export default MainPage;

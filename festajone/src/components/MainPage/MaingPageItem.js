@@ -1,14 +1,24 @@
 import React from 'react';
+import './MainPageItem.css';
 
-const MaingPageItem = ({ data }) => {
-  const sampleFestival = {
-    title: '행사 이름',
-    content: '행사 내용',
-    firstimage2: '',
-    eventstartdate: '행사 시작 날짜',
-    eventenddate: '행사 종료 날짜'
-  };
-  return <div></div>;
+const MainPageItem = ({ data }) => {
+  return (
+    <div className="box">
+      <div>
+        <div className="firstimage2">
+          <img src={data.firstimage2} />
+        </div>
+      </div>
+      <div>
+        <div>
+          <div className="title">행사이름:{data.title}</div>
+          <div className="content">행사내용:{data.title}</div>
+          <div className="eventstartdate">행사시작날짜:{data.title}</div>
+          <div className="eventenddate">행사종료날짜:{data.title}</div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-export default MaingPageItem;
+export default MainPageItem;
