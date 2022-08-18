@@ -11,6 +11,11 @@ body {
   background-size: cover;
 }
 
+.Login {
+  position: relative;
+  top: 150px;
+}
+
 .Join {
   position: relative;
   top: 150px;
@@ -62,4 +67,10 @@ h1 {
   100% {
     transform: translateY(5px);
   }
+}
+
+.submit {
+  background-color: white;
+  border: 1px solid white;
+  cursor: pointer;
 }

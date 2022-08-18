@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './Login.css';
 
 const Login = () => {
   const idRef = useRef();
@@ -12,7 +13,7 @@ const Login = () => {
     if (idRef.current.value === '' || idRef.current.value === undefined) {
       alert('아이디를 입력하세요');
       idRef.current.focus();
-      return;
+      return false;
     }
     if (pwRef.current.value === '' || pwRef.current.value === undefined) {
       alert('비밀번호를 입력하세요');
