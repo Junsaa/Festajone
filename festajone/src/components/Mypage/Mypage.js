@@ -3,21 +3,15 @@ import { Button, Tab, Col, Nav, Row } from 'react-bootstrap';
 import './mypage.css';
 
 const Mypage = () => {
-  let [menu, setMenu] = useState(false);
+  let [menu, setMenu] = useState(true);
 
   return (
     <>
       <div className="profile">
-        <table className="table">
-          <tr>
-            <td width="70%" style={{ textAlign: 'center' }}>
-              {/* 프로필 사진이 없을 때 */}
-              <i class="bi bi-person-circle" style={{ lineHeight: '100px', fontSize: '100px' }}></i>
-              {/* 프로필 사진이 있을 때
+        {/* 프로필 사진이 없을 때 */}
+        <i class="bi bi-person-circle" style={{ fontSize: '80px' }}></i>
+        {/* 프로필 사진이 있을 때
         <img style={{ width: '100px', height: '100px', borderRadius: '50%' }} /> */}
-            </td>
-          </tr>
-        </table>
       </div>
 
       <div width="100%" align="center" style={{ padding: '10px' }}>
@@ -109,6 +103,7 @@ const Mypage = () => {
             </Col>
           </Row>
         </Tab.Container>
+        {/* 페이지 */}
       </div>
     </>
   );
