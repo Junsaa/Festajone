@@ -1,0 +1,62 @@
+.root .searchFestival {
+  background-color: rgb(206, 206, 206);
+  width: 100%;
+  padding-top: 10px;
+}
+.root .searchFestival .region {
+  display: flex;
+  justify-content: center;
+}
+.root .searchFestival .region .regionOption {
+  padding-left: 30px;
+}
+.root .searchFestival .region .regionOption select {
+  width: 100px;
+}
+.root .searchFestival .classify {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+.root .searchFestival .classify .classfyOption {
+  padding-left: 30px;
+}
+.root .searchFestival .classify .classfyOption select {
+  width: 100px;
+}
+.root .searchFestival .searchFinish {
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+.root .searchFestival .searchFinish button {
+  background-color: rgb(154, 154, 249);
+  width: 100px;
+  height: 25px;
+  border-radius: 20px;
+}
+.root .listFlex {
+  display: flex;
+  justify-content: center;
+}
+.root .listFlex .festivalList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.root .listFlex .festivalList .item {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+}
+.root .listFlex .festivalList .item .FestivalImage {
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+}
+.root .listFlex .festivalList .item .FestivalDetail {
+  background-color: rgb(185, 193, 193);
+}/*# sourceMappingURL=FestivalList.css.map */
