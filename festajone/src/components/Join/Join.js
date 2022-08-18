@@ -23,8 +23,8 @@ const Join = () => {
       idRef.current.focus();
       return false;
     } else {
-      if (idRef.current.value.length < 8) {
-        alert('8자 이상 입력하세요');
+      if (idRef.current.value.length >= 8) {
+        alert('8자 이하로 입력하세요');
         idRef.current.focus();
         return;
       }
