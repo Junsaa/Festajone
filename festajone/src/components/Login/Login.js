@@ -12,7 +12,7 @@ const Login = () => {
     if (idRef.current.value === '' || idRef.current.value === undefined) {
       alert('아이디를 입력하세요');
       idRef.current.focus();
-      return false;
+      return;
     }
     if (pwRef.current.value === '' || pwRef.current.value === undefined) {
       alert('비밀번호를 입력하세요');
@@ -26,21 +26,21 @@ const Login = () => {
     );
 
     axios
-      .post('http://localhost:8008/login', {
+      .post('http://localhost:3000/login', {
         id: idRef.current.value,
-        pw: pwRef.current.value
+        pw: idRef.current.value
       })
       .then((res) => {
-        console.log('handleLogin =>', res);
+        console.log('handleLogin =>', res.data[0]);
         if (res.data[0].cnt === 1) {
           window.sessionStorage.setItem('id', idRef.current.value);
-          Navigate('/');
+          Navigate('/MainPage');
         } else {
-          alert('회원정보가 없습니다');
-          Navigate('/login');
+          Navigate('/');
         }
       })
       .catch((e) => {
+        alert('회원정보가 없습니다');
         console.error(e);
       });
   };
@@ -64,13 +64,10 @@ const Login = () => {
               ref={pwRef}
             />
           </div>
-          <input type="button" value="로그인" className="btn" onClick={handleLogin} />
-          <span>
-            <i class="eye" aria-hidden="true" type="button" id="eye"></i> 
-          </span>
+          <input type="submit" value="로그인" className="btn" onClick={handleLogin} />
         </div>
+        <input type="button" value="▷계정이 없으신가요?" onClick={handleJoin} className="submit" />
       </form>
-      <input type="button" value="▷계정이 없으신가요?" onClick={handleJoin} className="submit" />
     </div>
   );
 };

@@ -14,9 +14,20 @@ const Join = () => {
 
   const handleJoin = () => {
     if (idRef.current.value === '' || idRef.current.value === undefined) {
+      // if (idRef.length < 8) {
+      //   alert('8자 이상 입력하세요');
+      //   idRef.current.focus();
+      //   return;
+      // }
       alert('아이디를 입력하세요');
       idRef.current.focus();
       return false;
+    } else {
+      if (idRef.current.value.length < 8) {
+        alert('8자 이상 입력하세요');
+        idRef.current.focus();
+        return;
+      }
     }
     if (pwRef.current.value === '' || pwRef.current.value === undefined) {
       alert('비밀번호를 입력하세요');
@@ -37,6 +48,15 @@ const Join = () => {
       alert('닉네임을 입력하세요');
       nicknameRef.current.focus();
       return false;
+    }
+
+    function handleputLength(el, min) {
+      if (el.value.length > min) {
+        el.value = el.value.substr(0, min);
+      } else {
+        alert('8자 이상 입력하세요');
+        return false;
+      }
     }
 
     axios

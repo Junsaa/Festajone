@@ -33,14 +33,16 @@ body {
   box-shadow: 5px 5px 10px #ebebeb, -5px -5px 10px #ffffff;
 }
 
-.h1 {
-  font-size: 32px;
+h1 {
+  font-size: 40px;
   text-align: center;
+  margin: 0;
+  padding: 20px;
 }
 
 .btn {
   display: inline-block;
-  background-color: rgb(84, 183, 245);
+  background-color: #36a1ff;
   border-radius: 50px;
   border: 1px solid white;
   color: white;
@@ -49,7 +51,7 @@ body {
   height: 50px;
   padding-left: 100px;
   padding-right: 100px;
-  margin-bottom: 300px;
+  margin-bottom: 50px;
   margin-top: 20px;
 }
 
@@ -71,6 +73,4 @@ body {
   background-color: white;
   border: 1px solid white;
   cursor: pointer;
-  margin-top: 10px;
-  margin-bottom: 10px;
 }
