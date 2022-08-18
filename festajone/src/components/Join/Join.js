@@ -69,9 +69,15 @@ const Join = () => {
       })
       .then((res) => {
         console.log('handleJoin =>', res);
-        if (res.data.affectedRows === 1) alert('회원가입이 되었습니다');
-        else alert('회원가입이 되지 않았습니다.');
-        navigate('/');
+        if (res.data.affectedRows === 1) {
+          alert('회원가입이 되었습니다');
+          navigate('/');
+        }
+        else {
+          alert('회원가입이 되지 않았습니다.');
+          navigate('/join');
+        } 
+        
       })
       .catch((e) => {
         console.error(e);
