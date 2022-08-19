@@ -1,17 +1,64 @@
 /* global kakao */
-import React from 'react';
+import React, { useState } from 'react';
 import Map from '../MapApi/Map';
 import './festivalDetail.css';
 import { Carousel } from 'react-bootstrap';
+import axios from '../../../node_modules/axios/index';
 
 const FestivalDetail = () => {
+  const [festival, setFestival] = useState({
+    f_d_title: '',
+    f_d_tel: '',
+    f_d_telname: '',
+    f_d_homepage: '',
+    f_d_image: '',
+    f_d_addr: '',
+    f_d_mapx: '',
+    f_d_mapy: '',
+    f_d_startdate: '',
+    f_d_enddate: '',
+    f_d_pverview: '',
+    sortation: ''
+  });
+
+  const festivalDetail = (e) => {
+    axios
+      .post('http://localhost:8008/searchFestivalDetail')
+      .then((res) => {
+        const { data } = res;
+        console.log('festivalDetail =>', data);
+        if (res.data.length > 0) {
+          setFestival({
+            ...festival,
+            f_d_title: data[0].f_d_title,
+            f_d_tel: data[0].f_d_tel,
+            f_d_telname: data[0].f_d_telname,
+            f_d_homepage: data[0].f_d_homepage,
+            f_d_image: data[0].f_d_image,
+            f_d_addr: data[0].f_d_addr,
+            f_d_mapx: data[0].f_d_mapx,
+            f_d_mapy: data[0].f_d_mapy,
+            f_d_startdate: data[0].f_d_startdate,
+            f_d_enddate: data[0].f_d_enddate,
+            f_d_pverview: data[0].f_d_pverview,
+            sortation: data[0].sortation
+          });
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+
   return (
     <>
       <table className="table">
         <tr>
           <td style={{ textAlign: 'center' }}>
-            <h2>축제 이름</h2>
-            <span>개최 지역 &nbsp;|&nbsp; 개최 일자</span>
+            <h2>{festival.f_d_title}</h2>
+            <span>
+              {festival.f_d_telname} &nbsp;|&nbsp; {festival.f_d_startdate}
+            </span>
           </td>
           <td>
             <h1>
@@ -49,13 +96,13 @@ const FestivalDetail = () => {
 
       {/* 이미지 슬라이드 */}
       <div id="photo_Tab">
-        <DarkVariantExample></DarkVariantExample>
+        <DarkVariantExample img={festival.f_d_image}></DarkVariantExample>
       </div>
 
       <div className="detail_div" id="detail_Tab">
         <strong>상세정보</strong>
         <hr style={{ height: '1px', background: 'black' }} />
-        <p style={{ fontSize: '13px' }}>축제의 상세 설명을 적어주세요</p>
+        <p style={{ fontSize: '13px' }}>{festival.f_d_pverview}</p>
         {/* <div className="cont_more">
           <button type="button" className="btn_more">
             내용 더보기 +
@@ -65,28 +112,28 @@ const FestivalDetail = () => {
         <ul>
           <li>
             <b className="detail_b">시작일</b>
-            <span className="detail_span">2022.09.01</span>
+            <span className="detail_span">{festival.f_d_startdate}</span>
           </li>
           <li>
             <b className="detail_b">종료일</b>
-            <span className="detail_span">2022.09.01</span>
+            <span className="detail_span">{festival.f_d_enddate}</span>
           </li>
           <li>
             <b className="detail_b">행사장소</b>
-            <span className="detail_span"> 충청북도 괴산군 임꺽정로 113</span>
+            <span className="detail_span"> {festival.f_d_addr}</span>
           </li>
 
           <li>
             <b className="detail_b">주관</b>
-            <span className="detail_span"> 군청</span>
+            <span className="detail_span"> {festival.f_d_telname}</span>
           </li>
           <li>
             <b className="detail_b">전화번호</b>
-            <span className="detail_span"> 043-830-3463</span>
+            <span className="detail_span"> {festival.f_d_tel}</span>
           </li>
           <li>
             <b className="detail_b">홈페이지</b>
-            <span className="detail_span"> http://</span>
+            <span className="detail_span"> {festival.f_d_homepage}</span>
           </li>
         </ul>
       </div>
@@ -94,7 +141,7 @@ const FestivalDetail = () => {
       {/* 지도 */}
       <br />
       <div id="map_Tab">
-        <Map></Map>
+        <Map mapx={festival.f_d_mapx} mapy={festival.f_d_mapy}></Map>
       </div>
 
       <br />
@@ -128,11 +175,11 @@ function AroundResCompo() {
 }
 
 //이미지 슬라이드 컴포넌트
-function DarkVariantExample() {
+function DarkVariantExample({ img }) {
   return (
     <Carousel variant="dark">
       <Carousel.Item>
-        <img className="d-block w-100 slide_img" alt="" />
+        <img src="img" className="d-block w-100 slide_img" alt="" />
         <Carousel.Caption>
           <h5>First slide label</h5>
         </Carousel.Caption>
