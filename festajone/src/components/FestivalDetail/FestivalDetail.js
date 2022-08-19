@@ -22,13 +22,46 @@ const FestivalDetail = () => {
         </tr>
       </table>
 
-      {/* 이미지 슬라이드 */}
-      <DarkVariantExample></DarkVariantExample>
+      <div className="detail_tab menuFixed">
+        <ul>
+          <li className="select_tab on" id="photoTab">
+            <a href="#photo_Tab">
+              <span>사진보기</span>
+            </a>
+          </li>
+          <li className="select_tab" id="detailTab">
+            <a href="#detail_Tab">
+              <span>상세정보</span>
+            </a>
+          </li>
+          <li className="select_tab" id="mapTab">
+            <a href="#map_Tab">
+              <span>지도보기</span>
+            </a>
+          </li>
+          <li className="select_tab" id="aroundResTab">
+            <a href="#aroundRes_Tab">
+              <span>주변맛집</span>
+            </a>
+          </li>
+        </ul>
+      </div>
 
-      <div className="detail_div">
+      {/* 이미지 슬라이드 */}
+      <div id="photo_Tab">
+        <DarkVariantExample></DarkVariantExample>
+      </div>
+
+      <div className="detail_div" id="detail_Tab">
         <strong>상세정보</strong>
         <hr style={{ height: '1px', background: 'black' }} />
-
+        <p style={{ fontSize: '13px' }}>축제의 상세 설명을 적어주세요</p>
+        {/* <div className="cont_more">
+          <button type="button" className="btn_more">
+            내용 더보기 +
+          </button>
+        </div> */}
+        <br />
         <ul>
           <li>
             <b className="detail_b">시작일</b>
@@ -39,22 +72,34 @@ const FestivalDetail = () => {
             <span className="detail_span">2022.09.01</span>
           </li>
           <li>
+            <b className="detail_b">행사장소</b>
+            <span className="detail_span"> 충청북도 괴산군 임꺽정로 113</span>
+          </li>
+
+          <li>
+            <b className="detail_b">주관</b>
+            <span className="detail_span"> 군청</span>
+          </li>
+          <li>
             <b className="detail_b">전화번호</b>
             <span className="detail_span"> 043-830-3463</span>
           </li>
           <li>
-            <b className="detail_b">주소</b>
-            <span className="detail_span"> 충청북도 괴산군 임꺽정로 113</span>
+            <b className="detail_b">홈페이지</b>
+            <span className="detail_span"> http://</span>
           </li>
         </ul>
       </div>
 
       {/* 지도 */}
       <br />
-      <Map></Map>
+      <div id="map_Tab">
+        <Map></Map>
+      </div>
+
       <br />
 
-      <div className="detail_div">
+      <div className="detail_div" id="aroundRes_Tab">
         <strong>주변 맛집</strong>
         <hr style={{ height: '1px', background: 'black' }} />
         <ul className="list-group list-group-flush">

@@ -8,9 +8,9 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 let corsOptions = {
-    origin: '*',
-    Credential: true,
-}
+  origin: '*',
+  Credential: true
+};
 
 app.use(cors(corsOptions));
 
@@ -21,30 +21,31 @@ const db = mysql.createPool({
     database: "first",
 });
 
-app.post("/join", (req, res) => {
-    console.log("/join", req.body);
-    var id = req.body.id;
-    var pw = req.body.pw;
-    var email = req.body.email;
-    var name = req.body.name;
-    var nickname = req.body.nickname;
+app.post('/join', (req, res) => {
+  console.log('/join', req.body);
+  var id = req.body.id;
+  var pw = req.body.pw;
+  var email = req.body.email;
+  var name = req.body.name;
+  var nickname = req.body.nickname;
 
-    const sqlQuery = "insert into user(user_id, user_pw, user_email, user_name, user_nickname) values (?,?,?,?,?);";
-    db.query(sqlQuery, [id, pw, email, name, nickname], (err, result) => {
-        res.send(result);
-    });
+  const sqlQuery =
+    'insert into user(user_id, user_pw, user_email, user_name, user_nickname) values (?,?,?,?,?);';
+  db.query(sqlQuery, [id, pw, email, name, nickname], (err, result) => {
+    res.send(result);
+  });
 });
 
-app.post("/login", (req, res) => {
-    console.log("/login", req.body);
-    var id = req.body.id;
-    var pw = req.body.pw;
-  
-    const sqlQuery = "select count(*) as 'cnt' from user where user_id=? and user_pw=?;";
-    db.query(sqlQuery, [id, pw], (err, result) => {
-      res.send(result);
-    });
+app.post('/login', (req, res) => {
+  console.log('/login', req.body);
+  var id = req.body.id;
+  var pw = req.body.pw;
+
+  const sqlQuery = "select count(*) as 'cnt' from user where user_id=? and user_pw=?;";
+  db.query(sqlQuery, [id, pw], (err, result) => {
+    res.send(result);
   });
+});
 
 app.post("/searchfestival" , (req,res) =>{
     console.log("searchfestival")
@@ -57,5 +58,5 @@ app.post("/searchfestival" , (req,res) =>{
 })
 
 app.listen(PORT, () => {
-console.log(`running on port ${PORT}`);
+  console.log(`running on port ${PORT}`);
 });

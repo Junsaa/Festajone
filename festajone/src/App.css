@@ -143,8 +143,7 @@ var {
   background-color: #f1f1f1;
   text-align: center;
   color: #888;
-  /* footer가 화면 중간에 나타나서 주석처리했습니다. */
-  /* position: absolute; */
+  position: absolute;
   left: 0;
   bottom: 0;
   width: 100%;
