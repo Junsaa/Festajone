@@ -61,6 +61,7 @@ const FestivalDetail = () => {
             내용 더보기 +
           </button>
         </div> */}
+        <br />
         <ul>
           <li>
             <b className="detail_b">시작일</b>

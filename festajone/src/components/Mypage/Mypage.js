@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Tab, Col, Nav, Row } from 'react-bootstrap';
+import { Badge, Tab, Col, Nav, Row, Pagination } from 'react-bootstrap';
 import './mypage.css';
 
 const Mypage = () => {
@@ -10,6 +10,7 @@ const Mypage = () => {
       <div className="profile">
         {/* 프로필 사진이 없을 때 */}
         <i className="bi bi-person-circle" style={{ fontSize: '80px' }}></i>
+        <Badge bg="secondary">logOut</Badge>
         {/* 프로필 사진이 있을 때
         <img style={{ width: '100px', height: '100px', borderRadius: '50%' }} /> */}
 
@@ -173,7 +174,6 @@ const Mypage = () => {
             </Col>
           </Row>
         </Tab.Container>
-        {/* 페이지 넘버 버튼 */}
       </div>
     </>
   );
