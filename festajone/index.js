@@ -15,7 +15,7 @@ let corsOptions = {
 app.use(cors(corsOptions));
 
 const db = mysql.createPool({
-    host: "192.168.21.112",
+    host: "192.168.21.197",
     user: "pesta",
     password: "Pesta123",
     database: "first",
@@ -45,6 +45,16 @@ app.post("/login", (req, res) => {
       res.send(result);
     });
   });
+
+app.post("/searchfestival" , (req,res) =>{
+    console.log("searchfestival")
+    var f_areacode = parseInt(req.body.f_areacode)
+    
+    const sqlQuery = "select f_contentid,f_title,f_thumbnail,f_startdate,f_enddate from festival where f_areacode = ?;"
+    db.query(sqlQuery,[f_areacode],(err,result) => {
+        res.send(result)
+    })
+})
 
 app.listen(PORT, () => {
 console.log(`running on port ${PORT}`);
