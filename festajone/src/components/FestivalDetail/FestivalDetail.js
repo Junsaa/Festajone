@@ -15,8 +15,8 @@ const FestivalDetail = () => {
           </td>
           <td>
             <h1>
-              <i class="bi bi-heart"></i>
-              {/* 채워진 하트 <i class="bi bi-heart-fill"></i> */}
+              <i className="bi bi-heart"></i>
+              {/* 채워진 하트 <i className="bi bi-heart-fill"></i> */}
             </h1>
           </td>
         </tr>
@@ -57,7 +57,7 @@ const FestivalDetail = () => {
       <div className="detail_div">
         <strong>주변 맛집</strong>
         <hr style={{ height: '1px', background: 'black' }} />
-        <ul class="list-group list-group-flush">
+        <ul className="list-group list-group-flush">
           <AroundResCompo></AroundResCompo>
           <AroundResCompo></AroundResCompo>
           <AroundResCompo></AroundResCompo>
@@ -70,7 +70,7 @@ const FestivalDetail = () => {
 //주변 맛집 리스트 컴포넌트
 function AroundResCompo() {
   return (
-    <li class="list-group-item inline">
+    <li className="list-group-item inline">
       <img className="list_img" />
       <span className="block">
         <b style={{ marginLeft: '10px' }}>맛집 이름</b>
