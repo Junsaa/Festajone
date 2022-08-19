@@ -10,13 +10,13 @@ const Map = ({ mapx, mapy }) => {
 
     var container = document.getElementById('map');
     var options = {
-      center: new kakao.maps.LatLng(mapx, mapy),
+      center: new kakao.maps.LatLng(mapy, mapx),
       level: 3
     };
 
     var map = new kakao.maps.Map(container, options);
     //마커표시
-    var markerPosition = new kakao.maps.LatLng(mapx, mapy);
+    var markerPosition = new kakao.maps.LatLng(mapy, mapx);
     var marker = new kakao.maps.Marker({
       position: markerPosition
     });

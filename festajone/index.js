@@ -67,6 +67,7 @@ app.post('/searchFestivalDetail', (req, res) => {
     'SELECT f_d_title, f_d_tel,  f_d_telname, f_d_homepage, f_d_image,f_d_addr, f_d_mapx, f_d_mapy, f_d_startdate, f_d_enddate, f_d_pverview, sortation FROM festival_detail where f_d_contentid=?;';
   db.query(sqlQuery, [festival_contentid], (err, result) => {
     res.send(result);
+    console.log(result);
   });
 });
 

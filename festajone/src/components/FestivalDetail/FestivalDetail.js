@@ -1,5 +1,5 @@
 /* global kakao */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Map from '../MapApi/Map';
 import './festivalDetail.css';
 import { Carousel } from 'react-bootstrap';
@@ -49,6 +49,9 @@ const FestivalDetail = () => {
         console.error(e);
       });
   };
+  useEffect(() => {
+    festivalDetail();
+  }, []);
 
   return (
     <>
@@ -96,7 +99,7 @@ const FestivalDetail = () => {
 
       {/* 이미지 슬라이드 */}
       <div id="photo_Tab">
-        <DarkVariantExample img={festival.f_d_image}></DarkVariantExample>
+        <DarkVariantExample fes_img={festival.f_d_image}></DarkVariantExample>
       </div>
 
       <div className="detail_div" id="detail_Tab">
@@ -175,11 +178,11 @@ function AroundResCompo() {
 }
 
 //이미지 슬라이드 컴포넌트
-function DarkVariantExample({ img }) {
+function DarkVariantExample({ fes_img }) {
   return (
     <Carousel variant="dark">
       <Carousel.Item>
-        <img src="img" className="d-block w-100 slide_img" alt="" />
+        <img src={fes_img} className="d-block w-100 slide_img" alt="" />
         <Carousel.Caption>
           <h5>First slide label</h5>
         </Carousel.Caption>
