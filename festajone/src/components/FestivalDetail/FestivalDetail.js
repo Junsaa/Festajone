@@ -132,11 +132,15 @@ const FestivalDetail = () => {
           </li>
           <li>
             <b className="detail_b">전화번호</b>
-            <span className="detail_span"> {festival.f_d_tel}</span>
+            <span className="detail_span">
+              <div dangerouslySetInnerHTML={{ __html: festival.f_d_tel }}></div>{' '}
+            </span>
           </li>
           <li>
             <b className="detail_b">홈페이지</b>
-            <span className="detail_span"> {festival.f_d_homepage}</span>
+            <span className="detail_span">
+              <div dangerouslySetInnerHTML={{ __html: festival.f_d_homepage }}></div>{' '}
+            </span>
           </li>
         </ul>
       </div>
