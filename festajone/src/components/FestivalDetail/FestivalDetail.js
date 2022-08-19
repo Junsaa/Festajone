@@ -48,7 +48,9 @@ const FestivalDetail = () => {
       </div>
 
       {/* 이미지 슬라이드 */}
-      <DarkVariantExample id="photo_Tab"></DarkVariantExample>
+      <div id="photo_Tab">
+        <DarkVariantExample></DarkVariantExample>
+      </div>
 
       <div className="detail_div" id="detail_Tab">
         <strong>상세정보</strong>
