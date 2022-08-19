@@ -22,10 +22,35 @@ const FestivalDetail = () => {
         </tr>
       </table>
 
-      {/* 이미지 슬라이드 */}
-      <DarkVariantExample></DarkVariantExample>
+      <div className="detail_tab menuFixed">
+        <ul>
+          <li className="select_tab on" id="photoTab">
+            <a href="#photo_Tab">
+              <span>사진보기</span>
+            </a>
+          </li>
+          <li className="select_tab" id="detailTab">
+            <a href="#detail_Tab">
+              <span>상세정보</span>
+            </a>
+          </li>
+          <li className="select_tab" id="mapTab">
+            <a href="#map_Tab">
+              <span>지도보기</span>
+            </a>
+          </li>
+          <li className="select_tab" id="aroundResTab">
+            <a href="#aroundRes_Tab">
+              <span>주변맛집</span>
+            </a>
+          </li>
+        </ul>
+      </div>
 
-      <div className="detail_div">
+      {/* 이미지 슬라이드 */}
+      <DarkVariantExample id="photo_Tab"></DarkVariantExample>
+
+      <div className="detail_div" id="detail_Tab">
         <strong>상세정보</strong>
         <hr style={{ height: '1px', background: 'black' }} />
 
@@ -51,10 +76,13 @@ const FestivalDetail = () => {
 
       {/* 지도 */}
       <br />
-      <Map></Map>
+      <div id="map_Tab">
+        <Map></Map>
+      </div>
+
       <br />
 
-      <div className="detail_div">
+      <div className="detail_div" id="aroundRes_Tab">
         <strong>주변 맛집</strong>
         <hr style={{ height: '1px', background: 'black' }} />
         <ul className="list-group list-group-flush">
