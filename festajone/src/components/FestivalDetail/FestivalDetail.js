@@ -55,7 +55,12 @@ const FestivalDetail = () => {
       <div className="detail_div" id="detail_Tab">
         <strong>상세정보</strong>
         <hr style={{ height: '1px', background: 'black' }} />
-
+        <p style={{ fontSize: '13px' }}>축제의 상세 설명을 적어주세요</p>
+        {/* <div className="cont_more">
+          <button type="button" className="btn_more">
+            내용 더보기 +
+          </button>
+        </div> */}
         <ul>
           <li>
             <b className="detail_b">시작일</b>
@@ -66,12 +71,21 @@ const FestivalDetail = () => {
             <span className="detail_span">2022.09.01</span>
           </li>
           <li>
+            <b className="detail_b">행사장소</b>
+            <span className="detail_span"> 충청북도 괴산군 임꺽정로 113</span>
+          </li>
+
+          <li>
+            <b className="detail_b">주관</b>
+            <span className="detail_span"> 군청</span>
+          </li>
+          <li>
             <b className="detail_b">전화번호</b>
             <span className="detail_span"> 043-830-3463</span>
           </li>
           <li>
-            <b className="detail_b">주소</b>
-            <span className="detail_span"> 충청북도 괴산군 임꺽정로 113</span>
+            <b className="detail_b">홈페이지</b>
+            <span className="detail_span"> http://</span>
           </li>
         </ul>
       </div>
