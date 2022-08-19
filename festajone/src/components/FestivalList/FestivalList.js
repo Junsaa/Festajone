@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
+import axios from '../../../node_modules/axios/index'
 import './FestivalList.css'
 import FestivalListItem from './FestivalListItem'
 
 const FestivalList = () => {
+
+  const [festivalList, setFestivalList] = useState({
+    festivalList : [],
+  })
+
   const samples = [
     {
       title : "나비축제",
@@ -35,60 +41,72 @@ const FestivalList = () => {
       image : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuuubyOT5ty-cno4gwF33waO_Z9LxEgqcC2w&usqp=CAU"
     }
   ]
+  const regionRef = useRef();
 
-  const sample1 ={
-    title : "나비축제",
-    startDate : "03-04",
-    endDate : "03-25",
-    image : "http://www.mdilbo.com/lib/thumb.html?type=file&src=202204/28/20220428191037728396.png&w=700"
+
+  const checkRegionValue =() => {
+    console.log(regionRef.current.value)
+
+    axios
+      .post('http://localhost:8008/searchfestival',{
+        f_areacode : regionRef.current.value
+      }).then((res)=>{
+        const{data} = res;
+        setFestivalList({
+          festivalList : data
+        })
+      }).catch((e) => {
+        console.error(e)
+      })
   }
+
+
+
   return (
     <div className='root'>
       <div className='searchFestival'>
         <div className='region'>
           <div className='title'>지역</div>
           <div className='regionOption'>
-            <select id="">
-              <option value="">서울</option>
-              <option value="">대구</option>
-              <option value="">부산</option>
-              <option value="">광주</option>
-              <option value="">인천</option>
-              <option value="">울산</option>
-              <option value="">경기</option>
-              <option value="">충남</option>
-              <option value="">전남</option>
+            <select id="selectRegion" ref={regionRef}>
+              <option value="1">서울</option>
+              <option value="2">인천</option>
+              <option value="3">대전</option>
+              <option value="4">대구</option>
+              <option value="5">광주</option>
+              <option value="6">부산</option>
+              <option value="7">울산</option>
+              <option value="8">세종</option>
+              <option value="31">경기도</option>
+              <option value="32">강원도</option>
+              <option value="33">충청북도</option>
+              <option value="34">충청남도</option>
+              <option value="35">경상북도</option>
+              <option value="36">경상남도</option>
+              <option value="37">전라북도</option>
+              <option value="38">전라남도</option>
+              <option value="39">제주도</option>
             </select>
           </div>
         </div>
-        <div className='classify'>
-          <div className='title'>분류</div>
 
-          <div className='classfyOption'>
-            <select name="" id="">
-              <option value="">문화</option>
-              <option value="">영화</option>
-              <option value="">축제</option>
-            </select>
-          </div>
-        </div>
         <div className='searchFinish'>
-            <button>검색</button>
+            <button onClick={checkRegionValue}>검색</button>
         </div>
       </div>
 
       <div className='listFlex'>
         <div className='festivalList'>
           {
-            samples.map((samples) => {
+            festivalList.map((festivalList) => {
               return (
-                <FestivalListItem data={samples} />
+                <FestivalListItem data={festivalList} />
               )
             })
           }
         </div>
       </div>
-
+          {console.log(festivalList)}
     </div>
   )
 }

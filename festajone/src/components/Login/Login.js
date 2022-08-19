@@ -35,9 +35,9 @@ const Login = () => {
         console.log('handleLogin =>', res.data[0]);
         if (res.data[0].cnt === 1) {
           window.sessionStorage.setItem('id', idRef.current.value);
-          Navigate('/MainPage');
+          Navigate('/MyPage');
         } else {
-          Navigate('/');
+          Navigate('/login');
         } 
         var id = document.getElementById('username');
         var pw = document.getElementById('password');

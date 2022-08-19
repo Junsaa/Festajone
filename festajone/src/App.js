@@ -14,15 +14,13 @@ import Login from './components/Login/Login';
 import Join from './components/Join/Join';
 import FestivalDetail from './components/FestivalDetail/FestivalDetail';
 
-
 const App = () => {
-
-  const [menu , setMenu] = useState(1)
+  const [menu, setMenu] = useState(1);
 
   return (
     <div>
-      <Header/>
-      <Nav menu={menu}/>
+      <Header />
+      <Nav menu={menu} />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/boardlist" element={<BoardList />} />
@@ -32,7 +30,6 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
         <Route path="/festivaldetail" element={<FestivalDetail />} />
-
       </Routes>
       <Footer />
     </div>
