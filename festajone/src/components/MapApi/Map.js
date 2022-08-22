@@ -4,19 +4,22 @@ import React, { useEffect } from 'react';
 const { kakao } = window;
 
 const Map = ({ mapx, mapy }) => {
+  let kakaomap_mapx = parseFloat(mapx);
+  let kakaomap_mapy = parseFloat(mapy);
+  console.log(typeof kakaomap_mapx);
   useEffect(() => {
     // 마커를 담을 배열입니다
     var markers = [];
 
     var container = document.getElementById('map');
     var options = {
-      center: new kakao.maps.LatLng(mapx, mapy),
+      center: new kakao.maps.LatLng(kakaomap_mapy, kakaomap_mapx),
       level: 3
     };
 
     var map = new kakao.maps.Map(container, options);
     //마커표시
-    var markerPosition = new kakao.maps.LatLng(mapx, mapy);
+    var markerPosition = new kakao.maps.LatLng(kakaomap_mapy, kakaomap_mapx);
     var marker = new kakao.maps.Marker({
       position: markerPosition
     });
