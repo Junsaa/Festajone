@@ -14,6 +14,7 @@ import Login from './components/Login/Login';
 import Join from './components/Join/Join';
 import FestivalDetail from './components/FestivalDetail/FestivalDetail';
 import UpdateUser from './components/UpdateUser/UpdateUser';
+import RestaurantDetail from './components/RestaurantDetail/RestaurantDetail';
 
 const App = () => {
   const [menu, setMenu] = useState(1);
@@ -32,7 +33,7 @@ const App = () => {
         <Route path="/join" element={<Join />} />
         <Route path="/updateuser" element={<UpdateUser />} />
         <Route path="/festivaldetail" element={<FestivalDetail />} />
-        <Route path="/restaurantdetail" element={<RestaurantList />} />
+        <Route path="/restaurantdetail" element={<RestaurantDetail />} />
       </Routes>
       <Footer />
     </div>
