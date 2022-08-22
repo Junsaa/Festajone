@@ -4,6 +4,8 @@ import React, { useEffect } from 'react';
 const { kakao } = window;
 
 const Map = ({ mapx, mapy }) => {
+  console.log(typeof mapx);
+  console.log(typeof mapy);
   let kakaomap_mapx = 0;
   let kakaomap_mapy = 0;
 
@@ -17,6 +19,9 @@ const Map = ({ mapx, mapy }) => {
   } else {
     kakaomap_mapy = mapy;
   }
+
+  console.log(kakaomap_mapx);
+  console.log(kakaomap_mapy);
 
   useEffect(() => {
     // 마커를 담을 배열입니다
