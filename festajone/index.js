@@ -64,10 +64,35 @@ app.post('/searchFestivalDetail', (req, res) => {
   var festival_contentid = 2833886;
 
   const sqlQuery =
-    'SELECT f_d_title, f_d_tel,  f_d_telname, f_d_homepage, f_d_image,f_d_addr, f_d_mapx, f_d_mapy, f_d_startdate, f_d_enddate, f_d_pverview, sortation FROM festival_detail where f_d_contentid=?;';
+    'SELECT f_d_contentid, f_d_title, f_d_tel,  f_d_telname, f_d_homepage, f_d_image,f_d_addr, f_d_mapx, f_d_mapy, f_d_startdate, f_d_enddate, f_d_pverview,f_d_areacode, sortation FROM festival_detail where f_d_contentid=?;';
   db.query(sqlQuery, [festival_contentid], (err, result) => {
     res.send(result);
     console.log(result);
+  });
+});
+
+//축제 이미지 가져오기
+app.post('/searchFestivalImg', (req, res) => {
+  console.log('searchFestivalImg');
+  var festival_contentid = 2833886;
+
+  const sqlQuery =
+    'SELECT image_contentid, image_originalimgurl, image_smallimageurl FROM festival_image where image_contentid=?;';
+  db.query(sqlQuery, [festival_contentid], (err, result) => {
+    res.send(result);
+    console.log(result);
+  });
+});
+
+//축제 상세 페이지 - 주변 맛집 랜덤 추천
+app.post('/recommendRes', (req, res) => {
+  console.log('recommendRes');
+  var areacode = '';
+
+  const sqlQuery =
+    'SELECT r_contentid, r_title, r_mainimage, r_thumbnail,r_addr1, r_addr2, r_mapx,r_mapy FROM restaurant where areacode=? order by rand() limit 3;';
+  db.query(sqlQuery, [areacode], (err, result) => {
+    res.send(result);
   });
 });
 
