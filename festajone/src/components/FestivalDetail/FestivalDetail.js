@@ -7,6 +7,7 @@ import axios from '../../../node_modules/axios/index';
 
 const FestivalDetail = () => {
   const [festival, setFestival] = useState({
+    f_d_contentid: '',
     f_d_title: '',
     f_d_tel: '',
     f_d_telname: '',
@@ -18,8 +19,13 @@ const FestivalDetail = () => {
     f_d_startdate: '',
     f_d_enddate: '',
     f_d_pverview: '',
-    sortation: ''
+    sortation: '',
+    f_d_areacode: ''
   });
+
+  const [fesImg, setFesImg] = useState([]);
+
+  const [recommendRes, setRecommendRes] = useState([]);
 
   const festivalDetail = (e) => {
     axios
@@ -30,6 +36,7 @@ const FestivalDetail = () => {
         if (res.data.length > 0) {
           setFestival({
             ...festival,
+            f_d_contentid: data[0].f_d_contentid,
             f_d_title: data[0].f_d_title,
             f_d_tel: data[0].f_d_tel,
             f_d_telname: data[0].f_d_telname,
@@ -41,6 +48,7 @@ const FestivalDetail = () => {
             f_d_startdate: data[0].f_d_startdate,
             f_d_enddate: data[0].f_d_enddate,
             f_d_pverview: data[0].f_d_pverview,
+            f_d_areacode: data[0].f_d_areacode,
             sortation: data[0].sortation
           });
         }
@@ -49,8 +57,46 @@ const FestivalDetail = () => {
         console.error(e);
       });
   };
+  const festivalImgs = (e) => {
+    axios
+      .post('http://localhost:8008/searchFestivalImg', { contentid: 2833886 })
+      .then((res) => {
+        const { data } = res;
+        console.log('searchFestivalImg =>', data);
+        if (res.data.length > 0) {
+          for (var i = 0; i < res.data.length; i++) {
+            fesImg.splice(i, 0, data[i].image_originimgurl);
+          }
+        }
+        setFesImg(fesImg);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+
+  const recommendRestaurant = (e) => {
+    axios
+      .post('http://localhost:8008/recommendRes', { areacode: 31 })
+      .then((res) => {
+        const { data } = res;
+        console.log('recommendRes =>', data);
+        if (res.data.length > 0) {
+          for (var i = 0; i < res.data.length; i++) {
+            recommendRes.splice(i, 0, data[i]);
+          }
+        }
+        setRecommendRes(recommendRes);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+
   useEffect(() => {
     festivalDetail();
+    festivalImgs();
+    recommendRestaurant();
   }, []);
 
   return (
@@ -99,7 +145,7 @@ const FestivalDetail = () => {
 
       {/* 이미지 슬라이드 */}
       <div id="photo_Tab">
-        <DarkVariantExample fes_img={festival.f_d_image}></DarkVariantExample>
+        <DarkVariantExample fes_img={festival.f_d_image} fesImgs={fesImg}></DarkVariantExample>
       </div>
 
       <div className="detail_div" id="detail_Tab">
@@ -157,9 +203,13 @@ const FestivalDetail = () => {
         <strong>주변 맛집</strong>
         <hr style={{ height: '1px', background: 'black' }} />
         <ul className="list-group list-group-flush">
-          <AroundResCompo></AroundResCompo>
-          <AroundResCompo></AroundResCompo>
-          <AroundResCompo></AroundResCompo>
+          {recommendRes === [] || recommendRes === undefined ? (
+            <div>no</div>
+          ) : (
+            recommendRes.map(function (res, i) {
+              return <AroundResCompo recoRes={res} key={i}></AroundResCompo>;
+            })
+          )}
         </ul>
       </div>
     </>
@@ -167,42 +217,48 @@ const FestivalDetail = () => {
 };
 
 //주변 맛집 리스트 컴포넌트
-function AroundResCompo() {
+function AroundResCompo({ recoRes }) {
+  // console.log(recoRes);
+
   return (
     <li className="list-group-item inline">
-      <img className="list_img" />
+      <img className="list_img" src={recoRes.r_mainimage} />
       <span className="block">
-        <b style={{ marginLeft: '10px' }}>맛집 이름</b>
+        <b style={{ marginLeft: '10px' }}>
+          {recoRes.r_title} {recoRes.r_addr2}
+        </b>
       </span>
       <span className="block">
-        <p style={{ fontSize: '12px', marginLeft: '60px' }}> 맛집 설명</p>{' '}
+        <p style={{ fontSize: '12px', marginLeft: '60px' }}> {recoRes.r_addr1}</p>{' '}
       </span>
     </li>
   );
 }
 
 //이미지 슬라이드 컴포넌트
-function DarkVariantExample({ fes_img }) {
+function DarkVariantExample({ fes_img, fesImgs }) {
+  // console.log(fesImgs);
   return (
     <Carousel variant="dark">
       <Carousel.Item>
         <img src={fes_img} className="d-block w-100 slide_img" alt="" />
-        <Carousel.Caption>
-          <h5>First slide label</h5>
-        </Carousel.Caption>
       </Carousel.Item>
-      <Carousel.Item>
-        <img className="d-block w-100 slide_img" alt="" />
-        <Carousel.Caption>
-          <h5>Second slide label</h5>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
+      {fesImgs === [] || fesImgs === undefined
+        ? null
+        : fesImgs.map(function (img, i) {
+            return (
+              <Carousel.Item key={i}>
+                <img src={img} className="d-block w-100 slide_img" alt="" />
+              </Carousel.Item>
+            );
+          })}
+
+      {/* <Carousel.Item>
         <img className="d-block w-100 slide_img" alt="" />
         <Carousel.Caption>
           <h5>Third slide label</h5>
         </Carousel.Caption>
-      </Carousel.Item>
+      </Carousel.Item> */}
     </Carousel>
   );
 }
