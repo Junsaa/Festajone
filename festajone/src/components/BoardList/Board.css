@@ -1,0 +1,220 @@
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/*게시판 전체적인 리스트 위치 조정*/
+section.notice {
+  padding: 40px 0;
+}
+
+/*게시판 검색창 사이 띄우기*/
+.page-title {
+  margin-bottom: 30px;
+}
+/*'게시판' 글자 위치 조정*/
+.page-title h3 {
+  font-size: 28px;
+  color: #333333;
+  font-weight: 400;
+  text-align: center;
+}
+
+/*검색창 배색 부분*/
+#board-search .search-window {
+  padding: 15px 0;
+  background-color: #f9f7f9;
+}
+/*검색어 입력창 조절*/
+#board-search .search-window .search-wrap {
+  position: relative;
+  padding-left: 10px;
+  padding-right: 100px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 400px;
+}
+/*검색어 입력창 꾸며줌*/
+#board-search .search-window .search-wrap input {
+  height: 40px;
+  width: 100%;
+  font-size: 14px;
+  padding: 7px 14px;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 10px;
+}
+/*검색창 주위*/
+#board-search .search-window .search-wrap input:focus {
+  border-color: #333;
+  outline: 0;
+  border-width: 1px;
+}
+#board-search .search-window .search-wrap .btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 0;
+  font-size: 16px;
+}
+/*게시판 리스트*/
+.board-table {
+  font-size: 13px;
+  width: 100%;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+/*게시판 리스트 간격*/
+.board-table a {
+  color: #333;
+  display: inline-block;
+  line-height: 1.4;
+  word-break: break-all;
+  vertical-align: middle;
+}
+/*리스트 밑줄*/
+.board-table a:hover {
+  text-decoration: underline;
+}
+/*'제목'글자 위치*/
+.board-table th {
+  text-align: center;
+}
+/*리스트 정렬*/
+.board-table .th-num {
+  width: 100px;
+  text-align: center;
+}
+/*리스트 위치*/
+.board-table .th-date {
+  width: 200px;
+}
+/*리스트 열 폭*/
+.board-table th,
+.board-table td {
+  padding: 14px 0;
+}
+/*리스트 '번호''등록일' 위치*/
+.board-table tbody td {
+  border-top: 1px solid #e7e7e7;
+  text-align: center;
+  width: 10%;
+}
+/*리스트 '제목' 위치*/
+.board-table tbody th {
+  padding-left: 28px;
+  padding-right: 14px;
+  border-top: 1px solid #e7e7e7;
+  text-align: center;
+  width: 60%;
+}
+
+/*버튼 옵션*/
+.but {
+  display: inline-block;
+  position: absolute;
+  height: 100%;
+  padding: 5px 10px;
+  margin-left: 7px;
+  font-size: 15px;
+  background: transparent;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  border-radius: 10px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.write {
+  display: inline-block;
+  position: absolute;
+  height: 100%;
+  padding: 10px 10px;
+  margin-left: 50px;
+  font-size: 15px;
+  background: transparent;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  border-radius: 10px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -ms-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.but-dark {
+  background: #62befb;
+  color: #fff;
+}
+
+.wri-dark {
+  background: #62befb;
+  color: #fff;
+}
+
+.but-dark:hover,
+.but-dark:focus {
+  background: #373737;
+  border-color: #373737;
+  color: #fff;
+}
+
+.wri-dark:hover,
+.wri-dark:focus {
+  background: #373737;
+  border-color: #373737;
+  color: #fff;
+}
+
+/* reset */
+
+* {
+  list-style: none;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.container {
+  /* width: 1100px; */
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.blind {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  margin: -1px;
+  width: 1px;
+  height: 1px;
+}

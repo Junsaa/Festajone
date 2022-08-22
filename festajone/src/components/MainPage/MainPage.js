@@ -4,7 +4,6 @@ import './MainPage.css';
 
 const Mypage = () => {
   let [menu, setMenu] = useState(true);
-
   return (
     <>
       <div className="profile">

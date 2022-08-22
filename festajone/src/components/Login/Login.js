@@ -38,14 +38,13 @@ const Login = () => {
           Navigate('/MyPage');
         } else {
           Navigate('/login');
-        } 
+        }
         var id = document.getElementById('username');
         var pw = document.getElementById('password');
         id.value = '';
         pw.value = '';
       })
       .catch((e) => {
-        alert('회원정보가 없습니다');
         console.error(e);
       });
   };
@@ -69,7 +68,7 @@ const Login = () => {
               ref={pwRef}
             />
           </div>
-          <input type="submit" value="로그인" className="btn" onClick={handleLogin} />
+          <input type="button" value="로그인" className="btn" onClick={handleLogin} />
         </div>
         <input type="button" value="▷계정이 없으신가요?" onClick={handleJoin} className="submit" />
       </form>
