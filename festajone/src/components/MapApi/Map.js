@@ -4,9 +4,25 @@ import React, { useEffect } from 'react';
 const { kakao } = window;
 
 const Map = ({ mapx, mapy }) => {
-  let kakaomap_mapx = parseFloat(mapx);
-  let kakaomap_mapy = parseFloat(mapy);
-  console.log(typeof kakaomap_mapx);
+  console.log(typeof mapx);
+  console.log(typeof mapy);
+  let kakaomap_mapx = 0;
+  let kakaomap_mapy = 0;
+
+  if (isNaN(mapx) == true) {
+    kakaomap_mapx = parseFloat(mapx);
+  } else {
+    kakaomap_mapx = mapx;
+  }
+  if (isNaN(mapy) == true) {
+    kakaomap_mapy = parseFloat(mapy);
+  } else {
+    kakaomap_mapy = mapy;
+  }
+
+  console.log(kakaomap_mapx);
+  console.log(kakaomap_mapy);
+
   useEffect(() => {
     // 마커를 담을 배열입니다
     var markers = [];
