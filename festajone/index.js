@@ -135,7 +135,6 @@ app.post('/likeListAdd', (req, res) => {
 // 찜 해제하면 짐 테이블에서 삭제
 app.post('/likeListDelete', (req, res) => {
   const content_id = req.body.content_id;
-  console.log('/likeListDelete(content_id) => ', content_id);
 
   const sqlQuery = 'DELETE FROM user_like WHERE content_id = ?;';
   db.query(sqlQuery, [content_id], (err, result) => {
@@ -144,10 +143,21 @@ app.post('/likeListDelete', (req, res) => {
   });
 });
 
+//찜 여부 확인
+app.post('/searchLike', (req, res) => {
+  console.log('searchLike');
+  var content_id = req.body.content_id;
+
+  const sqlQuery = 'SELECT count(*) cnt FROM user_like where content_id=?;';
+  db.query(sqlQuery, [content_id], (err, result) => {
+    res.send(result);
+  });
+});
+
 //찜 한 축제
 app.post('/searchLikeFes', (req, res) => {
   console.log('searchLikeFes');
-  var user_id = '';
+  var user_id = req.body.user_id;
   var sortation = 2;
 
   const sqlQuery =
@@ -160,7 +170,7 @@ app.post('/searchLikeFes', (req, res) => {
 //찜 한 맛집
 app.post('/searchLikeRes', (req, res) => {
   console.log('searchLikeRes');
-  var user_id = '';
+  var user_id = req.body.user_id;
   var sortation = 3;
 
   const sqlQuery =
