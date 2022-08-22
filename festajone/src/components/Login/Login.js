@@ -58,10 +58,18 @@ const Login = () => {
       <h1>Login</h1>
       <form>
         <div className="text-area">
-          <input type="text" name="username" placeholder=" ID" className="text_input" ref={idRef} />
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder=" ID"
+            className="text_input"
+            ref={idRef}
+          />
           <div className="text-area">
             <input
               type="password"
+              id="password"
               name="password"
               placeholder=" PASSWORD"
               className="text_input"

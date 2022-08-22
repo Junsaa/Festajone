@@ -82,6 +82,7 @@ const Join = () => {
         <div className="text-area">
           <input
             type="text"
+            id="username"
             name="username"
             placeholder="아이디를 입력해주세요"
             className="text_input"
@@ -92,6 +93,7 @@ const Join = () => {
           <div className="text-area">
             <input
               type="password"
+              id="password"
               name="password"
               placeholder="비밀번호를 입력해주세요"
               className="text_input"
@@ -103,6 +105,7 @@ const Join = () => {
           <div className="text-area">
             <input
               type="text"
+              id="email"
               name="email"
               placeholder="abcde@email.com"
               className="text_input"
@@ -113,6 +116,7 @@ const Join = () => {
           <div className="text-area">
             <input
               type="text"
+              id="name"
               name="name"
               placeholder="이름을 입력해주세요"
               className="text_input"
@@ -123,6 +127,7 @@ const Join = () => {
           <div className="text-area">
             <input
               type="text"
+              id="nick"
               name="nickname"
               placeholder="닉네임을 입력해주세요"
               className="text_input"
