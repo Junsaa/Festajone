@@ -6,7 +6,7 @@ const { kakao } = window;
 const Map = ({ mapx, mapy }) => {
   let kakaomap_mapx = parseFloat(mapx);
   let kakaomap_mapy = parseFloat(mapy);
-  console.log(kakaomap_mapx + '/' + kakaomap_mapy);
+  // console.log(kakaomap_mapx + '/' + kakaomap_mapy);
 
   // if (isNaN(mapx) == true) {
   //   kakaomap_mapx = parseFloat(mapx);

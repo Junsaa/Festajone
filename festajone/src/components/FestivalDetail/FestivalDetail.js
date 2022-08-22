@@ -93,10 +93,63 @@ const FestivalDetail = () => {
       });
   };
 
+  const likeListAdd = (e) => {
+    axios
+      .post('http://localhost:8008/likeListAdd', {
+        user_id: 'soyeon',
+        thumbnail: festival.f_d_image,
+        title: festival.f_d_title,
+        addr: festival.f_d_addr,
+        content_id: festival.f_d_contentid,
+        startdate: festival.f_d_startdate,
+        enddate: festival.f_d_enddate,
+        sortation: festival.sortation
+      })
+      .then((res) => {
+        const { data } = res;
+        console.log('likeListAdd =>', data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+
+  const likeListDelete = (e) => {
+    axios
+      .post('http://localhost:8008/likeListDelete', { content_id: 2833886 })
+      .then((res) => {
+        const { data } = res;
+        console.log('likeListDelete =>', data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+
+  let [likeListCnt, setLikeListCnt] = useState();
+  const likeListCheck = (e) => {
+    axios
+      .post('http://localhost:8008/searchLike', { content_id: 2833886 })
+      .then((res) => {
+        const { data } = res;
+        console.log('searchLike =>', data);
+        if (data[0].cnt > 0) {
+          setLikeListCnt(true);
+        } else {
+          setLikeListCnt(false);
+        }
+        console.log(likeListCnt);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+
   useEffect(() => {
     festivalDetail();
     festivalImgs();
     recommendRestaurant();
+    likeListCheck();
   }, []);
 
   return (
@@ -111,8 +164,23 @@ const FestivalDetail = () => {
           </td>
           <td>
             <h1>
-              <i className="bi bi-heart"></i>
-              {/* 채워진 하트 <i className="bi bi-heart-fill"></i> */}
+              {likeListCnt ? (
+                <i
+                  className="bi bi-heart-fill"
+                  onClick={() => {
+                    likeListDelete();
+                    setLikeListCnt(false);
+                  }}
+                ></i>
+              ) : (
+                <i
+                  className="bi bi-heart"
+                  onClick={() => {
+                    likeListAdd();
+                    setLikeListCnt(true);
+                  }}
+                ></i>
+              )}
             </h1>
           </td>
         </tr>
