@@ -150,7 +150,7 @@ const FestivalDetail = () => {
     festivalImgs();
     recommendRestaurant();
     likeListCheck();
-  }, [likeListCnt]);
+  }, []);
 
   return (
     <>
