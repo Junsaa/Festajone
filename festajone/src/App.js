@@ -13,6 +13,7 @@ import Mypage from './components/Mypage/Mypage';
 import Login from './components/Login/Login';
 import Join from './components/Join/Join';
 import FestivalDetail from './components/FestivalDetail/FestivalDetail';
+import UpdateUser from './components/UpdateUser/UpdateUser';
 
 const App = () => {
   const [menu, setMenu] = useState(1);
@@ -29,7 +30,9 @@ const App = () => {
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
+        <Route path="/updateuser" element={<UpdateUser />} />
         <Route path="/festivaldetail" element={<FestivalDetail />} />
+        <Route path="/restaurantdetail" element={<RestaurantList />} />
       </Routes>
       <Footer />
     </div>
