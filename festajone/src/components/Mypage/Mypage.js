@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
 import { Badge, Tab, Col, Nav, Row, Pagination } from 'react-bootstrap';
+import { useNavigate } from '../../../node_modules/react-router-dom/index';
 import './mypage.css';
 
 const Mypage = () => {
   let [menu, setMenu] = useState(1);
+  let navigate = useNavigate();
 
   return (
     <>
       <div className="profile">
         {/* 프로필 사진이 없을 때 */}
         <i className="bi bi-person-circle" style={{ fontSize: '80px' }}></i>
-        <Badge bg="secondary">logOut</Badge>
+        <Badge
+          bg="secondary"
+          onClick={() => {
+            navigate('/updateuser');
+          }}
+        >
+          MyPage
+        </Badge>
+        <Badge bg="secondary" style={{ marginLeft: '5px' }}>
+          logOut
+        </Badge>
         {/* 프로필 사진이 있을 때
         <img style={{ width: '100px', height: '100px', borderRadius: '50%' }} /> */}
 
