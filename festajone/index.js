@@ -60,7 +60,7 @@ app.post('/searchfestival', (req, res) => {
 
 // 축제 상세 정보 가져오기
 app.post('/searchFestivalDetail', (req, res) => {
-  console.log('searchFestivalDetail');
+  // console.log('searchFestivalDetail');
   var festival_contentid = 2833886;
 
   const sqlQuery =
@@ -73,12 +73,12 @@ app.post('/searchFestivalDetail', (req, res) => {
 
 //축제 이미지 가져오기
 app.post('/searchFestivalImg', (req, res) => {
-  console.log('searchFestivalImg');
-  var festival_contentid = 2833886;
+  // console.log('searchFestivalImg');
+  var contentid = req.body.contentid;
 
   const sqlQuery =
-    'SELECT image_contentid, image_originalimgurl, image_smallimageurl FROM festival_image where image_contentid=?;';
-  db.query(sqlQuery, [festival_contentid], (err, result) => {
+    'SELECT image_contentid, image_originimgurl, image_smallimageurl FROM festival_image where image_contentid=?;';
+  db.query(sqlQuery, [contentid], (err, result) => {
     res.send(result);
     console.log(result);
   });
@@ -86,13 +86,26 @@ app.post('/searchFestivalImg', (req, res) => {
 
 //축제 상세 페이지 - 주변 맛집 랜덤 추천
 app.post('/recommendRes', (req, res) => {
-  console.log('recommendRes');
-  var areacode = '';
+  // console.log('recommendRes');
+  var areacode = req.body.areacode;
 
   const sqlQuery =
-    'SELECT r_contentid, r_title, r_mainimage, r_thumbnail,r_addr1, r_addr2, r_mapx,r_mapy FROM restaurant where areacode=? order by rand() limit 3;';
+    'SELECT r_contentid, r_title, r_mainimage, r_thumbnail,r_addr1, r_addr2, r_mapx,r_mapy FROM restaurant where r_areacode=? order by rand() limit 3;';
   db.query(sqlQuery, [areacode], (err, result) => {
     res.send(result);
+  });
+});
+
+// 맛집 상세 정보 가져오기
+app.post('/searchResDetail', (req, res) => {
+  // console.log('searchFestivalDetail');
+  var res_contentid = req.body.res_contentid;
+
+  const sqlQuery =
+    'SELECT r_contentid, r_title, r_mainimage, r_addr1, r_addr2, r_mapx, r_mapy FROM restaurant where r_contentid=?;';
+  db.query(sqlQuery, [res_contentid], (err, result) => {
+    res.send(result);
+    console.log(result);
   });
 });
 
