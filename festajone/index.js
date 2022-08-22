@@ -96,6 +96,19 @@ app.post('/recommendRes', (req, res) => {
   });
 });
 
+// 맛집 상세 정보 가져오기
+app.post('/searchResDetail', (req, res) => {
+  // console.log('searchFestivalDetail');
+  var res_contentid = req.body.res_contentid;
+
+  const sqlQuery =
+    'SELECT r_contentid, r_title, r_mainimage, r_addr1, r_addr2, r_mapx, r_mapy FROM restaurant where r_contentid=?;';
+  db.query(sqlQuery, [res_contentid], (err, result) => {
+    res.send(result);
+    console.log(result);
+  });
+});
+
 // 찜하면 찜 테이블에 추가
 app.post('/likeListAdd', (req, res) => {
   console.log('/likeListAdd', req.body);

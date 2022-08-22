@@ -6,7 +6,7 @@ const { kakao } = window;
 const Map = ({ mapx, mapy }) => {
   let kakaomap_mapx = parseFloat(mapx);
   let kakaomap_mapy = parseFloat(mapy);
-  console.log(typeof kakaomap_mapx);
+  console.log(kakaomap_mapx + '/' + kakaomap_mapy);
 
   // if (isNaN(mapx) == true) {
   //   kakaomap_mapx = parseFloat(mapx);
@@ -51,7 +51,7 @@ const Map = ({ mapx, mapy }) => {
     //검색 후 목록 표시
 
     // console.log("loading kakaomap");
-  }, []);
+  }, [kakaomap_mapx, kakaomap_mapy]);
 
   return (
     <div align="center">
