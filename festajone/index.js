@@ -238,6 +238,19 @@ app.post('/passwordupdate', (req, res) => {
   });
 });
 
+//로그인한 사용자 정보 가져오기
+app.post('/user_login', (req, res) => {
+  console.log('/user_login', req.body);
+  var user_id = req.body.user_id;
+
+  const sqlQuery =
+    'select user_name, user_nickname, user_email, profile_image from user where user_id=?;';
+  db.query(sqlQuery, [user_id], (err, result) => {
+    res.send(result);
+    console.log('result=', result);
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`running on port ${PORT}`);
 });

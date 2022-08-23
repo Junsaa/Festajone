@@ -9,7 +9,7 @@ const RestaurantDetail = () => {
   const location = useLocation();
 
   const get_r_contentid = location.state.get_r_contentid;
-  console.log(typeof get_r_contentid);
+  // console.log(typeof get_r_contentid);
 
   const [restaurantD, setRestaurantD] = useState({
     r_contentid: '',
@@ -113,7 +113,17 @@ const RestaurantDetail = () => {
           </td>
           <td>
             <h1>
-              {likeListCnt ? (
+              {sessionStorage.getItem('id') === '' ||
+              sessionStorage.getItem('id') === undefined ||
+              sessionStorage.getItem('id') === null ? (
+                <i
+                  className="bi bi-heart"
+                  onClick={() => {
+                    alert('로그인을 해주세요');
+                    //로그인 페이지 연결????
+                  }}
+                ></i>
+              ) : likeListCnt ? (
                 <i
                   className="bi bi-heart-fill"
                   onClick={() => {

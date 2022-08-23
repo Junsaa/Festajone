@@ -140,7 +140,6 @@ const FestivalDetail = () => {
         } else {
           setLikeListCnt(false);
         }
-        // console.log(likeListCnt);
       })
       .catch((e) => {
         console.error(e);
@@ -166,7 +165,17 @@ const FestivalDetail = () => {
           </td>
           <td>
             <h1>
-              {likeListCnt ? (
+              {sessionStorage.getItem('id') === '' ||
+              sessionStorage.getItem('id') === undefined ||
+              sessionStorage.getItem('id') === null ? (
+                <i
+                  className="bi bi-heart"
+                  onClick={() => {
+                    alert('로그인을 해주세요');
+                    //로그인 페이지 연결????
+                  }}
+                ></i>
+              ) : likeListCnt ? (
                 <i
                   className="bi bi-heart-fill"
                   onClick={() => {
@@ -273,13 +282,11 @@ const FestivalDetail = () => {
         <strong>주변 맛집</strong>
         <hr style={{ height: '1px', background: 'black' }} />
         <ul className="list-group list-group-flush">
-          {recommendRes === [] || recommendRes === undefined ? (
-            <div>no</div>
-          ) : (
-            recommendRes.map(function (res, i) {
-              return <AroundResCompo recoRes={res} key={i}></AroundResCompo>;
-            })
-          )}
+          {recommendRes === [] || recommendRes === undefined
+            ? null
+            : recommendRes.map(function (res, i) {
+                return <AroundResCompo recoRes={res} key={i}></AroundResCompo>;
+              })}
         </ul>
       </div>
     </>
@@ -303,7 +310,7 @@ function AroundResCompo({ recoRes }) {
         <img className="list_img" src={recoRes.r_mainimage} onClick={goResDetail} />
       )}
 
-      <span className="block">
+      <span className="block" onClick={goResDetail}>
         <b style={{ marginLeft: '10px' }}>
           {recoRes.r_title} {recoRes.r_addr2}
         </b>

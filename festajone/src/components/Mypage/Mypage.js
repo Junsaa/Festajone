@@ -13,12 +13,6 @@ const Mypage = () => {
   const [likeRes, setLikeRes] = useState([]);
   const [myboard, setMyboard] = useState([]);
 
-  useEffect(() => {
-    getLikeFesList();
-    getLikeResList();
-    getMyboardList();
-  }, []);
-
   //찜한 축제 리스트 get
   const getLikeFesList = (e) => {
     axios
@@ -73,6 +67,12 @@ const Mypage = () => {
         console.error(e);
       });
   };
+
+  useEffect(() => {
+    getLikeFesList();
+    getLikeResList();
+    getMyboardList();
+  }, []);
 
   return (
     <>
@@ -241,23 +241,41 @@ const Mypage = () => {
               <Tab.Content>
                 <Tab.Pane eventKey="first">
                   <ul className="list-group list-group-flush">
-                    {likeFes.map(function (f, i) {
-                      return <LikeFes key={i} likefes={f} />;
-                    })}
+                    {likeFes === [] || likeFes === undefined ? (
+                      <li className="list-group-item inline">
+                        <p>찜한 축제가 없습니다.</p>
+                      </li>
+                    ) : (
+                      likeFes.map(function (f, i) {
+                        return <LikeFes key={i} likefes={f} />;
+                      })
+                    )}
                   </ul>
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
                   <ul className="list-group list-group-flush">
-                    {likeRes.map(function (r, i) {
-                      return <LikeRes key={i} likeres={r} />;
-                    })}
+                    {likeRes === [] || likeRes === undefined ? (
+                      <li className="list-group-item inline">
+                        <p>찜한 맛집이 없습니다.</p>
+                      </li>
+                    ) : (
+                      likeRes.map(function (r, i) {
+                        return <LikeRes key={i} likeres={r} />;
+                      })
+                    )}
                   </ul>
                 </Tab.Pane>
                 <Tab.Pane eventKey="third">
                   <ul className="list-group list-group-flush">
-                    {myboard.map(function (b, i) {
-                      return <MyBoard key={i} myboard={b} />;
-                    })}
+                    {myboard === [] || myboard === undefined ? (
+                      <li className="list-group-item inline">
+                        <p>내가 작성한 게시글이 없습니다. </p>
+                      </li>
+                    ) : (
+                      myboard.map(function (b, i) {
+                        return <MyBoard key={i} myboard={b} />;
+                      })
+                    )}
                   </ul>
                 </Tab.Pane>
               </Tab.Content>
@@ -270,10 +288,22 @@ const Mypage = () => {
 };
 
 function LikeFes({ likefes }) {
+  var navigate = useNavigate();
+  const goFesDetail = () => {
+    navigate('/festivaldetail', { state: { get_f_contentid: likefes.content_id } });
+  };
+
   return (
     <li className="list-group-item inline">
-      <img src={likefes.thumbnail} className="list_img" />
-      <span className="block">
+      {likefes.thumbnail === '' || likefes.thumbnail === undefined ? (
+        <div className="list_img" align="center" style={{ fontSize: 'xx-large' }}>
+          <i className="bi bi-image" onClick={goFesDetail}></i>
+        </div>
+      ) : (
+        <img src={likefes.thumbnail} className="list_img" onClick={goFesDetail} />
+      )}
+
+      <span className="block" onClick={goFesDetail}>
         <b style={{ marginLeft: '10px' }}>{likefes.title}</b>
       </span>
       <span className="block">
@@ -287,10 +317,22 @@ function LikeFes({ likefes }) {
 }
 
 function LikeRes({ likeres }) {
+  var navigate = useNavigate();
+  const goResDetail = () => {
+    navigate('/restaurantdetail', { state: { get_r_contentid: likeres.content_id } });
+  };
+
   return (
     <li className="list-group-item inline">
-      <img className="list_img" src={likeres.thumbnail} />
-      <span className="block">
+      {likeres.thumbnail === '' || likeres.thumbnail === undefined ? (
+        <div className="list_img" align="center" style={{ fontSize: 'xx-large' }}>
+          <i className="bi bi-image" onClick={goResDetail}></i>
+        </div>
+      ) : (
+        <img className="list_img" src={likeres.thumbnail} onClick={goResDetail} />
+      )}
+
+      <span className="block" onClick={goResDetail}>
         <b style={{ marginLeft: '10px' }}>{likeres.title}</b>
       </span>
       <span className="block">
