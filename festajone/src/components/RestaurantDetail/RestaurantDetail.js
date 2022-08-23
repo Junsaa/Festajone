@@ -3,9 +3,16 @@ import Map from '../MapApi/Map';
 import '../FestivalDetail/festivalDetail.css';
 import { useEffect, useState } from 'react';
 import axios from '../../../node_modules/axios/index';
+import { useLocation } from 'react-router-dom';
 
 const RestaurantDetail = () => {
+  const location = useLocation();
+
+  const get_r_contentid = location.state.get_r_contentid;
+  console.log(typeof get_r_contentid);
+
   const [restaurantD, setRestaurantD] = useState({
+    r_contentid: '',
     r_title: '',
     r_mainimage: '',
     r_addr1: '',
@@ -16,13 +23,14 @@ const RestaurantDetail = () => {
 
   const resDetail = (e) => {
     axios
-      .post('http://localhost:8008/searchResDetail', { res_contentid: 2685271 })
+      .post('http://localhost:8008/searchResDetail', { res_contentid: parseInt(get_r_contentid) })
       .then((res) => {
         const { data } = res;
         console.log('resDetail =>', data);
         if (res.data.length > 0) {
           setRestaurantD({
             ...restaurantD,
+            r_contentid: data[0].r_contentid,
             r_title: data[0].r_title,
             r_mainimage: data[0].r_mainimage,
             r_addr1: data[0].r_addr1,
@@ -37,8 +45,62 @@ const RestaurantDetail = () => {
       });
   };
 
+  let res_addr = restaurantD.r_addr1 + restaurantD.r_addr2;
+  const likeListAdd = (e) => {
+    axios
+      .post('http://localhost:8008/likeListAdd', {
+        user_id: sessionStorage.getItem('id'),
+        thumbnail: restaurantD.r_mainimage,
+        title: restaurantD.r_title,
+        addr: res_addr,
+        content_id: restaurantD.r_contentid,
+        startdate: '',
+        enddate: '',
+        sortation: 3
+      })
+      .then((res) => {
+        const { data } = res;
+        console.log('likeListAdd =>', data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+
+  const likeListDelete = (e) => {
+    axios
+      .post('http://localhost:8008/likeListDelete', { content_id: parseInt(get_r_contentid) })
+      .then((res) => {
+        const { data } = res;
+        console.log('likeListDelete =>', data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+
+  let [likeListCnt, setLikeListCnt] = useState();
+  const likeListCheck = (e) => {
+    axios
+      .post('http://localhost:8008/searchLike', { content_id: parseInt(get_r_contentid) })
+      .then((res) => {
+        const { data } = res;
+        console.log('searchLike =>', data);
+        if (data[0].cnt > 0) {
+          setLikeListCnt(true);
+        } else {
+          setLikeListCnt(false);
+        }
+        console.log(likeListCnt);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+
   useEffect(() => {
     resDetail();
+    likeListCheck();
   }, []);
 
   return (
@@ -51,8 +113,23 @@ const RestaurantDetail = () => {
           </td>
           <td>
             <h1>
-              <i className="bi bi-heart"></i>
-              {/* 채워진 하트 <i className="bi bi-heart-fill"></i> */}
+              {likeListCnt ? (
+                <i
+                  className="bi bi-heart-fill"
+                  onClick={() => {
+                    likeListDelete();
+                    setLikeListCnt(false);
+                  }}
+                ></i>
+              ) : (
+                <i
+                  className="bi bi-heart"
+                  onClick={() => {
+                    likeListAdd();
+                    setLikeListCnt(true);
+                  }}
+                ></i>
+              )}
             </h1>
           </td>
         </tr>
@@ -72,7 +149,6 @@ const RestaurantDetail = () => {
             내용 더보기 +
           </button>
         </div> */}
-        <br />
         <ul>
           <li>
             <b className="detail_b">주소</b>

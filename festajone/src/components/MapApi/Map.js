@@ -26,7 +26,7 @@ const Map = ({ mapx, mapy }) => {
     var container = document.getElementById('map');
     var options = {
       center: new kakao.maps.LatLng(kakaomap_mapy, kakaomap_mapx),
-      level: 3
+      level: 5
     };
 
     var map = new kakao.maps.Map(container, options);

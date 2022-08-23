@@ -16,8 +16,8 @@ app.use(cors(corsOptions));
 
 const db = mysql.createPool({
   host: 'localhost',
-  user: 'root',
-  password: '123456',
+  user: 'pesta',
+  password: 'Pesta123',
   database: 'first'
 });
 
@@ -192,20 +192,51 @@ app.post('/searchMyBoard', (req, res) => {
   });
 });
 
-//사용자 정보 수정
-// app.post("/update", (req, res) => {
-//   console.log("/update", req.body);
-//   var title = req.body.article.board_title;
-//   var content = req.body.article.board_content;
-//   var num = req.body.article.board_num;
+//사용자 비밀번호 일치 여부
+app.post('/pwcheck', (req, res) => {
+  console.log('/pwcheck', req.body);
+  var user_id = req.body.user_id;
 
-//   const sqlQuery =
-//     "update BOARD_TBL set BOARD_TITLE=?, BOARD_CONTENT=?, BOARD_DATE=now() where board_num=?;";
-//   db.query(sqlQuery, [title, content, num], (err, result) => {
-//     res.send(result);
-//     console.log("result=", result);
-//   });
-// });
+  const sqlQuery = 'select user_pw from user where user_id=?;';
+  db.query(sqlQuery, [user_id], (err, result) => {
+    res.send(result);
+    console.log('result=', result);
+  });
+});
+
+//사용자 정보 수정
+app.post('/updateuser', (req, res) => {
+  console.log('/updateuser', req.body);
+  var user_id = req.body.user_id;
+  var user_name = req.body.user_name;
+  var user_nickname = req.body.user_nickname;
+  var user_email = req.body.user_email;
+  var profile_image = req.body.profile_image;
+
+  const sqlQuery =
+    'update user set user_name=?, user_nickname=?, user_email=?,profile_image=? where user_id=?;';
+  db.query(
+    sqlQuery,
+    [user_name, user_nickname, user_email, profile_image, user_id],
+    (err, result) => {
+      res.send(result);
+      console.log('result=', result);
+    }
+  );
+});
+
+//사용자비밀번호 수정
+app.post('/passwordupdate', (req, res) => {
+  console.log('/passwordupdate', req.body);
+  var user_id = req.body.user_id;
+  var updatepassword = req.body.user_pw;
+
+  const sqlQuery = 'update user set user_pw=? where user_id=?;';
+  db.query(sqlQuery, [updatepassword, user_id], (err, result) => {
+    res.send(result);
+    console.log('result=', result);
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`running on port ${PORT}`);

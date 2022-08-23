@@ -4,6 +4,8 @@ import Map from '../MapApi/Map';
 import './festivalDetail.css';
 import { Carousel } from 'react-bootstrap';
 import axios from '../../../node_modules/axios/index';
+import { useNavigate } from '../../../node_modules/react-router-dom/index';
+import RestaurantDetail from '../RestaurantDetail/RestaurantDetail';
 
 const FestivalDetail = () => {
   const [festival, setFestival] = useState({
@@ -96,7 +98,7 @@ const FestivalDetail = () => {
   const likeListAdd = (e) => {
     axios
       .post('http://localhost:8008/likeListAdd', {
-        user_id: 'soyeon',
+        user_id: sessionStorage.getItem('id'),
         thumbnail: festival.f_d_image,
         title: festival.f_d_title,
         addr: festival.f_d_addr,
@@ -138,7 +140,7 @@ const FestivalDetail = () => {
         } else {
           setLikeListCnt(false);
         }
-        console.log(likeListCnt);
+        // console.log(likeListCnt);
       })
       .catch((e) => {
         console.error(e);
@@ -287,10 +289,20 @@ const FestivalDetail = () => {
 //주변 맛집 리스트 컴포넌트
 function AroundResCompo({ recoRes }) {
   // console.log(recoRes);
-
+  var navigate = useNavigate();
+  const goResDetail = () => {
+    navigate('/restaurantdetail', { state: { get_r_contentid: recoRes.r_contentid } });
+  };
   return (
     <li className="list-group-item inline">
-      <img className="list_img" src={recoRes.r_mainimage} />
+      {recoRes.r_mainimage === '' || recoRes.r_mainimage === undefined ? (
+        <div className="list_img" align="center" style={{ fontSize: 'xx-large' }}>
+          <i className="bi bi-image" onClick={goResDetail}></i>
+        </div>
+      ) : (
+        <img className="list_img" src={recoRes.r_mainimage} onClick={goResDetail} />
+      )}
+
       <span className="block">
         <b style={{ marginLeft: '10px' }}>
           {recoRes.r_title} {recoRes.r_addr2}
