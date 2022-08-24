@@ -26,7 +26,7 @@ const RestaurantDetail = () => {
       .post('http://localhost:8008/searchResDetail', { res_contentid: parseInt(get_r_contentid) })
       .then((res) => {
         const { data } = res;
-        console.log('resDetail =>', data);
+        // console.log('resDetail =>', data);
         if (res.data.length > 0) {
           setRestaurantD({
             ...restaurantD,
@@ -60,7 +60,7 @@ const RestaurantDetail = () => {
       })
       .then((res) => {
         const { data } = res;
-        console.log('likeListAdd =>', data);
+        // console.log('likeListAdd =>', data);
       })
       .catch((e) => {
         console.error(e);
@@ -72,7 +72,7 @@ const RestaurantDetail = () => {
       .post('http://localhost:8008/likeListDelete', { content_id: parseInt(get_r_contentid) })
       .then((res) => {
         const { data } = res;
-        console.log('likeListDelete =>', data);
+        // console.log('likeListDelete =>', data);
       })
       .catch((e) => {
         console.error(e);
@@ -85,13 +85,13 @@ const RestaurantDetail = () => {
       .post('http://localhost:8008/searchLike', { content_id: parseInt(get_r_contentid) })
       .then((res) => {
         const { data } = res;
-        console.log('searchLike =>', data);
+        // console.log('searchLike =>', data);
         if (data[0].cnt > 0) {
           setLikeListCnt(true);
         } else {
           setLikeListCnt(false);
         }
-        console.log(likeListCnt);
+        // console.log(likeListCnt);
       })
       .catch((e) => {
         console.error(e);

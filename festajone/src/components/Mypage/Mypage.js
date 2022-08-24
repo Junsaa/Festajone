@@ -19,7 +19,7 @@ const Mypage = () => {
       .post('http://localhost:8008/user_login', { user_id: sessionStorage.getItem('id') })
       .then((res) => {
         const { data } = res;
-        console.log('user_login =>', data);
+        // console.log('user_login =>', data);
         setUser({
           ...user,
           user_name: data[0].user_name,
@@ -46,7 +46,7 @@ const Mypage = () => {
       .post('http://localhost:8008/searchLikeFes', { user_id: sessionStorage.getItem('id') })
       .then((res) => {
         const { data } = res;
-        console.log('searchLikeFes =>', data);
+        // console.log('searchLikeFes =>', data);
         if (res.data.length > 0) {
           for (var i = 0; i < res.data.length; i++) {
             likeFes.splice(i, 0, data[i]);
@@ -64,7 +64,7 @@ const Mypage = () => {
       .post('http://localhost:8008/searchLikeRes', { user_id: sessionStorage.getItem('id') })
       .then((res) => {
         const { data } = res;
-        console.log('searchLikeRes =>', data);
+        // console.log('searchLikeRes =>', data);
         if (res.data.length > 0) {
           for (var i = 0; i < res.data.length; i++) {
             likeRes.splice(i, 0, data[i]);
@@ -82,24 +82,26 @@ const Mypage = () => {
       .post('http://localhost:8008/searchMyBoard', { user_id: sessionStorage.getItem('id') })
       .then((res) => {
         const { data } = res;
-        console.log('searchMyBoard =>', data);
+        // console.log('searchMyBoard =>', data, typeof data);
         if (res.data.length > 0) {
           for (var i = 0; i < res.data.length; i++) {
             myboard.splice(i, 0, data[i]);
           }
         }
         setMyboard(myboard);
+        // console.log(myboard.length);
       })
       .catch((e) => {
         console.error(e);
       });
   };
 
+  // window.location.replace('/mypage');
   useEffect(() => {
-    getUser();
     getLikeFesList();
     getLikeResList();
     getMyboardList();
+    getUser();
   }, []);
 
   return (
@@ -116,7 +118,13 @@ const Mypage = () => {
             }}
           ></i>
         ) : (
-          <img src={image} style={{ width: '100px', height: '100px', borderRadius: '50%' }} />
+          <img
+            src={image}
+            style={{ width: '100px', height: '100px', borderRadius: '50%' }}
+            onClick={() => {
+              navigate('/updateuser');
+            }}
+          />
         )}
 
         <Badge
@@ -139,7 +147,6 @@ const Mypage = () => {
           logOut
         </Badge>
       </div>
-
       <div width="100%" align="center" style={{ padding: '10px' }}>
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
           <Row>
@@ -272,8 +279,14 @@ const Mypage = () => {
             </Col>
             <Col sm={9}>
               <Tab.Content>
-                {likeFes === [] || likeFes === undefined || likeFes === null ? (
-                  <Tab.Pane eventKey="first">찜한 축제가 없습니다.</Tab.Pane>
+                {likeFes === [] ||
+                likeFes === undefined ||
+                likeFes === null ||
+                likeFes.length === 0 ? (
+                  <Tab.Pane eventKey="first">
+                    <br />
+                    찜한 축제가 없습니다.
+                  </Tab.Pane>
                 ) : (
                   <Tab.Pane eventKey="first">
                     <ul className="list-group list-group-flush">
@@ -283,8 +296,14 @@ const Mypage = () => {
                     </ul>
                   </Tab.Pane>
                 )}
-                {likeRes === [] || likeRes === undefined || likeRes === null ? (
-                  <Tab.Pane eventKey="second">찜한 맛집이 없습니다.</Tab.Pane>
+                {likeRes === [] ||
+                likeRes === undefined ||
+                likeRes === null ||
+                likeRes.length === 0 ? (
+                  <Tab.Pane eventKey="second">
+                    <br />
+                    찜한 맛집이 없습니다.
+                  </Tab.Pane>
                 ) : (
                   <Tab.Pane eventKey="second">
                     <ul className="list-group list-group-flush">
@@ -294,8 +313,14 @@ const Mypage = () => {
                     </ul>
                   </Tab.Pane>
                 )}
-                {myboard === [] || myboard === undefined || myboard === null ? (
-                  <Tab.Pane eventKey="third">내가 작성한 게시글이 없습니다.</Tab.Pane>
+                {myboard === [] ||
+                myboard === undefined ||
+                myboard === null ||
+                myboard.length === 0 ? (
+                  <Tab.Pane eventKey="third">
+                    <br />
+                    내가 작성한 게시글이 없습니다.
+                  </Tab.Pane>
                 ) : (
                   <Tab.Pane eventKey="third">
                     <ul className="list-group list-group-flush">

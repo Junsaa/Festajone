@@ -34,7 +34,7 @@ const FestivalDetail = () => {
       .post('http://localhost:8008/searchFestivalDetail')
       .then((res) => {
         const { data } = res;
-        console.log('festivalDetail =>', data);
+        // console.log('festivalDetail =>', data);
         if (res.data.length > 0) {
           setFestival({
             ...festival,
@@ -64,7 +64,7 @@ const FestivalDetail = () => {
       .post('http://localhost:8008/searchFestivalImg', { contentid: 2833886 })
       .then((res) => {
         const { data } = res;
-        console.log('searchFestivalImg =>', data);
+        // console.log('searchFestivalImg =>', data);
         if (res.data.length > 0) {
           for (var i = 0; i < res.data.length; i++) {
             fesImg.splice(i, 0, data[i].image_originimgurl);
@@ -82,7 +82,7 @@ const FestivalDetail = () => {
       .post('http://localhost:8008/recommendRes', { areacode: 31 })
       .then((res) => {
         const { data } = res;
-        console.log('recommendRes =>', data);
+        // console.log('recommendRes =>', data);
         if (res.data.length > 0) {
           for (var i = 0; i < res.data.length; i++) {
             recommendRes.splice(i, 0, data[i]);
@@ -121,7 +121,7 @@ const FestivalDetail = () => {
       .post('http://localhost:8008/likeListDelete', { content_id: 2833886 })
       .then((res) => {
         const { data } = res;
-        console.log('likeListDelete =>', data);
+        // console.log('likeListDelete =>', data);
       })
       .catch((e) => {
         console.error(e);
@@ -134,7 +134,7 @@ const FestivalDetail = () => {
       .post('http://localhost:8008/searchLike', { content_id: 2833886 })
       .then((res) => {
         const { data } = res;
-        console.log('searchLike =>', data);
+        // console.log('searchLike =>', data);
         if (data[0].cnt > 0) {
           setLikeListCnt(true);
         } else {
