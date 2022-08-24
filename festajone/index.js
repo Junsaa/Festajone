@@ -92,6 +92,7 @@ app.post('/login', (req, res) => {
 //   });
 // });
 
+//축제 리스트
 app.post('/searchfestival', (req, res) => {
   console.log('searchfestival');
   var f_areacode = parseInt(req.body.f_areacode);
@@ -106,7 +107,7 @@ app.post('/searchfestival', (req, res) => {
   });
 });
 
-//축제 정보 오늘 날짜 기준으로 가져오기
+//축제 리스트 오늘 날짜 기준으로 가져오기
 app.post('/sortrecent', (req, res) => {
   console.log('sortrecent');
   var f_areacode = parseInt(req.body.f_areacode);
@@ -115,6 +116,20 @@ app.post('/sortrecent', (req, res) => {
   const sqlQuery =
     'select f_contentid,f_title,f_thumbnail,f_startdate,f_enddate from festival where f_areacode = ? and f_startdate >=? order by f_startdate;';
   db.query(sqlQuery, [f_areacode, today], (err, result) => {
+    res.send(result);
+  });
+});
+//맛집 리스트
+app.post('/searchrestaurant', (req, res) => {
+  console.log('searchrestaurant');
+  var r_areacode = parseInt(req.body.r_areacode);
+  console.log(r_areacode);
+
+  const sqlQuery =
+    'select r_contentid,r_title,r_thumbnail,r_addr1 from restaurant where r_areacode= ?;';
+  db.query(sqlQuery, [r_areacode], (err, result) => {
+    console.log(result);
+    console.log(err);
     res.send(result);
   });
 });
