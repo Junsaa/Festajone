@@ -13,6 +13,8 @@ import Mypage from './components/Mypage/Mypage';
 import Login from './components/Login/Login';
 import Join from './components/Join/Join';
 import FestivalDetail from './components/FestivalDetail/FestivalDetail';
+import UpdateUser from './components/UpdateUser/UpdateUser';
+import RestaurantDetail from './components/RestaurantDetail/RestaurantDetail';
 
 const App = () => {
   const [menu, setMenu] = useState(1);
@@ -21,17 +23,19 @@ const App = () => {
     <div>
       <Header />
       <Nav menu={menu} />
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/boardlist" element={<BoardList />} />
-          <Route path="/festivallist" element={<FestivalList />} />
-          <Route path="/restaurantlist" element={<RestaurantList />} />
-          <Route path="/mypage" element={<Mypage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/join" element={<Join />} />
-          <Route path="/festivaldetail" element={<FestivalDetail />} />
-        </Routes>
-
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/boardlist" element={<BoardList />} />
+        <Route path="/festivallist" element={<FestivalList />} />
+        <Route path="/restaurantlist" element={<RestaurantList />} />
+        <Route path="/mypage" element={<Mypage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/join" element={<Join />} />
+        <Route path="/updateuser" element={<UpdateUser />} />
+        <Route path="/festivaldetail" element={<FestivalDetail />} />
+        <Route path="/restaurantdetail" element={<RestaurantDetail />} />
+      </Routes>
+      <Footer />
     </div>
   );
 };

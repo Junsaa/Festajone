@@ -18,7 +18,7 @@ const Join = () => {
       idRef.current.focus();
       return false;
     } else {
-      if (idRef.current.value.length >= 8) {
+      if (idRef.current.value.length > 8) {
         alert('아이디를 8자 이하로 입력하세요');
         idRef.current.focus();
         return;
@@ -29,7 +29,7 @@ const Join = () => {
       pwRef.current.focus();
       return false;
     } else {
-      if (pwRef.current.value.length >= 10) {
+      if (pwRef.current.value.length > 10) {
         alert('비밀번호를 10자 이하로 입력하세요');
         pwRef.current.focus();
         return;
@@ -61,6 +61,7 @@ const Join = () => {
       })
       .then((res) => {
         console.log('handleJoin =>', res);
+        alert(res.data.affectedRows);
         if (res.data.affectedRows === 1) {
           alert('회원가입이 되었습니다');
           navigate('/login');
@@ -68,16 +69,6 @@ const Join = () => {
           alert('회원가입이 되지 않았습니다.');
           navigate('/join');
         }
-        var id = document.getElementById('username');
-        var pw = document.getElementById('password');
-        var email = document.getElementById('email');
-        var name = document.getElementById('name');
-        var nick = document.getElementById('nick');
-        id.value = '';
-        pw.value = '';
-        email.value = '';
-        name.value = '';
-        nick.value = '';
       })
       .catch((e) => {
         console.error(e);
@@ -91,6 +82,7 @@ const Join = () => {
         <div className="text-area">
           <input
             type="text"
+            id="username"
             name="username"
             placeholder="아이디를 입력해주세요"
             className="text_input"
@@ -101,6 +93,7 @@ const Join = () => {
           <div className="text-area">
             <input
               type="password"
+              id="password"
               name="password"
               placeholder="비밀번호를 입력해주세요"
               className="text_input"
@@ -112,6 +105,7 @@ const Join = () => {
           <div className="text-area">
             <input
               type="text"
+              id="email"
               name="email"
               placeholder="abcde@email.com"
               className="text_input"
@@ -122,6 +116,7 @@ const Join = () => {
           <div className="text-area">
             <input
               type="text"
+              id="name"
               name="name"
               placeholder="이름을 입력해주세요"
               className="text_input"
@@ -132,6 +127,7 @@ const Join = () => {
           <div className="text-area">
             <input
               type="text"
+              id="nick"
               name="nickname"
               placeholder="닉네임을 입력해주세요"
               className="text_input"

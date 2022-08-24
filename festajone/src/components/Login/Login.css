@@ -11,9 +11,14 @@ body {
   background-size: cover;
 }
 
-.Join {
+.Login {
   position: relative;
   top: 20px;
+}
+
+.Join {
+  position: relative;
+  top: 150px;
 }
 
 .text_input {
@@ -62,4 +67,10 @@ h1 {
   100% {
     transform: translateY(5px);
   }
+}
+
+.submit {
+  background-color: white;
+  border: 1px solid white;
+  cursor: pointer;
 }

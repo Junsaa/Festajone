@@ -3,20 +3,35 @@ import React, { useEffect } from 'react';
 
 const { kakao } = window;
 
-const Map = () => {
+const Map = ({ mapx, mapy }) => {
+  let kakaomap_mapx = parseFloat(mapx);
+  let kakaomap_mapy = parseFloat(mapy);
+  // console.log(kakaomap_mapx + '/' + kakaomap_mapy);
+
+  // if (isNaN(mapx) == true) {
+  //   kakaomap_mapx = parseFloat(mapx);
+  // } else {
+  //   kakaomap_mapx = mapx;
+  // }
+  // if (isNaN(mapy) == true) {
+  //   kakaomap_mapy = parseFloat(mapy);
+  // } else {
+  //   kakaomap_mapy = mapy;
+  // }
+
   useEffect(() => {
     // 마커를 담을 배열입니다
     var markers = [];
 
     var container = document.getElementById('map');
     var options = {
-      center: new kakao.maps.LatLng(33.450701, 126.570667),
-      level: 3
+      center: new kakao.maps.LatLng(kakaomap_mapy, kakaomap_mapx),
+      level: 5
     };
 
     var map = new kakao.maps.Map(container, options);
     //마커표시
-    var markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
+    var markerPosition = new kakao.maps.LatLng(kakaomap_mapy, kakaomap_mapx);
     var marker = new kakao.maps.Marker({
       position: markerPosition
     });
@@ -36,7 +51,7 @@ const Map = () => {
     //검색 후 목록 표시
 
     // console.log("loading kakaomap");
-  }, []);
+  }, [kakaomap_mapx, kakaomap_mapy]);
 
   return (
     <div align="center">

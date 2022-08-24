@@ -1,20 +1,143 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Badge, Tab, Col, Nav, Row, Pagination } from 'react-bootstrap';
+import axios from '../../../node_modules/axios/index';
+import { useNavigate } from '../../../node_modules/react-router-dom/index';
 import './mypage.css';
 
 const Mypage = () => {
   let [menu, setMenu] = useState(1);
+  let navigate = useNavigate();
+
+  const [user, setUser] = useState({
+    user_name: '',
+    user_nickname: '',
+    user_email: '',
+    profile_image: ''
+  });
+  const getUser = (e) => {
+    axios
+      .post('http://localhost:8008/user_login', { user_id: sessionStorage.getItem('id') })
+      .then((res) => {
+        const { data } = res;
+        console.log('user_login =>', data);
+        setUser({
+          ...user,
+          user_name: data[0].user_name,
+          user_nickname: data[0].user_nickname,
+          user_email: data[0].user_email,
+          profile_image: data[0].profile_image
+        });
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+
+  const image = 'http://localhost:8008/userimgFolder/' + user.profile_image;
+
+  //찜한 축제, 맛집, 내가 쓴 게시글 리스트
+  const [likeFes, setLikeFes] = useState([]);
+  const [likeRes, setLikeRes] = useState([]);
+  const [myboard, setMyboard] = useState([]);
+
+  //찜한 축제 리스트 get
+  const getLikeFesList = (e) => {
+    axios
+      .post('http://localhost:8008/searchLikeFes', { user_id: sessionStorage.getItem('id') })
+      .then((res) => {
+        const { data } = res;
+        console.log('searchLikeFes =>', data);
+        if (res.data.length > 0) {
+          for (var i = 0; i < res.data.length; i++) {
+            likeFes.splice(i, 0, data[i]);
+          }
+        }
+        setLikeFes(likeFes);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+  //찜한 맛집 리스트 get
+  const getLikeResList = (e) => {
+    axios
+      .post('http://localhost:8008/searchLikeRes', { user_id: sessionStorage.getItem('id') })
+      .then((res) => {
+        const { data } = res;
+        console.log('searchLikeRes =>', data);
+        if (res.data.length > 0) {
+          for (var i = 0; i < res.data.length; i++) {
+            likeRes.splice(i, 0, data[i]);
+          }
+        }
+        setLikeRes(likeRes);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+  //내가 쓴 글 리스트 get
+  const getMyboardList = (e) => {
+    axios
+      .post('http://localhost:8008/searchMyBoard', { user_id: sessionStorage.getItem('id') })
+      .then((res) => {
+        const { data } = res;
+        console.log('searchMyBoard =>', data);
+        if (res.data.length > 0) {
+          for (var i = 0; i < res.data.length; i++) {
+            myboard.splice(i, 0, data[i]);
+          }
+        }
+        setMyboard(myboard);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+
+  useEffect(() => {
+    getUser();
+    getLikeFesList();
+    getLikeResList();
+    getMyboardList();
+  }, []);
 
   return (
     <>
       <div className="profile">
-        {/* 프로필 사진이 없을 때 */}
-        <i className="bi bi-person-circle" style={{ fontSize: '80px' }}></i>
-        <Badge bg="secondary">logOut</Badge>
-        {/* 프로필 사진이 있을 때
-        <img style={{ width: '100px', height: '100px', borderRadius: '50%' }} /> */}
+        {image === 'http://localhost:8008/userimgFolder/null' ||
+        image === undefined ||
+        image === null ? (
+          <i
+            className="bi bi-person-circle"
+            style={{ fontSize: '80px' }}
+            onClick={() => {
+              navigate('/updateuser');
+            }}
+          ></i>
+        ) : (
+          <img src={image} style={{ width: '100px', height: '100px', borderRadius: '50%' }} />
+        )}
 
-        {/* 요리죠리 해보아도 로그아웃 버튼 위치가 맘에 안든다.. */}
+        <Badge
+          bg="secondary"
+          style={{ marginLeft: '5px', verticalAlign: 'bottom' }}
+          onClick={() => {
+            navigate('/updateuser');
+          }}
+        >
+          MyPage
+        </Badge>
+        <Badge
+          bg="secondary"
+          style={{ marginLeft: '5px', verticalAlign: 'bottom' }}
+          onClick={() => {
+            sessionStorage.removeItem('id');
+            navigate('/');
+          }}
+        >
+          logOut
+        </Badge>
       </div>
 
       <div width="100%" align="center" style={{ padding: '10px' }}>
@@ -62,7 +185,7 @@ const Mypage = () => {
                           viewBox="0 0 20 20"
                         >
                           <path
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                             d="M.5 6a.5.5 0 0 0-.488.608l1.652 7.434A2.5 2.5 0 0 0 4.104 16h5.792a2.5 2.5 0 0 0 2.44-1.958l.131-.59a3 3 0 0 0 1.3-5.854l.221-.99A.5.5 0 0 0 13.5 6H.5ZM13 12.5a2.01 2.01 0 0 1-.316-.025l.867-3.898A2.001 2.001 0 0 1 13 12.5Z"
                           />
                           <path d="m4.4.8-.003.004-.014.019a4.167 4.167 0 0 0-.204.31 2.327 2.327 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.593.593 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3.31 3.31 0 0 1-.202.388 5.444 5.444 0 0 1-.253.382l-.018.025-.005.008-.002.002A.5.5 0 0 1 3.6 4.2l.003-.004.014-.019a4.149 4.149 0 0 0 .204-.31 2.06 2.06 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.593.593 0 0 0-.09-.252A4.334 4.334 0 0 0 3.6 2.8l-.01-.012a5.099 5.099 0 0 1-.37-.543A1.53 1.53 0 0 1 3 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a5.446 5.446 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 4.4.8Zm3 0-.003.004-.014.019a4.167 4.167 0 0 0-.204.31 2.327 2.327 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.593.593 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3.31 3.31 0 0 1-.202.388 5.444 5.444 0 0 1-.253.382l-.018.025-.005.008-.002.002A.5.5 0 0 1 6.6 4.2l.003-.004.014-.019a4.149 4.149 0 0 0 .204-.31 2.06 2.06 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.593.593 0 0 0-.09-.252A4.334 4.334 0 0 0 6.6 2.8l-.01-.012a5.099 5.099 0 0 1-.37-.543A1.53 1.53 0 0 1 6 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a5.446 5.446 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 7.4.8Zm3 0-.003.004-.014.019a4.077 4.077 0 0 0-.204.31 2.337 2.337 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.593.593 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3.198 3.198 0 0 1-.202.388 5.385 5.385 0 0 1-.252.382l-.019.025-.005.008-.002.002A.5.5 0 0 1 9.6 4.2l.003-.004.014-.019a4.149 4.149 0 0 0 .204-.31 2.06 2.06 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.593.593 0 0 0-.09-.252A4.334 4.334 0 0 0 9.6 2.8l-.01-.012a5.099 5.099 0 0 1-.37-.543A1.53 1.53 0 0 1 9 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a5.446 5.446 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 10.4.8Z" />
@@ -149,27 +272,53 @@ const Mypage = () => {
             </Col>
             <Col sm={9}>
               <Tab.Content>
-                <Tab.Pane eventKey="first">
+                {likeFes === [] || likeFes === undefined || likeFes === null ? (
+                  <Tab.Pane eventKey="first">찜한 축제가 없습니다.</Tab.Pane>
+                ) : (
+                  <Tab.Pane eventKey="first">
+                    <ul className="list-group list-group-flush">
+                      {likeFes.map(function (f, i) {
+                        return <LikeFes key={i} likefes={f} />;
+                      })}
+                    </ul>
+                  </Tab.Pane>
+                )}
+                {likeRes === [] || likeRes === undefined || likeRes === null ? (
+                  <Tab.Pane eventKey="second">찜한 맛집이 없습니다.</Tab.Pane>
+                ) : (
+                  <Tab.Pane eventKey="second">
+                    <ul className="list-group list-group-flush">
+                      {likeRes.map(function (r, i) {
+                        return <LikeRes key={i} likeres={r} />;
+                      })}
+                    </ul>
+                  </Tab.Pane>
+                )}
+                {myboard === [] || myboard === undefined || myboard === null ? (
+                  <Tab.Pane eventKey="third">내가 작성한 게시글이 없습니다.</Tab.Pane>
+                ) : (
+                  <Tab.Pane eventKey="third">
+                    <ul className="list-group list-group-flush">
+                      {myboard.map(function (b, i) {
+                        return <MyBoard key={i} myboard={b} />;
+                      })}
+                    </ul>
+                  </Tab.Pane>
+                )}
+
+                {/* <Tab.Pane eventKey="third">
                   <ul className="list-group list-group-flush">
-                    <LikeFes />
-                    <LikeFes />
-                    <LikeFes />
+                    {myboard === [] || myboard === undefined ? (
+                      <li className="list-group-item inline">
+                        <p>내가 작성한 게시글이 없습니다. </p>
+                      </li>
+                    ) : (
+                      myboard.map(function (b, i) {
+                        return <MyBoard key={i} myboard={b} />;
+                      })
+                    )}
                   </ul>
-                </Tab.Pane>
-                <Tab.Pane eventKey="second">
-                  <ul className="list-group list-group-flush">
-                    <LikeRes />
-                    <LikeRes />
-                    <LikeRes />
-                  </ul>
-                </Tab.Pane>
-                <Tab.Pane eventKey="third">
-                  <ul className="list-group list-group-flush">
-                    <MyBoard />
-                    <MyBoard />
-                    <MyBoard />
-                  </ul>
-                </Tab.Pane>
+                </Tab.Pane> */}
               </Tab.Content>
             </Col>
           </Row>
@@ -179,43 +328,70 @@ const Mypage = () => {
   );
 };
 
-function LikeFes() {
+function LikeFes({ likefes }) {
+  var navigate = useNavigate();
+  const goFesDetail = () => {
+    navigate('/festivaldetail', { state: { get_f_contentid: likefes.content_id } });
+  };
+
   return (
     <li className="list-group-item inline">
-      <img className="list_img" />
-      <span className="block">
-        <b style={{ marginLeft: '10px' }}>축제 이름</b>
+      {likefes.thumbnail === '' || likefes.thumbnail === undefined ? (
+        <div className="list_img" align="center" style={{ fontSize: 'xx-large' }}>
+          <i className="bi bi-image" onClick={goFesDetail}></i>
+        </div>
+      ) : (
+        <img src={likefes.thumbnail} className="list_img" onClick={goFesDetail} />
+      )}
+
+      <span className="block" onClick={goFesDetail}>
+        <b style={{ marginLeft: '10px' }}>{likefes.title}</b>
       </span>
       <span className="block">
-        <p style={{ fontSize: '12px', marginLeft: '60px' }}>축제 설명</p>{' '}
+        <p style={{ fontSize: '12px', marginLeft: '60px' }}>
+          {likefes.startdate} - {likefes.enddate}
+        </p>{' '}
+        <p style={{ fontSize: '10px', marginLeft: '60px' }}>{likefes.addr}</p>{' '}
       </span>
     </li>
   );
 }
 
-function LikeRes() {
+function LikeRes({ likeres }) {
+  var navigate = useNavigate();
+  const goResDetail = () => {
+    navigate('/restaurantdetail', { state: { get_r_contentid: likeres.content_id } });
+  };
+
   return (
     <li className="list-group-item inline">
-      <img className="list_img" />
-      <span className="block">
-        <b style={{ marginLeft: '10px' }}>맛집 이름</b>
+      {likeres.thumbnail === '' || likeres.thumbnail === undefined ? (
+        <div className="list_img" align="center" style={{ fontSize: 'xx-large' }}>
+          <i className="bi bi-image" onClick={goResDetail}></i>
+        </div>
+      ) : (
+        <img className="list_img" src={likeres.thumbnail} onClick={goResDetail} />
+      )}
+
+      <span className="block" onClick={goResDetail}>
+        <b style={{ marginLeft: '10px' }}>{likeres.title}</b>
       </span>
       <span className="block">
-        <p style={{ fontSize: '12px', marginLeft: '60px' }}>맛집 설명</p>{' '}
+        <p style={{ fontSize: '12px', marginLeft: '60px' }}>{likeres.addr}</p>{' '}
       </span>
     </li>
   );
 }
 
-function MyBoard() {
+function MyBoard({ myboard }) {
   return (
     <li className="list-group-item inline">
-      <img className="list_img" />
+      <img className="list_img" src={myboard.board_image1} />
       <span className="block">
-        <b style={{ marginLeft: '10px' }}>제목</b>
+        <b style={{ marginLeft: '10px' }}>{myboard.board_title}</b>
       </span>
       <span className="block">
-        <p style={{ fontSize: '12px', marginLeft: '60px' }}>작성일</p>{' '}
+        <p style={{ fontSize: '12px', marginLeft: '60px' }}>{myboard.board_date}</p>{' '}
       </span>
     </li>
   );
