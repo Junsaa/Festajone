@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Button, Form, Badge } from 'react-bootstrap';
+import { Button, Form, Badge, Modal } from 'react-bootstrap';
 import axios from '../../../node_modules/axios/index';
 
 const UpdateUser = () => {
@@ -15,7 +15,7 @@ const UpdateUser = () => {
       .post('http://localhost:8008/pwcheck', { user_id: sessionStorage.getItem('id') })
       .then((res) => {
         const { data } = res;
-        console.log('pwcheck =>', data);
+        // console.log('pwcheck =>', data);
         if (passwordRef1.current.value == data[0].user_pw) {
           setPwboolean1(1);
         } else {
@@ -32,7 +32,7 @@ const UpdateUser = () => {
       .post('http://localhost:8008/pwcheck', { user_id: sessionStorage.getItem('id') })
       .then((res) => {
         const { data } = res;
-        console.log('pwcheck =>', data);
+        // console.log('pwcheck =>', data);
         if (passwordRef2.current.value == data[0].user_pw) {
           setPwboolean2(1);
         } else {
@@ -85,6 +85,7 @@ const UpdateUser = () => {
 
 const PasswordChange = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
   const updatePwRef = useRef();
+
   const setPassword = (e) => {
     e.preventDefault();
     if (updatePwRef.current.value === '' || updatePwRef.current.value === undefined) {
@@ -99,8 +100,7 @@ const PasswordChange = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
       .then((res) => {
         const { data } = res;
         console.log('passwordupdate =>', data);
-        //비밀번호 성공 안내 필요
-        alert('비밀번호 변경에 성공하였습니다.');
+        alert('비밀번호 수정 성공');
         setmodal(0);
       })
       .catch((e) => {
@@ -115,7 +115,7 @@ const PasswordChange = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
         <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>
-              현재 비밀번호
+              비밀번호
               <Badge
                 bg="secondary"
                 style={{ marginLeft: '5px' }}
@@ -123,10 +123,10 @@ const PasswordChange = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
                   getPassword();
                 }}
               >
-                pw check
+                password check
               </Badge>
             </Form.Label>
-            <Form.Control type="password" ref={passwordRef} placeholder="Password" />
+            <Form.Control type="password" ref={passwordRef} placeholder="현재 비밀번호" />
             {pwboolean === 0 && (
               <Form.Text className="text-muted">비밀번호를 입력해주세요.</Form.Text>
             )}
@@ -138,13 +138,23 @@ const PasswordChange = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
                 <br />
                 <br />
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                  <Form.Label>변경할 비밀번호</Form.Label>
-                  <Form.Control type="password" ref={updatePwRef} placeholder="Password" />
+                  <Form.Label>새로운 비밀번호</Form.Label>
+                  <Form.Control
+                    type="password"
+                    ref={updatePwRef}
+                    placeholder="변경할 비밀번호를 입력해 주세요."
+                  />
                 </Form.Group>
                 {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
               <Form.Check type="checkbox" label="Check me out" />
             </Form.Group> */}
-                <Button variant="primary" type="button" onClick={setPassword}>
+                <Button
+                  variant="primary"
+                  type="button"
+                  onClick={() => {
+                    setPassword();
+                  }}
+                >
                   변경
                 </Button>
               </>
@@ -184,7 +194,7 @@ const InfoUpdate = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
       .post('http://localhost:8008/user_login', { user_id: sessionStorage.getItem('id') })
       .then((res) => {
         const { data } = res;
-        console.log('user_login =>', data);
+        // console.log('user_login =>', data);
         setUser({
           ...user,
           user_name: data[0].user_name,
@@ -251,7 +261,7 @@ const InfoUpdate = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
         <Form>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>
-              현재 비밀번호
+              비밀번호
               <Badge
                 bg="secondary"
                 style={{ marginLeft: '5px' }}
@@ -259,10 +269,10 @@ const InfoUpdate = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
                   getPassword();
                 }}
               >
-                pw check
+                password check
               </Badge>
             </Form.Label>
-            <Form.Control type="password" placeholder="Password" ref={passwordRef} />
+            <Form.Control type="password" placeholder="현재 비밀번호" ref={passwordRef} />
             {pwboolean === 0 && (
               <Form.Text className="text-muted">비밀번호를 입력해주세요.</Form.Text>
             )}
