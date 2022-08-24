@@ -236,7 +236,9 @@ const FestivalDetail = () => {
       <div className="detail_div" id="detail_Tab">
         <strong>상세정보</strong>
         <hr style={{ height: '1px', background: 'black' }} />
-        <p style={{ fontSize: '13px' }}>{festival.f_d_pverview}</p>
+        <div dangerouslySetInnerHTML={{ __html: festival.f_d_pverview }}>
+          {/* <p style={{ fontSize: '13px' }}></p> */}
+        </div>{' '}
         {/* <div className="cont_more">
           <button type="button" className="btn_more">
             내용 더보기 +

@@ -79,27 +79,26 @@ app.post('/login', (req, res) => {
   });
 });
 
-app.post('/searchfestival', (req, res) => {
-  console.log('searchfestival');
-  var f_areacode = parseInt(req.body.f_areacode);
+// app.post('/searchfestival', (req, res) => {
+//   console.log('searchfestival');
+//   var f_areacode = parseInt(req.body.f_areacode);
 
-  const sqlQuery =
-    'select f_contentid,f_title,f_thumbnail,f_startdate,f_enddate, f_areacode from festival where f_areacode = ? order by f_startdate;';
-  db.query(sqlQuery, [f_areacode], (err, result) => {
-    // console.log(err);
-    // console.log(result);
-    res.send(result);
-  });
-});
+//   const sqlQuery =
+//     'select f_contentid,f_title,f_thumbnail,f_startdate,f_enddate, f_areacode from festival where f_areacode = ? order by f_startdate;';
+//   db.query(sqlQuery, [f_areacode], (err, result) => {
+//     // console.log(err);
+//     // console.log(result);
+//     res.send(result);
+//   });
+// });
 
-// 축제 상세 정보 가져오기
 app.post('/searchfestival', (req, res) => {
   console.log('searchfestival');
   var f_areacode = parseInt(req.body.f_areacode);
   console.log(f_areacode);
 
   const sqlQuery =
-    'select f_contentid,f_title,f_thumbnail,f_startdate,f_enddate from festival where f_areacode = ? order by f_startdate;';
+    'select f_contentid,f_title,f_thumbnail,f_startdate,f_enddate, f_areacode from festival where f_areacode = ? order by f_startdate;';
   db.query(sqlQuery, [f_areacode], (err, result) => {
     // console.log(err);
     // console.log(result);
@@ -117,6 +116,19 @@ app.post('/sortrecent', (req, res) => {
     'select f_contentid,f_title,f_thumbnail,f_startdate,f_enddate from festival where f_areacode = ? and f_startdate >=? order by f_startdate;';
   db.query(sqlQuery, [f_areacode, today], (err, result) => {
     res.send(result);
+  });
+});
+
+// 축제 상세 정보 가져오기
+app.post('/searchFestivalDetail', (req, res) => {
+  // console.log('searchFestivalDetail');
+  var content_id = req.body.content_id;
+
+  const sqlQuery =
+    'SELECT f_d_contentid, f_d_title, f_d_tel, f_d_telname, f_d_homepage, f_d_image, f_d_addr, f_d_mapx, f_d_mapy, f_d_startdate, f_d_enddate, f_d_pverview, sortation,f_d_areacode FROM festival_detail where f_d_contentid=?;';
+  db.query(sqlQuery, [content_id], (err, result) => {
+    res.send(result);
+    console.log(result);
   });
 });
 
