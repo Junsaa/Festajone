@@ -105,6 +105,7 @@ const PasswordChange = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
       })
       .catch((e) => {
         console.error(e);
+        alert('비밀번호 수정 실패');
       });
   };
 
@@ -166,6 +167,12 @@ const InfoUpdate = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
   const updateEmailRef = useRef();
   const updateImgRef = useRef();
 
+  const [image_name, setImage_name] = useState('');
+
+  function onImage(e) {
+    setImage_name(e.target.files[0]);
+  }
+
   const [user, setUser] = useState({
     user_name: '',
     user_nickname: '',
@@ -206,22 +213,35 @@ const InfoUpdate = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
     if (updateEmailRef.current.value === '' || updateEmailRef.current.value === undefined) {
       updateEmailRef.current.value = user.user_email;
     }
+    if (updateImgRef.current.value === '' || updateImgRef.current.value === undefined) {
+      updateImgRef.current.value = user.profile_image;
+    }
+
+    const config = {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    };
 
     axios
-      .post('http://localhost:8008/updateuser', {
-        user_id: sessionStorage.getItem('id'),
-        user_name: updateNameRef.current.value,
-        user_nickname: updateNicknameRef.current.value,
-        user_email: updateEmailRef.current.value,
-        profile_image: ''
-      })
+      .post(
+        'http://localhost:8008/updateuser',
+        {
+          user_id: sessionStorage.getItem('id'),
+          user_name: updateNameRef.current.value,
+          user_nickname: updateNicknameRef.current.value,
+          user_email: updateEmailRef.current.value,
+          image: image_name
+        },
+        config
+      )
       .then((res) => {
         const { data } = res;
         console.log('updateuser =>', data);
+        alert('정보 수정 성공');
         setmodal(0);
       })
       .catch((e) => {
         console.error(e);
+        alert('정보 수정 실패');
       });
   };
 
@@ -268,6 +288,16 @@ const InfoUpdate = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
                     type="text"
                     placeholder={user.user_nickname}
                     ref={updateNicknameRef}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Label>프로필 사진</Form.Label>
+                  <Form.Control
+                    type="file"
+                    name="image"
+                    accept="image/*"
+                    onChange={onImage}
+                    ref={updateImgRef}
                   />
                 </Form.Group>
 

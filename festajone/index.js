@@ -4,6 +4,8 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const PORT = process.env.port || 8008;
 const cors = require('cors');
+const iconv = require('iconv-lite');
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -20,6 +22,36 @@ const db = mysql.createPool({
   password: 'Pesta123',
   database: 'first'
 });
+
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+
+try {
+  fs.readdirSync('userimgFolder');
+} catch (error) {
+  console.error('userimgFolder 폴더가 없어 userimgFolder 폴더를 생성합니다.');
+  fs.mkdirSync('userimgFolder');
+}
+
+const userimg_upload = multer({
+  storage: multer.diskStorage({
+    destination(req, file, done) {
+      done(null, 'userimgFolder/');
+    },
+    filename(req, file, done) {
+      const ext = path.extname(file.originalname);
+      done(
+        null,
+        path.basename(iconv.decode(file.originalname, 'utf-8').toString(), ext) + Date.now() + ext
+      );
+    }
+  }),
+  limits: { fileSize: 10 * 1024 * 1024 }
+});
+
+// 이미지가 저장된 경로를 static으로 지정하면 불러올 수 있다.
+app.use('/userimgFolder', express.static('userimgFolder'));
 
 app.post('/join', (req, res) => {
   console.log('/join', req.body);
@@ -205,19 +237,18 @@ app.post('/pwcheck', (req, res) => {
 });
 
 //사용자 정보 수정
-app.post('/updateuser', (req, res) => {
-  console.log('/updateuser', req.body);
+app.post('/updateuser', userimg_upload.single('image'), (req, res) => {
+  console.log('/updateuser', req.file, req.body);
   var user_id = req.body.user_id;
   var user_name = req.body.user_name;
   var user_nickname = req.body.user_nickname;
   var user_email = req.body.user_email;
-  var profile_image = req.body.profile_image;
 
   const sqlQuery =
     'update user set user_name=?, user_nickname=?, user_email=?,profile_image=? where user_id=?;';
   db.query(
     sqlQuery,
-    [user_name, user_nickname, user_email, profile_image, user_id],
+    [user_name, user_nickname, user_email, req.file.filename, user_id],
     (err, result) => {
       res.send(result);
       console.log('result=', result);

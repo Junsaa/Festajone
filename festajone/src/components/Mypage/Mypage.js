@@ -8,6 +8,33 @@ const Mypage = () => {
   let [menu, setMenu] = useState(1);
   let navigate = useNavigate();
 
+  const [user, setUser] = useState({
+    user_name: '',
+    user_nickname: '',
+    user_email: '',
+    profile_image: ''
+  });
+  const getUser = (e) => {
+    axios
+      .post('http://localhost:8008/user_login', { user_id: sessionStorage.getItem('id') })
+      .then((res) => {
+        const { data } = res;
+        console.log('user_login =>', data);
+        setUser({
+          ...user,
+          user_name: data[0].user_name,
+          user_nickname: data[0].user_nickname,
+          user_email: data[0].user_email,
+          profile_image: data[0].profile_image
+        });
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+
+  const image = 'http://localhost:8008/userimgFolder/' + user.profile_image;
+
   //찜한 축제, 맛집, 내가 쓴 게시글 리스트
   const [likeFes, setLikeFes] = useState([]);
   const [likeRes, setLikeRes] = useState([]);
@@ -69,6 +96,7 @@ const Mypage = () => {
   };
 
   useEffect(() => {
+    getUser();
     getLikeFesList();
     getLikeResList();
     getMyboardList();
@@ -77,19 +105,23 @@ const Mypage = () => {
   return (
     <>
       <div className="profile">
-        {/* 프로필 사진이 없을 때 */}
-        <i
-          className="bi bi-person-circle"
-          style={{ fontSize: '80px' }}
-          onClick={() => {
-            navigate('/updateuser');
-          }}
-        ></i>
-        {/* 프로필 사진이 있을 때 */}
-        {/* <img style={{ width: '100px', height: '100px', borderRadius: '50%' }} /> */}
+        {image === 'http://localhost:8008/userimgFolder/null' ||
+        image === undefined ||
+        image === null ? (
+          <i
+            className="bi bi-person-circle"
+            style={{ fontSize: '80px' }}
+            onClick={() => {
+              navigate('/updateuser');
+            }}
+          ></i>
+        ) : (
+          <img src={image} style={{ width: '100px', height: '100px', borderRadius: '50%' }} />
+        )}
 
         <Badge
           bg="secondary"
+          style={{ marginLeft: '5px', verticalAlign: 'bottom' }}
           onClick={() => {
             navigate('/updateuser');
           }}
@@ -98,9 +130,10 @@ const Mypage = () => {
         </Badge>
         <Badge
           bg="secondary"
-          style={{ marginLeft: '5px' }}
+          style={{ marginLeft: '5px', verticalAlign: 'bottom' }}
           onClick={() => {
             sessionStorage.removeItem('id');
+            navigate('/');
           }}
         >
           logOut
@@ -239,33 +272,41 @@ const Mypage = () => {
             </Col>
             <Col sm={9}>
               <Tab.Content>
-                <Tab.Pane eventKey="first">
-                  <ul className="list-group list-group-flush">
-                    {likeFes === [] || likeFes === undefined ? (
-                      <li className="list-group-item inline">
-                        <p>찜한 축제가 없습니다.</p>
-                      </li>
-                    ) : (
-                      likeFes.map(function (f, i) {
+                {likeFes === [] || likeFes === undefined || likeFes === null ? (
+                  <Tab.Pane eventKey="first">찜한 축제가 없습니다.</Tab.Pane>
+                ) : (
+                  <Tab.Pane eventKey="first">
+                    <ul className="list-group list-group-flush">
+                      {likeFes.map(function (f, i) {
                         return <LikeFes key={i} likefes={f} />;
-                      })
-                    )}
-                  </ul>
-                </Tab.Pane>
-                <Tab.Pane eventKey="second">
-                  <ul className="list-group list-group-flush">
-                    {likeRes === [] || likeRes === undefined ? (
-                      <li className="list-group-item inline">
-                        <p>찜한 맛집이 없습니다.</p>
-                      </li>
-                    ) : (
-                      likeRes.map(function (r, i) {
+                      })}
+                    </ul>
+                  </Tab.Pane>
+                )}
+                {likeRes === [] || likeRes === undefined || likeRes === null ? (
+                  <Tab.Pane eventKey="second">찜한 맛집이 없습니다.</Tab.Pane>
+                ) : (
+                  <Tab.Pane eventKey="second">
+                    <ul className="list-group list-group-flush">
+                      {likeRes.map(function (r, i) {
                         return <LikeRes key={i} likeres={r} />;
-                      })
-                    )}
-                  </ul>
-                </Tab.Pane>
-                <Tab.Pane eventKey="third">
+                      })}
+                    </ul>
+                  </Tab.Pane>
+                )}
+                {myboard === [] || myboard === undefined || myboard === null ? (
+                  <Tab.Pane eventKey="third">내가 작성한 게시글이 없습니다.</Tab.Pane>
+                ) : (
+                  <Tab.Pane eventKey="third">
+                    <ul className="list-group list-group-flush">
+                      {myboard.map(function (b, i) {
+                        return <MyBoard key={i} myboard={b} />;
+                      })}
+                    </ul>
+                  </Tab.Pane>
+                )}
+
+                {/* <Tab.Pane eventKey="third">
                   <ul className="list-group list-group-flush">
                     {myboard === [] || myboard === undefined ? (
                       <li className="list-group-item inline">
@@ -277,7 +318,7 @@ const Mypage = () => {
                       })
                     )}
                   </ul>
-                </Tab.Pane>
+                </Tab.Pane> */}
               </Tab.Content>
             </Col>
           </Row>
