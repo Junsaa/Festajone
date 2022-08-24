@@ -116,6 +116,20 @@ app.post("/sortrecent", (req,res) => {
   })
 })
 
+//맛집 정보 리스트 가져오기 
+app.post("/searchrestaurant", (req,res) => {
+  console.log('searchrestaurant')
+  var r_areacode = parseInt(req.body.r_areacode)
+  console.log(r_areacode)
+
+  const sqlQuery = "select r_contentid,r_title,r_thumbnail,r_addr1 from restaurant where r_areacode= ?;"
+  db.query(sqlQuery,[r_areacode],(err,result) => {
+    console.log(result)
+    console.log(err)
+    res.send(result)
+  })
+})
+
 //축제 이미지 가져오기
 app.post('/searchFestivalImg', (req, res) => {
   // console.log('searchFestivalImg');
