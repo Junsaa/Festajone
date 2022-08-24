@@ -21,17 +21,17 @@ const App = () => {
     <div>
       <Header />
       <Nav menu={menu} />
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/boardlist" element={<BoardList />} />
-        <Route path="/festivallist" element={<FestivalList />} />
-        <Route path="/restaurantlist" element={<RestaurantList />} />
-        <Route path="/mypage" element={<Mypage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/join" element={<Join />} />
-        <Route path="/festivaldetail" element={<FestivalDetail />} />
-      </Routes>
-      <Footer />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/boardlist" element={<BoardList />} />
+          <Route path="/festivallist" element={<FestivalList />} />
+          <Route path="/restaurantlist" element={<RestaurantList />} />
+          <Route path="/mypage" element={<Mypage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/join" element={<Join />} />
+          <Route path="/festivaldetail" element={<FestivalDetail />} />
+        </Routes>
+
     </div>
   );
 };

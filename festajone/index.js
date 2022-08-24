@@ -15,10 +15,11 @@ let corsOptions = {
 app.use(cors(corsOptions));
 
 const db = mysql.createPool({
-    host: "192.168.21.197",
-    user: "pesta",
-    password: "Pesta123",
+    host: "localhost",
+    user: "root",
+    password: "75303306",
     database: "first",
+    ssl: false
 });
 
 app.post('/join', (req, res) => {
@@ -50,11 +51,38 @@ app.post('/login', (req, res) => {
 app.post("/searchfestival" , (req,res) =>{
     console.log("searchfestival")
     var f_areacode = parseInt(req.body.f_areacode)
+    console.log(f_areacode)
     
-    const sqlQuery = "select f_contentid,f_title,f_thumbnail,f_startdate,f_enddate from festival where f_areacode = ?;"
+    const sqlQuery = "select f_contentid,f_title,f_thumbnail,f_startdate,f_enddate from festival where f_areacode = ? order by f_startdate;"
     db.query(sqlQuery,[f_areacode],(err,result) => {
-        res.send(result)
+      // console.log(err);
+      // console.log(result);
+      res.send(result);
     })
+})
+
+app.post("/sortrecent", (req,res) => {
+  console.log("sortrecent")
+  var f_areacode = parseInt(req.body.f_areacode)
+  var today = req.body.today
+
+  const sqlQuery = "select f_contentid,f_title,f_thumbnail,f_startdate,f_enddate from festival where f_areacode = ? and f_startdate >=? order by f_startdate;"
+  db.query(sqlQuery,[f_areacode, today],(err, result) => {
+    res.send(result)
+  })
+})
+
+app.post("/searchrestaurant", (req,res) => {
+  console.log('searchrestaurant')
+  var r_areacode = parseInt(req.body.r_areacode)
+  console.log(r_areacode)
+
+  const sqlQuery = "select r_contentid,r_title,r_thumbnail,r_addr1 from restaurant where r_areacode= ?;"
+  db.query(sqlQuery,[r_areacode],(err,result) => {
+    console.log(result)
+    console.log(err)
+    res.send(result)
+  })
 })
 
 app.listen(PORT, () => {
