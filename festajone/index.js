@@ -79,42 +79,57 @@ app.post('/login', (req, res) => {
   });
 });
 
+// app.post('/searchfestival', (req, res) => {
+//   console.log('searchfestival');
+//   var f_areacode = parseInt(req.body.f_areacode);
+
+//   const sqlQuery =
+//     'select f_contentid,f_title,f_thumbnail,f_startdate,f_enddate from festival where f_areacode = ?;';
+//   db.query(sqlQuery, [f_areacode], (err, result) => {
+//     res.send(result);
+//   });
+// });
+
+// 축제 상세 정보 가져오기
 app.post('/searchfestival', (req, res) => {
   console.log('searchfestival');
   var f_areacode = parseInt(req.body.f_areacode);
+  console.log(f_areacode);
 
   const sqlQuery =
-    'select f_contentid,f_title,f_thumbnail,f_startdate,f_enddate from festival where f_areacode = ?;';
+    'select f_contentid,f_title,f_thumbnail,f_startdate,f_enddate, f_areacode from festival where f_areacode = ? order by f_startdate;';
   db.query(sqlQuery, [f_areacode], (err, result) => {
+    // console.log(err);
+    // console.log(result);
+    res.send(result);
+  });
+});
+
+//축제 정보 오늘 날짜 기준으로 가져오기
+app.post('/sortrecent', (req, res) => {
+  console.log('sortrecent');
+  var f_areacode = parseInt(req.body.f_areacode);
+  var today = req.body.today;
+
+  const sqlQuery =
+    'select f_contentid,f_title,f_thumbnail,f_startdate,f_enddate from festival where f_areacode = ? and f_startdate >=? order by f_startdate;';
+  db.query(sqlQuery, [f_areacode, today], (err, result) => {
     res.send(result);
   });
 });
 
 // 축제 상세 정보 가져오기
-app.post("/searchfestival" , (req,res) =>{
-  console.log("searchfestival")
-  var f_areacode = parseInt(req.body.f_areacode)
-  console.log(f_areacode)
-  
-  const sqlQuery = "select f_contentid,f_title,f_thumbnail,f_startdate,f_enddate from festival where f_areacode = ? order by f_startdate;"
-  db.query(sqlQuery,[f_areacode],(err,result) => {
-    // console.log(err);
-    // console.log(result);
+app.post('/searchFestivalDetail', (req, res) => {
+  // console.log('searchFestivalDetail');
+  var fes_contentid = req.body.content_id;
+
+  const sqlQuery =
+    'SELECT f_d_contentid, f_d_title, f_d_tel, f_d_telname, f_d_homepage, f_d_image, f_d_addr, f_d_mapx, f_d_mapy, f_d_startdate, f_d_enddate, f_d_pverview, sortation, f_d_areacode FROM festival_detail where f_d_contentid=?;';
+  db.query(sqlQuery, [fes_contentid], (err, result) => {
     res.send(result);
-  })
-})
-
-//축제 정보 오늘 날짜 기준으로 가져오기
-app.post("/sortrecent", (req,res) => {
-  console.log("sortrecent")
-  var f_areacode = parseInt(req.body.f_areacode)
-  var today = req.body.today
-
-  const sqlQuery = "select f_contentid,f_title,f_thumbnail,f_startdate,f_enddate from festival where f_areacode = ? and f_startdate >=? order by f_startdate;"
-  db.query(sqlQuery,[f_areacode, today],(err, result) => {
-    res.send(result)
-  })
-})
+    console.log(result);
+  });
+});
 
 //축제 이미지 가져오기
 app.post('/searchFestivalImg', (req, res) => {
@@ -133,6 +148,7 @@ app.post('/searchFestivalImg', (req, res) => {
 app.post('/recommendRes', (req, res) => {
   // console.log('recommendRes');
   var areacode = req.body.areacode;
+  console.log('맛집 지역', areacode);
 
   const sqlQuery =
     'SELECT r_contentid, r_title, r_mainimage, r_thumbnail,r_addr1, r_addr2, r_mapx,r_mapy FROM restaurant where r_areacode=? order by rand() limit 3;';

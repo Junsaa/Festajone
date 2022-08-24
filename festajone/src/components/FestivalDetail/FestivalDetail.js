@@ -4,10 +4,16 @@ import Map from '../MapApi/Map';
 import './festivalDetail.css';
 import { Carousel } from 'react-bootstrap';
 import axios from '../../../node_modules/axios/index';
-import { useNavigate } from '../../../node_modules/react-router-dom/index';
+import { useLocation, useNavigate } from '../../../node_modules/react-router-dom/index';
 import RestaurantDetail from '../RestaurantDetail/RestaurantDetail';
 
 const FestivalDetail = () => {
+  const location = useLocation();
+
+  const get_contentid = location.state.contentid;
+  const get_areacode = location.state.areacode;
+  console.log(get_contentid, get_areacode);
+
   const [festival, setFestival] = useState({
     f_d_contentid: '',
     f_d_title: '',
@@ -31,10 +37,10 @@ const FestivalDetail = () => {
 
   const festivalDetail = (e) => {
     axios
-      .post('http://localhost:8008/searchFestivalDetail')
+      .post('http://localhost:8008/searchFestivalDetail', { content_id: get_contentid })
       .then((res) => {
         const { data } = res;
-        // console.log('festivalDetail =>', data);
+        console.log('festivalDetail =>', data);
         if (res.data.length > 0) {
           setFestival({
             ...festival,
@@ -61,10 +67,10 @@ const FestivalDetail = () => {
   };
   const festivalImgs = (e) => {
     axios
-      .post('http://localhost:8008/searchFestivalImg', { contentid: 2833886 })
+      .post('http://localhost:8008/searchFestivalImg', { contentid: get_contentid })
       .then((res) => {
         const { data } = res;
-        // console.log('searchFestivalImg =>', data);
+        console.log('searchFestivalImg =>', data);
         if (res.data.length > 0) {
           for (var i = 0; i < res.data.length; i++) {
             fesImg.splice(i, 0, data[i].image_originimgurl);
@@ -79,10 +85,10 @@ const FestivalDetail = () => {
 
   const recommendRestaurant = (e) => {
     axios
-      .post('http://localhost:8008/recommendRes', { areacode: 31 })
+      .post('http://localhost:8008/recommendRes', { areacode: get_areacode })
       .then((res) => {
         const { data } = res;
-        // console.log('recommendRes =>', data);
+        console.log('recommendRes =>', data);
         if (res.data.length > 0) {
           for (var i = 0; i < res.data.length; i++) {
             recommendRes.splice(i, 0, data[i]);
@@ -282,7 +288,7 @@ const FestivalDetail = () => {
         <strong>주변 맛집</strong>
         <hr style={{ height: '1px', background: 'black' }} />
         <ul className="list-group list-group-flush">
-          {recommendRes === [] || recommendRes === undefined
+          {recommendRes === [] || recommendRes === undefined || recommendRes.length === 0
             ? null
             : recommendRes.map(function (res, i) {
                 return <AroundResCompo recoRes={res} key={i}></AroundResCompo>;
