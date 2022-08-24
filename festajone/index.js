@@ -79,16 +79,7 @@ app.post('/login', (req, res) => {
   });
 });
 
-app.post('/searchfestival', (req, res) => {
-  console.log('searchfestival');
-  var f_areacode = parseInt(req.body.f_areacode);
 
-  const sqlQuery =
-    'select f_contentid,f_title,f_thumbnail,f_startdate,f_enddate from festival where f_areacode = ?;';
-  db.query(sqlQuery, [f_areacode], (err, result) => {
-    res.send(result);
-  });
-});
 
 // 축제 상세 정보 가져오기
 app.post("/searchfestival" , (req,res) =>{
