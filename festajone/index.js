@@ -197,12 +197,13 @@ app.post('/likeListAdd', (req, res) => {
   var startdate = req.body.startdate;
   var enddate = req.body.enddate;
   var sortation = req.body.sortation;
+  var areacode = req.body.areacode;
 
   const sqlQuery =
-    'insert into user_like(user_id, thumbnail, title, addr, content_id, startdate, enddate, sortation) values (?,?,?,?,?,?,?,?);';
+    'insert into user_like(user_id, thumbnail, title, addr, content_id, startdate, enddate, sortation, areacode) values (?,?,?,?,?,?,?,?,?);';
   db.query(
     sqlQuery,
-    [user_id, thumbnail, title, addr, content_id, startdate, enddate, sortation],
+    [user_id, thumbnail, title, addr, content_id, startdate, enddate, sortation, areacode],
     (err, result) => {
       res.send(result);
     }
@@ -238,7 +239,7 @@ app.post('/searchLikeFes', (req, res) => {
   var sortation = 2;
 
   const sqlQuery =
-    'SELECT user_id, thumbnail, title, addr, content_id, startdate, enddate, sortation FROM user_like where user_id=? and sortation=?;';
+    'SELECT user_id, thumbnail, title, addr, content_id, startdate, enddate, sortation, areacode FROM user_like where user_id=? and sortation=?;';
   db.query(sqlQuery, [user_id, sortation], (err, result) => {
     res.send(result);
   });

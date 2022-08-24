@@ -8,8 +8,14 @@ import { useLocation } from 'react-router-dom';
 const RestaurantDetail = () => {
   const location = useLocation();
 
-  const get_r_contentid = location.state.get_r_contentid;
+  let get_r_contentid = '';
   // console.log(typeof get_r_contentid);
+
+  useEffect(() => {
+    get_r_contentid = location.state.get_r_contentid;
+    resDetail();
+    likeListCheck();
+  }, []);
 
   const [restaurantD, setRestaurantD] = useState({
     r_contentid: '',
@@ -97,11 +103,6 @@ const RestaurantDetail = () => {
         console.error(e);
       });
   };
-
-  useEffect(() => {
-    resDetail();
-    likeListCheck();
-  }, []);
 
   return (
     <>

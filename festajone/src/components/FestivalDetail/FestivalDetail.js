@@ -10,9 +10,18 @@ import RestaurantDetail from '../RestaurantDetail/RestaurantDetail';
 const FestivalDetail = () => {
   const location = useLocation();
 
-  const get_contentid = location.state.contentid;
-  const get_areacode = location.state.areacode;
+  let get_contentid = '';
+  let get_areacode = '';
   console.log(get_contentid, get_areacode);
+
+  useEffect(() => {
+    get_contentid = location.state.contentid;
+    get_areacode = location.state.areacode;
+    festivalDetail();
+    festivalImgs();
+    recommendRestaurant();
+    likeListCheck();
+  }, []);
 
   const [festival, setFestival] = useState({
     f_d_contentid: '',
@@ -111,7 +120,8 @@ const FestivalDetail = () => {
         content_id: festival.f_d_contentid,
         startdate: festival.f_d_startdate,
         enddate: festival.f_d_enddate,
-        sortation: festival.sortation
+        sortation: festival.sortation,
+        areacode: festival.f_d_areacode
       })
       .then((res) => {
         const { data } = res;
@@ -124,7 +134,7 @@ const FestivalDetail = () => {
 
   const likeListDelete = (e) => {
     axios
-      .post('http://localhost:8008/likeListDelete', { content_id: 2833886 })
+      .post('http://localhost:8008/likeListDelete', { content_id: get_contentid })
       .then((res) => {
         const { data } = res;
         // console.log('likeListDelete =>', data);
@@ -137,7 +147,7 @@ const FestivalDetail = () => {
   let [likeListCnt, setLikeListCnt] = useState();
   const likeListCheck = (e) => {
     axios
-      .post('http://localhost:8008/searchLike', { content_id: 2833886 })
+      .post('http://localhost:8008/searchLike', { content_id: get_contentid })
       .then((res) => {
         const { data } = res;
         // console.log('searchLike =>', data);
@@ -151,13 +161,6 @@ const FestivalDetail = () => {
         console.error(e);
       });
   };
-
-  useEffect(() => {
-    festivalDetail();
-    festivalImgs();
-    recommendRestaurant();
-    likeListCheck();
-  }, []);
 
   return (
     <>
