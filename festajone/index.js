@@ -306,10 +306,10 @@ app.post('/updateuser', userimg_upload.single('image'), (req, res) => {
 app.post('/passwordupdate', (req, res) => {
   console.log('/passwordupdate', req.body);
   var user_id = req.body.user_id;
-  var updatepassword = req.body.user_pw;
+  var user_pw = req.body.user_pw;
 
   const sqlQuery = 'update user set user_pw=? where user_id=?;';
-  db.query(sqlQuery, [updatepassword, user_id], (err, result) => {
+  db.query(sqlQuery, [user_pw, user_id], (err, result) => {
     res.send(result);
     console.log('result=', result);
   });
