@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 const RestaurantDetail = () => {
   const location = useLocation();
 
-  let get_r_contentid = '';
+  let get_r_contentid = location.state.get_r_contentid;
   // console.log(typeof get_r_contentid);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const RestaurantDetail = () => {
 
   const resDetail = (e) => {
     axios
-      .post('http://localhost:8008/searchResDetail', { res_contentid: parseInt(get_r_contentid) })
+      .post('http://localhost:8008/searchResDetail', { res_contentid: get_r_contentid })
       .then((res) => {
         const { data } = res;
         // console.log('resDetail =>', data);
@@ -75,10 +75,10 @@ const RestaurantDetail = () => {
 
   const likeListDelete = (e) => {
     axios
-      .post('http://localhost:8008/likeListDelete', { content_id: parseInt(get_r_contentid) })
+      .post('http://localhost:8008/likeListDelete', { content_id: get_r_contentid })
       .then((res) => {
         const { data } = res;
-        // console.log('likeListDelete =>', data);
+        console.log('likeListDelete =>', data);
       })
       .catch((e) => {
         console.error(e);
@@ -88,7 +88,7 @@ const RestaurantDetail = () => {
   let [likeListCnt, setLikeListCnt] = useState();
   const likeListCheck = (e) => {
     axios
-      .post('http://localhost:8008/searchLike', { content_id: parseInt(get_r_contentid) })
+      .post('http://localhost:8008/searchLike', { content_id: get_r_contentid })
       .then((res) => {
         const { data } = res;
         // console.log('searchLike =>', data);

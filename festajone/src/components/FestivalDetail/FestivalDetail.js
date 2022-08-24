@@ -10,18 +10,8 @@ import RestaurantDetail from '../RestaurantDetail/RestaurantDetail';
 const FestivalDetail = () => {
   const location = useLocation();
 
-  let get_contentid = '';
-  let get_areacode = '';
-  console.log(get_contentid, get_areacode);
-
-  useEffect(() => {
-    get_contentid = location.state.contentid;
-    get_areacode = location.state.areacode;
-    festivalDetail();
-    festivalImgs();
-    recommendRestaurant();
-    likeListCheck();
-  }, []);
+  let get_contentid = location.state.contentid;
+  let get_areacode = location.state.areacode;
 
   const [festival, setFestival] = useState({
     f_d_contentid: '',
@@ -131,13 +121,13 @@ const FestivalDetail = () => {
         console.error(e);
       });
   };
-
+  console.log('akdjfhanluvk;ildmc;isdl >>', get_contentid);
   const likeListDelete = (e) => {
     axios
       .post('http://localhost:8008/likeListDelete', { content_id: get_contentid })
       .then((res) => {
         const { data } = res;
-        // console.log('likeListDelete =>', data);
+        console.log('likeListDelete =>', data);
       })
       .catch((e) => {
         console.error(e);
@@ -150,7 +140,7 @@ const FestivalDetail = () => {
       .post('http://localhost:8008/searchLike', { content_id: get_contentid })
       .then((res) => {
         const { data } = res;
-        // console.log('searchLike =>', data);
+        console.log('searchLike =>', data);
         if (data[0].cnt > 0) {
           setLikeListCnt(true);
         } else {
@@ -161,6 +151,15 @@ const FestivalDetail = () => {
         console.error(e);
       });
   };
+  useEffect(() => {
+    get_contentid = location.state.contentid;
+    get_areacode = location.state.areacode;
+    console.log(get_contentid, get_areacode);
+    festivalDetail();
+    festivalImgs();
+    recommendRestaurant();
+    likeListCheck();
+  }, []);
 
   return (
     <>
@@ -188,16 +187,16 @@ const FestivalDetail = () => {
                 <i
                   className="bi bi-heart-fill"
                   onClick={() => {
-                    likeListDelete();
                     setLikeListCnt(false);
+                    likeListDelete();
                   }}
                 ></i>
               ) : (
                 <i
                   className="bi bi-heart"
                   onClick={() => {
-                    likeListAdd();
                     setLikeListCnt(true);
+                    likeListAdd();
                   }}
                 ></i>
               )}

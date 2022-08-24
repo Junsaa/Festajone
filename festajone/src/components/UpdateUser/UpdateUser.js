@@ -213,7 +213,7 @@ const InfoUpdate = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
   }, []);
 
   const setUserInfo = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (updateNameRef.current.value === '' || updateNameRef.current.value === undefined) {
       updateNameRef.current.value = user.user_name;
     }

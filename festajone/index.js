@@ -212,9 +212,10 @@ app.post('/likeListAdd', (req, res) => {
 
 // 찜 해제하면 짐 테이블에서 삭제
 app.post('/likeListDelete', (req, res) => {
-  const content_id = req.body.content_id;
+  console.log('likeListDelete');
+  var content_id = req.body.content_id;
 
-  const sqlQuery = 'DELETE FROM user_like WHERE content_id = ?;';
+  const sqlQuery = 'DELETE FROM user_like WHERE content_id =?;';
   db.query(sqlQuery, [content_id], (err, result) => {
     console.log(err);
     res.send(result);
