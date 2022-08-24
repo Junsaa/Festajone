@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from '../../../node_modules/react-router-dom
 import RestaurantDetail from '../RestaurantDetail/RestaurantDetail';
 
 const FestivalDetail = () => {
+  const navigate = useNavigate();
   const location = useLocation();
 
   let get_contentid = location.state.contentid;
@@ -180,6 +181,7 @@ const FestivalDetail = () => {
                   className="bi bi-heart"
                   onClick={() => {
                     alert('로그인을 해주세요');
+                    navigate('/login');
                     //로그인 페이지 연결????
                   }}
                 ></i>

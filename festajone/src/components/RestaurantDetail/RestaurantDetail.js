@@ -4,8 +4,10 @@ import '../FestivalDetail/festivalDetail.css';
 import { useEffect, useState } from 'react';
 import axios from '../../../node_modules/axios/index';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from '../../../node_modules/react-router-dom/index';
 
 const RestaurantDetail = () => {
+  const navigate = useNavigate();
   const location = useLocation();
 
   let get_r_contentid = location.state.get_r_contentid;
@@ -121,6 +123,7 @@ const RestaurantDetail = () => {
                   className="bi bi-heart"
                   onClick={() => {
                     alert('로그인을 해주세요');
+                    navigate('/login');
                     //로그인 페이지 연결????
                   }}
                 ></i>
