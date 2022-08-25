@@ -1,0 +1,21 @@
+.container {
+  padding: 10px 0 40px 0;
+}
+
+.SlideTitle {
+  margin: 10px;
+  /* display: flex; */
+  text-align: center;
+}
+
+.firstimag {
+  height: auto;
+  width: auto;
+  margin: auto;
+  padding: 0 0 10px 0;
+  align-items: center;
+}
+
+.img {
+  height: 500px;
+}
