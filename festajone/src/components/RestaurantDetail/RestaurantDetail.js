@@ -10,7 +10,7 @@ const RestaurantDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  let get_r_contentid = location.state.get_r_contentid;
+  let get_r_contentid = '';
   // console.log(typeof get_r_contentid);
 
   useEffect(() => {
@@ -77,7 +77,7 @@ const RestaurantDetail = () => {
 
   const likeListDelete = (e) => {
     axios
-      .post('http://localhost:8008/likeListDelete', { content_id: get_r_contentid })
+      .post('http://localhost:8008/likeListDelete', { content_id: restaurantD.r_contentid })
       .then((res) => {
         const { data } = res;
         console.log('likeListDelete =>', data);

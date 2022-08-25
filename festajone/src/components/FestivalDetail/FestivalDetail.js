@@ -11,8 +11,18 @@ const FestivalDetail = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  let get_contentid = location.state.contentid;
-  let get_areacode = location.state.areacode;
+  let get_contentid = '';
+  let get_areacode = '';
+  console.log(get_contentid, get_areacode);
+  useEffect(() => {
+    get_contentid = location.state.contentid;
+    get_areacode = location.state.areacode;
+    console.log(get_contentid, get_areacode);
+    festivalDetail();
+    festivalImgs();
+    recommendRestaurant();
+    likeListCheck();
+  }, []);
 
   const [festival, setFestival] = useState({
     f_d_contentid: '',
@@ -122,10 +132,9 @@ const FestivalDetail = () => {
         console.error(e);
       });
   };
-  console.log('akdjfhanluvk;ildmc;isdl >>', get_contentid);
   const likeListDelete = (e) => {
     axios
-      .post('http://localhost:8008/likeListDelete', { content_id: get_contentid })
+      .post('http://localhost:8008/likeListDelete', { content_id: festival.f_d_contentid })
       .then((res) => {
         const { data } = res;
         console.log('likeListDelete =>', data);
@@ -152,15 +161,6 @@ const FestivalDetail = () => {
         console.error(e);
       });
   };
-  useEffect(() => {
-    get_contentid = location.state.contentid;
-    get_areacode = location.state.areacode;
-    console.log(get_contentid, get_areacode);
-    festivalDetail();
-    festivalImgs();
-    recommendRestaurant();
-    likeListCheck();
-  }, []);
 
   return (
     <>
