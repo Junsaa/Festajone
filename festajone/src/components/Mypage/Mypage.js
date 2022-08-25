@@ -356,7 +356,9 @@ const Mypage = () => {
 function LikeFes({ likefes }) {
   var navigate = useNavigate();
   const goFesDetail = () => {
-    navigate('/festivaldetail', { state: { get_f_contentid: likefes.content_id } });
+    navigate('/festivaldetail', {
+      state: { contentid: likefes.content_id, areacode: likefes.areacode }
+    });
   };
 
   return (

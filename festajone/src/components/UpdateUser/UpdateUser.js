@@ -87,7 +87,7 @@ const PasswordChange = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
   const updatePwRef = useRef();
 
   const setPassword = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (updatePwRef.current.value === '' || updatePwRef.current.value === undefined) {
       updatePwRef.current.focus();
       return false;
@@ -213,7 +213,7 @@ const InfoUpdate = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
   }, []);
 
   const setUserInfo = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (updateNameRef.current.value === '' || updateNameRef.current.value === undefined) {
       updateNameRef.current.value = user.user_name;
     }
@@ -223,7 +223,12 @@ const InfoUpdate = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
     if (updateEmailRef.current.value === '' || updateEmailRef.current.value === undefined) {
       updateEmailRef.current.value = user.user_email;
     }
-    if (updateImgRef.current.value === '' || updateImgRef.current.value === undefined) {
+    if (
+      updateImgRef.current.value === '' ||
+      updateImgRef.current.value === undefined ||
+      image_name === '' ||
+      image_name === undefined
+    ) {
       updateImgRef.current.value = user.profile_image;
     }
 

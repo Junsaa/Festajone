@@ -197,12 +197,13 @@ app.post('/likeListAdd', (req, res) => {
   var startdate = req.body.startdate;
   var enddate = req.body.enddate;
   var sortation = req.body.sortation;
+  var areacode = req.body.areacode;
 
   const sqlQuery =
-    'insert into user_like(user_id, thumbnail, title, addr, content_id, startdate, enddate, sortation) values (?,?,?,?,?,?,?,?);';
+    'insert into user_like(user_id, thumbnail, title, addr, content_id, startdate, enddate, sortation, areacode) values (?,?,?,?,?,?,?,?,?);';
   db.query(
     sqlQuery,
-    [user_id, thumbnail, title, addr, content_id, startdate, enddate, sortation],
+    [user_id, thumbnail, title, addr, content_id, startdate, enddate, sortation, areacode],
     (err, result) => {
       res.send(result);
     }
@@ -211,9 +212,10 @@ app.post('/likeListAdd', (req, res) => {
 
 // 찜 해제하면 짐 테이블에서 삭제
 app.post('/likeListDelete', (req, res) => {
-  const content_id = req.body.content_id;
+  console.log('likeListDelete');
+  var content_id = req.body.content_id;
 
-  const sqlQuery = 'DELETE FROM user_like WHERE content_id = ?;';
+  const sqlQuery = 'DELETE FROM user_like WHERE content_id =?;';
   db.query(sqlQuery, [content_id], (err, result) => {
     console.log(err);
     res.send(result);
@@ -238,7 +240,7 @@ app.post('/searchLikeFes', (req, res) => {
   var sortation = 2;
 
   const sqlQuery =
-    'SELECT user_id, thumbnail, title, addr, content_id, startdate, enddate, sortation FROM user_like where user_id=? and sortation=?;';
+    'SELECT user_id, thumbnail, title, addr, content_id, startdate, enddate, sortation, areacode FROM user_like where user_id=? and sortation=?;';
   db.query(sqlQuery, [user_id, sortation], (err, result) => {
     res.send(result);
   });
@@ -305,10 +307,10 @@ app.post('/updateuser', userimg_upload.single('image'), (req, res) => {
 app.post('/passwordupdate', (req, res) => {
   console.log('/passwordupdate', req.body);
   var user_id = req.body.user_id;
-  var updatepassword = req.body.user_pw;
+  var user_pw = req.body.user_pw;
 
   const sqlQuery = 'update user set user_pw=? where user_id=?;';
-  db.query(sqlQuery, [updatepassword, user_id], (err, result) => {
+  db.query(sqlQuery, [user_pw, user_id], (err, result) => {
     res.send(result);
     console.log('result=', result);
   });

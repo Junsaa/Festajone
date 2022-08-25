@@ -8,11 +8,11 @@ import { useLocation, useNavigate } from '../../../node_modules/react-router-dom
 import RestaurantDetail from '../RestaurantDetail/RestaurantDetail';
 
 const FestivalDetail = () => {
+  const navigate = useNavigate();
   const location = useLocation();
 
-  const get_contentid = location.state.contentid;
-  const get_areacode = location.state.areacode;
-  console.log(get_contentid, get_areacode);
+  let get_contentid = location.state.contentid;
+  let get_areacode = location.state.areacode;
 
   const [festival, setFestival] = useState({
     f_d_contentid: '',
@@ -111,7 +111,8 @@ const FestivalDetail = () => {
         content_id: festival.f_d_contentid,
         startdate: festival.f_d_startdate,
         enddate: festival.f_d_enddate,
-        sortation: festival.sortation
+        sortation: festival.sortation,
+        areacode: festival.f_d_areacode
       })
       .then((res) => {
         const { data } = res;
@@ -121,13 +122,13 @@ const FestivalDetail = () => {
         console.error(e);
       });
   };
-
+  console.log('akdjfhanluvk;ildmc;isdl >>', get_contentid);
   const likeListDelete = (e) => {
     axios
-      .post('http://localhost:8008/likeListDelete', { content_id: 2833886 })
+      .post('http://localhost:8008/likeListDelete', { content_id: get_contentid })
       .then((res) => {
         const { data } = res;
-        // console.log('likeListDelete =>', data);
+        console.log('likeListDelete =>', data);
       })
       .catch((e) => {
         console.error(e);
@@ -137,10 +138,10 @@ const FestivalDetail = () => {
   let [likeListCnt, setLikeListCnt] = useState();
   const likeListCheck = (e) => {
     axios
-      .post('http://localhost:8008/searchLike', { content_id: 2833886 })
+      .post('http://localhost:8008/searchLike', { content_id: get_contentid })
       .then((res) => {
         const { data } = res;
-        // console.log('searchLike =>', data);
+        console.log('searchLike =>', data);
         if (data[0].cnt > 0) {
           setLikeListCnt(true);
         } else {
@@ -151,8 +152,10 @@ const FestivalDetail = () => {
         console.error(e);
       });
   };
-
   useEffect(() => {
+    get_contentid = location.state.contentid;
+    get_areacode = location.state.areacode;
+    console.log(get_contentid, get_areacode);
     festivalDetail();
     festivalImgs();
     recommendRestaurant();
@@ -178,6 +181,7 @@ const FestivalDetail = () => {
                   className="bi bi-heart"
                   onClick={() => {
                     alert('로그인을 해주세요');
+                    navigate('/login');
                     //로그인 페이지 연결????
                   }}
                 ></i>
@@ -185,16 +189,16 @@ const FestivalDetail = () => {
                 <i
                   className="bi bi-heart-fill"
                   onClick={() => {
-                    likeListDelete();
                     setLikeListCnt(false);
+                    likeListDelete();
                   }}
                 ></i>
               ) : (
                 <i
                   className="bi bi-heart"
                   onClick={() => {
-                    likeListAdd();
                     setLikeListCnt(true);
+                    likeListAdd();
                   }}
                 ></i>
               )}
