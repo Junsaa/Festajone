@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './App.css';
 import { Routes, Route, Link } from 'react-router-dom';
@@ -15,7 +15,8 @@ import Join from './components/Join/Join';
 import FestivalDetail from './components/FestivalDetail/FestivalDetail';
 import UpdateUser from './components/UpdateUser/UpdateUser';
 import RestaurantDetail from './components/RestaurantDetail/RestaurantDetail';
-import Writer from "./components/BoardList/writer";
+import Writer from './components/BoardList/writer';
+import axios from '../node_modules/axios/index';
 
 const App = () => {
   const [menu, setMenu] = useState(1);

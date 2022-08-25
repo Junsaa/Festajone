@@ -310,7 +310,9 @@ function AroundResCompo({ recoRes }) {
   // console.log(recoRes);
   var navigate = useNavigate();
   const goResDetail = () => {
-    navigate('/restaurantdetail', { state: { get_r_contentid: recoRes.r_contentid } });
+    navigate('/restaurantdetail', {
+      state: { get_r_contentid: recoRes.r_contentid, title: recoRes.title }
+    });
   };
   return (
     <li className="list-group-item inline">
@@ -323,12 +325,13 @@ function AroundResCompo({ recoRes }) {
       )}
 
       <span className="block" onClick={goResDetail}>
-        <b style={{ marginLeft: '10px' }}>
-          {recoRes.r_title} {recoRes.r_addr2}
-        </b>
+        <b style={{ marginLeft: '10px' }}>{recoRes.r_title}</b>
       </span>
       <span className="block">
-        <p style={{ fontSize: '12px', marginLeft: '60px' }}> {recoRes.r_addr1}</p>{' '}
+        <p style={{ fontSize: '12px', marginLeft: '60px' }}>
+          {' '}
+          {recoRes.r_addr1} {recoRes.r_addr2}
+        </p>{' '}
       </span>
     </li>
   );

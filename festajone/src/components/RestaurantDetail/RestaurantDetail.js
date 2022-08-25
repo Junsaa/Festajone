@@ -11,12 +11,16 @@ const RestaurantDetail = () => {
   const location = useLocation();
 
   let get_r_contentid = '';
+  let get_r_title = '';
   // console.log(typeof get_r_contentid);
 
   useEffect(() => {
     get_r_contentid = location.state.get_r_contentid;
+    get_r_title = location.state.title;
     resDetail();
     likeListCheck();
+    get_api_blog();
+    get_api_image();
   }, []);
 
   const [restaurantD, setRestaurantD] = useState({
@@ -106,12 +110,58 @@ const RestaurantDetail = () => {
       });
   };
 
+  const [blogitems, setblogItems] = useState([]);
+  const [imageitems, setimageItems] = useState([]);
+
+  const get_api_blog = (e) => {
+    axios
+      .get('http://localhost:8008/search/blog', { params: { query: get_r_title } })
+      .then((res) => {
+        const { data } = res;
+        console.log('get_api =>', data);
+        if (res.data.items.length > 0) {
+          for (var i = 0; i < res.data.items.length; i++) {
+            blogitems.splice(i, 0, data.items[i]);
+          }
+        }
+        setblogItems(blogitems);
+        console.log(blogitems);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+  const get_api_image = (e) => {
+    axios
+      .get('http://localhost:8008/search/image', { params: { query: get_r_title } })
+      .then((res) => {
+        const { data } = res;
+        // console.log('get_api image =>', data);
+        // console.log(typeof data);
+        // console.log(res.data.items.length);
+        if (res.data.items.length > 0) {
+          for (var i = 0; i < res.data.items.length; i++) {
+            imageitems.push(data.items[i].thumbnail);
+          }
+        }
+        setimageItems(imageitems);
+        // console.log(imageitems);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+
   return (
     <>
       <table className="table">
         <tr>
+          {/* <td style={{ textAlign: 'center' }}>
+            <img src={restaurantD.r_mainimage} style={{ width: '150px', height: '150px' }} />
+          </td> */}
           <td style={{ textAlign: 'center' }}>
             <h2>{restaurantD.r_title}</h2>
+
             {/* <span>{restaurantD.r_addr1} {restaurantD.r_addr2}</span> */}
           </td>
           <td>
@@ -151,7 +201,10 @@ const RestaurantDetail = () => {
 
       {/* 이미지 슬라이드 */}
       <div id="photo_Tab">
-        <DarkVariantExample res_img={restaurantD.r_mainimage}></DarkVariantExample>
+        <DarkVariantExample
+          res_img={restaurantD.r_mainimage}
+          imageitems={imageitems}
+        ></DarkVariantExample>
       </div>
 
       <div className="detail_div" id="detail_Tab">
@@ -195,12 +248,43 @@ const RestaurantDetail = () => {
       </div>
 
       <br />
+      <div className="detail_div" id="aroundRes_Tab">
+        <strong>블로그 후기</strong>
+        <hr style={{ height: '1px', background: 'black' }} />
+        <ul className="list-group list-group-flush">
+          {blogitems === [] || blogitems === undefined || blogitems.length === 0
+            ? null
+            : blogitems.map(function (b, i) {
+                return <BlogReview blog={b} key={i}></BlogReview>;
+              })}
+        </ul>
+      </div>
     </>
   );
 };
 
+function BlogReview({ blog }) {
+  // console.log(blog);
+  return (
+    <li className="list-group-item inline">
+      <span className="block">
+        <b>
+          <a href={blog.link} target="_blank">
+            {blog.title.replace(/<[^>]*>?/g, '')}{' '}
+          </a>
+        </b>
+      </span>
+      <span className="block">
+        <p style={{ fontSize: '12px' }}> {blog.description.replace(/<[^>]*>?/g, '')}</p>{' '}
+        {blog.postdate}
+      </span>
+    </li>
+  );
+}
+
 //이미지 슬라이드 컴포넌트
-function DarkVariantExample({ res_img }) {
+function DarkVariantExample({ res_img, imageitems }) {
+  // console.log(imageitems);
   return (
     <Carousel variant="dark">
       <Carousel.Item>
@@ -209,6 +293,15 @@ function DarkVariantExample({ res_img }) {
           <h5>First slide label</h5>
         </Carousel.Caption> */}
       </Carousel.Item>
+      {imageitems === [] || imageitems === undefined
+        ? null
+        : imageitems.map(function (image, i) {
+            return (
+              <Carousel.Item key={i}>
+                <img src={image} className="d-block w-100 slide_img" alt="" />
+              </Carousel.Item>
+            );
+          })}
     </Carousel>
   );
 }

@@ -82,7 +82,7 @@ const Mypage = () => {
       .post('http://localhost:8008/searchMyBoard', { user_id: sessionStorage.getItem('id') })
       .then((res) => {
         const { data } = res;
-        // console.log('searchMyBoard =>', data, typeof data);
+        console.log('searchMyBoard =>', data);
         if (res.data.length > 0) {
           for (var i = 0; i < res.data.length; i++) {
             myboard.splice(i, 0, data[i]);
@@ -387,7 +387,9 @@ function LikeFes({ likefes }) {
 function LikeRes({ likeres }) {
   var navigate = useNavigate();
   const goResDetail = () => {
-    navigate('/restaurantdetail', { state: { get_r_contentid: likeres.content_id } });
+    navigate('/restaurantdetail', {
+      state: { get_r_contentid: likeres.content_id, title: likeres.title }
+    });
   };
 
   return (
@@ -411,9 +413,10 @@ function LikeRes({ likeres }) {
 }
 
 function MyBoard({ myboard }) {
+  const image = 'http://localhost:8008/uploads/' + myboard.board_image1;
   return (
     <li className="list-group-item inline">
-      <img className="list_img" src={myboard.board_image1} />
+      <img className="list_img" src={image} />
       <span className="block">
         <b style={{ marginLeft: '10px' }}>{myboard.board_title}</b>
       </span>
