@@ -5,7 +5,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 import Nav from './components/Nav/Nav';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import BoardList from './components/BoardList/BoardList';
+import BoardList from './components/BoardList/Main';
 import MainPage from './components/MainPage/MainPage';
 import FestivalList from './components/FestivalList/FestivalList';
 import RestaurantList from './components/RestaurantList/RestaurantList';
@@ -15,6 +15,7 @@ import Join from './components/Join/Join';
 import FestivalDetail from './components/FestivalDetail/FestivalDetail';
 import UpdateUser from './components/UpdateUser/UpdateUser';
 import RestaurantDetail from './components/RestaurantDetail/RestaurantDetail';
+import Writer from "./components/BoardList/writer";
 
 const App = () => {
   const [menu, setMenu] = useState(0);
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/updateuser" element={<UpdateUser />} />
         <Route path="/festivaldetail" element={<FestivalDetail />} />
         <Route path="/restaurantdetail" element={<RestaurantDetail />} />
+        <Route path="/writer" element={<Writer />} />
       </Routes>
       <Footer />
     </div>
