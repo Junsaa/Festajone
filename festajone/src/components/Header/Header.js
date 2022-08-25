@@ -1,10 +1,11 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './Header.css';
 
-const Header = () => {
+const Header = ({}) => {
   const navigate = useNavigate();
+
 
   const LoginOrMypage = useCallback(() => {
     if (

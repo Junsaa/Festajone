@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import './App.css';
 import { Routes, Route, Link } from 'react-router-dom';
@@ -19,7 +19,7 @@ import Writer from './components/BoardList/writer';
 import axios from '../node_modules/axios/index';
 
 const App = () => {
-  const [menu, setMenu] = useState(1);
+  const [menu, setMenu] = useState(0);
 
   return (
     <div>
