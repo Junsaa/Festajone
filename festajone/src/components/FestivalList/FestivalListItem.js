@@ -30,7 +30,7 @@ const FestivalListItem = ({ data }) => {
           축제명 : {data.f_title.length >= 15 ? data.f_title.substr(0, 16) + '...' : data.f_title}
         </div>
         <div className="FestivalDate">
-          축제 시작 기간 : {data.f_startdate.substr(0, 10)}~{data.f_enddate}
+          축제 시작 기간 : {data.f_startdate.substr(0, 10).replace(/\-/g,"")}~{data.f_enddate}
         </div>
       </div>
     </div>

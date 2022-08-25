@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import './App.css';
 import { Routes, Route, Link } from 'react-router-dom';
@@ -17,7 +17,7 @@ import UpdateUser from './components/UpdateUser/UpdateUser';
 import RestaurantDetail from './components/RestaurantDetail/RestaurantDetail';
 
 const App = () => {
-  const [menu, setMenu] = useState(1);
+  const [menu, setMenu] = useState(0);
 
   return (
     <div>
