@@ -17,6 +17,7 @@ import UpdateUser from './components/UpdateUser/UpdateUser';
 import RestaurantDetail from './components/RestaurantDetail/RestaurantDetail';
 import Writer from './components/BoardList/writer';
 import axios from '../node_modules/axios/index';
+import BoardDetail from './components/BoardList/BoardDetail';
 
 const App = () => {
   const [menu, setMenu] = useState(0);
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/festivaldetail" element={<FestivalDetail />} />
         <Route path="/restaurantdetail" element={<RestaurantDetail />} />
         <Route path="/writer" element={<Writer />} />
+        <Route path="/boarddetail" element={<BoardDetail />} />
       </Routes>
       <Footer />
     </div>

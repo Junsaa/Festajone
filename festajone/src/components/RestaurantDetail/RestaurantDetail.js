@@ -14,15 +14,6 @@ const RestaurantDetail = () => {
   let get_r_title = '';
   // console.log(typeof get_r_contentid);
 
-  useEffect(() => {
-    get_r_contentid = location.state.get_r_contentid;
-    get_r_title = location.state.title;
-    resDetail();
-    likeListCheck();
-    get_api_blog();
-    get_api_image();
-  }, []);
-
   const [restaurantD, setRestaurantD] = useState({
     r_contentid: '',
     r_title: '',
@@ -118,14 +109,14 @@ const RestaurantDetail = () => {
       .get('http://localhost:8008/search/blog', { params: { query: get_r_title } })
       .then((res) => {
         const { data } = res;
-        console.log('get_api =>', data);
+        // console.log('get_api =>', data);
         if (res.data.items.length > 0) {
           for (var i = 0; i < res.data.items.length; i++) {
             blogitems.splice(i, 0, data.items[i]);
           }
         }
         setblogItems(blogitems);
-        console.log(blogitems);
+        // console.log(blogitems);
       })
       .catch((e) => {
         console.error(e);
@@ -151,6 +142,15 @@ const RestaurantDetail = () => {
         console.error(e);
       });
   };
+
+  useEffect(() => {
+    get_r_contentid = location.state.get_r_contentid;
+    get_r_title = location.state.title;
+    resDetail();
+    likeListCheck();
+    get_api_blog();
+    get_api_image();
+  }, []);
 
   return (
     <>
@@ -270,13 +270,17 @@ function BlogReview({ blog }) {
       <span className="block">
         <b>
           <a href={blog.link} target="_blank">
-            {blog.title.replace(/<[^>]*>?/g, '')}{' '}
+            <div dangerouslySetInnerHTML={{ __html: blog.title }}></div>
+            {/* {blog.title.replace(/<[^>]*>?/g, '')}{' '} */}
           </a>
         </b>
       </span>
       <span className="block">
-        <p style={{ fontSize: '12px' }}> {blog.description.replace(/<[^>]*>?/g, '')}</p>{' '}
-        {blog.postdate}
+        <p style={{ fontSize: '12px' }}>
+          <div dangerouslySetInnerHTML={{ __html: blog.description }}></div>
+          {/* {blog.description.replace(/<[^>]*>?/g, '')}*/}
+        </p>{' '}
+        <p style={{ textAlign: 'right' }}>게시일 : {blog.postdate}</p>
       </span>
     </li>
   );

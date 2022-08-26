@@ -105,6 +105,7 @@ const FestivalDetail = () => {
           }
         }
         setRecommendRes(recommendRes);
+        // console.log(recommendRes);
       })
       .catch((e) => {
         console.error(e);
@@ -311,7 +312,7 @@ function AroundResCompo({ recoRes }) {
   var navigate = useNavigate();
   const goResDetail = () => {
     navigate('/restaurantdetail', {
-      state: { get_r_contentid: recoRes.r_contentid, title: recoRes.title }
+      state: { get_r_contentid: recoRes.r_contentid, title: recoRes.r_title }
     });
   };
   return (

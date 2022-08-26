@@ -1,16 +1,11 @@
-import axios from "axios";
+import axios from 'axios';
 
-const BoardArticle = ({
-  article,
-  handlelist,
-  handledetail,
-  handleupdateform,
-}) => {
+const BoardArticle = ({ article, handlelist, handledetail, handleupdateform }) => {
   const handleDelete = (e) => {
-    console.log("handleDelete(board_num) =>", e.target.id);
+    console.log('handleDelete(board_num) =>', e.target.id);
     axios
-      .post("http://localhost:8008/delete", {
-        num: e.target.id,
+      .post('http://localhost:8008/delete', {
+        num: e.target.id
       })
       .then(() => {
         handlelist();
@@ -20,7 +15,7 @@ const BoardArticle = ({
       });
   };
 
-  console.log("BoardArticle =>", article);
+  // console.log("BoardArticle =>", article);
 
   return (
     <tr>

@@ -1,32 +1,31 @@
-import BoardList from "./BoardList";
-import BoardWrite from "./BoardWrite";
-import BoardDetail from "./BoardDetail";
-import BoardUpdateForm from "./BoardUpdateForm";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import BoardList from './BoardList';
+import BoardWrite from './BoardWrite';
+import BoardDetail from './BoardDetail';
+import BoardUpdateForm from './BoardUpdateForm';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Main() {
   // 게시글 저장
   const [boardlist, setBoardlist] = useState({
-    boardList: [],
+    boardList: []
   });
 
   const navigate = useNavigate();
 
   const [article, setArticle] = useState({
     board_num: 0,
-    board_writer: "",
-    board_title: "",
-    board_content: "",
-    board_date: "",
-    board_image: "",
+    board_writer: '',
+    board_title: '',
+    board_content: '',
+    board_date: '',
+    board_image: ''
   });
 
   // 0:글쓰기, 1:상세보기, 2:글수정
   const [actionMode, setActionMode] = useState({ mode: 0 });
   const [pageLink, setPageLink] = useState([]);
-
 
   var page_num = 1;
   const page_size = 5;
@@ -43,7 +42,7 @@ function Main() {
   }, []);
 
   const handlePage = (e) => {
-    console.log("handlePage(e.target.id) =>", e.target.id);
+    console.log('handlePage(e.target.id) =>', e.target.id);
     page_num = e.target.id;
     getList();
   };
@@ -52,35 +51,35 @@ function Main() {
   async function getList() {
     // alert("getList(actionMode) =>" + actionMode.mode);
     await axios
-      .get("http://localhost:8008/count", {})
+      .get('http://localhost:8008/count', {})
       .then((res) => {
         const { data } = res;
         article_count = data[0].COUNT;
         page_count = Math.ceil(article_count / page_size);
         var page_link = [];
         for (let i = 1; i <= page_count; i++) page_link.push(i);
-        console.log("getArticleCount(page_link) =>", page_link);
+        console.log('getArticleCount(page_link) =>', page_link);
         setPageLink(page_link);
       })
       .catch((e) => {
         console.error(e);
       });
-    console.log("article_count =>", article_count);
+    console.log('article_count =>', article_count);
     await axios
-      .post("http://localhost:8008/list", {
+      .post('http://localhost:8008/list', {
         page_num: page_num,
         page_size: page_size,
-        article_count: article_count,
+        article_count: article_count
       })
       .then((res) => {
         const { data } = res;
-        console.log("data ==>", data);
+        console.log('data ==>', data);
         setBoardlist({
-          boardList: data,
+          boardList: data
         });
         setActionMode({
           ...actionMode,
-          mode: 0, // 상세보기
+          mode: 0 // 상세보기
         });
       })
       .catch((e) => {
@@ -92,10 +91,10 @@ function Main() {
   const handleDetail = (e) => {
     // alert("handleDetail(actionMode) =>" + actionMode.mode);
     axios
-      .post("http://localhost:8008/detail", { num: e.target.id })
+      .post('http://localhost:8008/detail', { num: e.target.id })
       .then((res) => {
         const { data } = res;
-        console.log("detail =>", data);
+        console.log('detail =>', data);
         if (res.data.length > 0) {
           setArticle({
             ...article,
@@ -104,12 +103,12 @@ function Main() {
             board_title: data[0].BOARD_TITLE,
             board_content: data[0].BOARD_CONTENT,
             board_date: data[0].BOARD_DATE,
-            board_image: data[0].board_image1,
+            board_image: data[0].board_image1
           });
 
           setActionMode({
             ...actionMode,
-            mode: 1, // 상세보기
+            mode: 1 // 상세보기
           });
         }
       })
@@ -124,10 +123,10 @@ function Main() {
     //   "handleUpdateForm(actionMode) =>" + actionMode.mode + ", " + e.target.id
     // );
     axios
-      .post("http://localhost:8008/detail", { num: e.target.id })
+      .post('http://localhost:8008/detail', { num: e.target.id })
       .then((res) => {
         const { data } = res;
-        console.log("handleUpdateForm =>", data);
+        console.log('handleUpdateForm =>', data);
         if (res.data.length > 0) {
           setArticle({
             ...article,
@@ -135,11 +134,11 @@ function Main() {
             board_writer: data[0].BOARD_WRITER,
             board_title: data[0].BOARD_TITLE,
             board_content: data[0].BOARD_CONTENT,
-            board_date: data[0].BOARD_DATE,
+            board_date: data[0].BOARD_DATE
           });
           setActionMode({
             ...actionMode,
-            mode: 2, // 글수정하기
+            mode: 2 // 글수정하기
           });
         }
       })
@@ -149,10 +148,10 @@ function Main() {
   };
 
   const handleUpdate = () => {
-    console.log("handleUpdate =>", article);
+    console.log('handleUpdate =>', article);
     axios
-      .post("http://localhost:8008/update", {
-        article: article,
+      .post('http://localhost:8008/update', {
+        article: article
       })
       .then(() => {
         getList();
@@ -184,7 +183,11 @@ function Main() {
     // 상세보기
     return (
       <div>
-        <BoardDetail article={article} handlelist={getList} handleupdateform={handleUpdateForm}></BoardDetail>
+        <BoardDetail
+          article={article}
+          handlelist={getList}
+          handleupdateform={handleUpdateForm}
+        ></BoardDetail>
         <br />
         {/* <BoardList
           boardlist={boardlist}

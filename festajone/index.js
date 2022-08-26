@@ -17,11 +17,10 @@ let corsOptions = {
 app.use(cors(corsOptions));
 
 const db = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "75303306",
-  database: "first",
-  ssl: false
+  host: 'localhost',
+  user: 'pesta',
+  password: 'Pesta123',
+  database: 'first'
 });
 
 const multer = require('multer');
@@ -299,7 +298,7 @@ app.post('/searchMyBoard', (req, res) => {
   var user_id = req.body.user_id;
 
   const sqlQuery =
-    'SELECT board_title, board_content, board_date, board_image1 FROM board where board_writer=?;';
+    'SELECT board_num, board_title, board_content, board_writer, date_format(board_date, "%Y-%m-%d") board_date, board_image1 FROM board where board_writer=?;';
   db.query(sqlQuery, [user_id], (err, result) => {
     res.send(result);
   });
@@ -469,7 +468,8 @@ app.post('/festivalDate', (req, res) => {
 var client_id = 'ir3vWsGnql5HVjuMKodQ';
 var client_secret = '9xYnqTe25x';
 app.get('/search/blog', function (req, res) {
-  var api_url = 'https://openapi.naver.com/v1/search/blog?query=' + encodeURI(req.query.query); // json 결과
+  var api_url =
+    'https://openapi.naver.com/v1/search/blog?query=' + encodeURI(req.query.query) + '&display=10'; // json 결과
   // console.log(req.query.query, '/', api_url);
   var request = require('request');
   var options = {

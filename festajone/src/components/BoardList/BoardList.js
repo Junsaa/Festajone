@@ -1,11 +1,11 @@
-import { useEffect } from "react";
-import BoardArticle from "./BoardArticle";
-import { useNavigate } from "react-router-dom";
-import PageLink from "./PageLink";
+import { useEffect } from 'react';
+import BoardArticle from './BoardArticle';
+import { useNavigate } from 'react-router-dom';
+import PageLink from './PageLink';
 
 const writer = (e) => {
-  document.location.href='/writer';
-} 
+  document.location.href = '/writer';
+};
 
 const BoardList = ({
   boardlist,
@@ -14,7 +14,7 @@ const BoardList = ({
   handledetail,
   handleupdateform,
   handlepage,
-  pagelink,
+  pagelink
 }) => {
   const navigate = useNavigate();
 
@@ -23,13 +23,13 @@ const BoardList = ({
   }, []);
 
   const handleLogout = () => {
-    console.log("handleLogout");
+    console.log('handleLogout');
     window.sessionStorage.clear();
     console.log(
-      "handleLogout:window.sessionStorage(login_id) =>",
-      window.sessionStorage.getItem("id")
+      'handleLogout:window.sessionStorage(login_id) =>',
+      window.sessionStorage.getItem('id')
     );
-    navigate("/"); // 로그인페이지로 이동
+    navigate('/'); // 로그인페이지로 이동
   };
 
   if (boardlist.boardList.length === 0) {
@@ -78,15 +78,15 @@ const BoardList = ({
           <tr>
             <td align="center">
               {pagelink.map((page) => {
-                return (
-                  <PageLink page={page} key={page} handlepage={handlepage} />
-                );
+                return <PageLink page={page} key={page} handlepage={handlepage} />;
               })}
             </td>
           </tr>
-          <td>
-            <input type='button' value='글쓰기' onClick={writer} id='writer'/>
-          </td>
+          <tr>
+            <td>
+              <input type="button" value="글쓰기" onClick={writer} id="writer" />
+            </td>
+          </tr>
         </table>
       </div>
     );
