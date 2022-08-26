@@ -103,7 +103,9 @@ function Main() {
             board_title: data[0].BOARD_TITLE,
             board_content: data[0].BOARD_CONTENT,
             board_date: data[0].BOARD_DATE,
-            board_image: data[0].board_image1
+            board_image1: data[0].board_image1,
+            board_image2: data[0].board_image2,
+            board_image3: data[0].board_image3,
           });
 
           setActionMode({

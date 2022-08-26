@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
 
 const handleDelete = (e) => {
   console.log('handleDelete(board_num) =>', e.target.id);
@@ -18,23 +17,24 @@ const handleDelete = (e) => {
 var user_id = sessionStorage.getItem('id');
 
 const BoardDetail = ({ article, handlelist, handleupdateform }) => {
-  // console.log("BoardDetail =>", article);
+  console.log('BoardDetail =>', article);
+  var image1;
+  var image2;
+  var image3;
+  if(article.board_image2 === null && article.board_image3 === null){
+    image1 = 'http://localhost:8008/uploads/' + article.board_image1;
+    image2 = null;
+    image3 = null;
+  } else if(article.board_image3 === null){
+    image1 = 'http://localhost:8008/uploads/' + article.board_image1;
+    image2 = 'http://localhost:8008/uploads/' + article.board_image2;
+    image3 = null;
+  } else {
+    image1 = 'http://localhost:8008/uploads/' + article.board_image1;
+    image2 = 'http://localhost:8008/uploads/' + article.board_image2;
+    image3 = image3 = 'http://localhost:8008/uploads/' + article.board_image3;
+  }
 
-  // const location = useLocation();
-  // let myarticle = {};
-  // if (
-  //   location.state.article === {} ||
-  //   location.state.article === undefined ||
-  //   location.state.article === null
-  // ) {
-  //   myarticle = {};
-  // } else {
-  //   myarticle = location.state.article;
-  // }
-  // console.log(myarticle);
-
-  const image = 'http://localhost:8008/uploads/' + article.board_image;
-  console.log('image =>', image);
   if (user_id === article.board_writer) {
     return (
       <div>
@@ -73,11 +73,17 @@ const BoardDetail = ({ article, handlelist, handleupdateform }) => {
             <tr>
               <td width="100px">이미지</td>
               <td align="left" width="600px">
-                <img src={image} />
+                <img src={image1} />
+              </td> 
+              <td align="left" width="600px">
+                <img src={image2} />
+              </td>
+              <td align="left" width="600px">
+                <img src={image3} />
               </td>
             </tr>
             <tr>
-              <td colSpan="2" align="center">
+              <td colspan="2" align="center">
                 <input type="button" value="글목록" onClick={handlelist}></input>
                 &nbsp;
                 <input
@@ -137,11 +143,20 @@ const BoardDetail = ({ article, handlelist, handleupdateform }) => {
             <tr>
               <td width="100px">이미지</td>
               <td align="left" width="600px">
-                <img src={image} />
+                <img src={image1} />
+              </td>
+              <td align="left" width="600px">
+                <img src={image2} />
+              </td>
+              <td align="left" width="600px">
+                <img src={image3} />
               </td>
             </tr>
+            <br/>
+            <br/>
+            <br/>
             <tr>
-              <td colSpan="2" align="center">
+              <td colspan="2" align="center">
                 <input type="button" value="글목록" onClick={handlelist}></input>
               </td>
             </tr>

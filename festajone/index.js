@@ -404,28 +404,68 @@ app.post('/list', (req, res) => {
 });
 
 // 게시판 글 작성(추가)
-app.post('/insert', upload.single('image'), (req, res) => {
-  console.log('/insert', req.file, req.body);
-  var writer = req.body.writer;
-  var title = req.body.title;
-  var content = req.body.content;
+app.post(
+  '/insert',
+  upload.fields([{ name: 'image1' }, { name: 'image2' }, { name: 'image3' }]),
+  // upload.array('imgs'),
+  (req, res) => {
+    console.log('/insert', req.files, req.body);
+    var writer = req.body.writer;
+    var title = req.body.title;
+    var content = req.body.content;
+    console.log('QQQ =>', req.files.image3);
 
-  const sqlQuery1 =
-    'INSERT INTO board (board_writer, board_title, board_content, board_image1) values (?,?,?,?);';
-  db.query(
-    sqlQuery1,
-    [writer, title, content, req.file.filename]
-    //  (err, result) => {
-    //    res.send(result);
-    //  }
-  );
-  const sqlQuery2 =
-    "SELECT BOARD_NUM, BOARD_WRITER, BOARD_TITLE, BOARD_CONTENT, board_image1, DATE_FORMAT(BOARD_DATE, '%Y-%m-%d') AS BOARD_DATE FROM BOARD where BOARD_NUM = (SELECT MAX(BOARD_NUM) FROM BOARD);";
-  db.query(sqlQuery2, (err, result) => {
-    res.send(result);
-    console.log('indeta => ', result[0].BOARD_NUM + 1);
-  });
-});
+    if(req.files.image2 === undefined && req.files.image3 === undefined){
+      const sqlQuery1 =
+      'INSERT INTO board (board_writer, board_title, board_content, board_image1) values (?,?,?,?);';
+    db.query(
+      sqlQuery1,
+      [
+        writer,
+        title,
+        content,
+        req.files.image1[0].filename,
+      ],
+      (err, result) => {
+        console.log('result=>', result);
+      }
+    );
+    } else if(req.files.image3 === undefined){
+      const sqlQuery1 =
+      'INSERT INTO board (board_writer, board_title, board_content, board_image1, board_image2) values (?,?,?,?,?);';
+    db.query(
+      sqlQuery1,
+      [
+        writer,
+        title,
+        content,
+        req.files.image1[0].filename,
+        req.files.image2[0].filename,
+      ],
+      (err, result) => {
+        console.log('result=>', result);
+      }
+    );
+    } else {
+      const sqlQuery1 =
+      'INSERT INTO board (board_writer, board_title, board_content, board_image1, board_image2, board_image3) values (?,?,?,?,?,?);';
+    db.query(
+      sqlQuery1,
+      [
+        writer,
+        title,
+        content,
+        req.files.image1[0].filename,
+        req.files.image2[0].filename,
+        req.files.image3[0].filename
+      ],
+      (err, result) => {
+        console.log('result=>', result);
+      }
+    );
+    }
+  }
+);
 
 // 게시판 글 상세정보
 app.post('/detail', (req, res) => {
@@ -433,7 +473,7 @@ app.post('/detail', (req, res) => {
   var num = parseInt(req.body.num);
 
   const sqlQuery =
-    "SELECT BOARD_NUM, BOARD_WRITER, BOARD_TITLE, BOARD_CONTENT, board_image1, DATE_FORMAT(BOARD_DATE, '%Y-%m-%d') AS BOARD_DATE FROM BOARD where BOARD_NUM = ?;";
+    "SELECT BOARD_NUM, BOARD_WRITER, BOARD_TITLE, BOARD_CONTENT, board_image1, board_image2, board_image3, DATE_FORMAT(BOARD_DATE, '%Y-%m-%d') AS BOARD_DATE FROM BOARD where BOARD_NUM = ?;";
   db.query(sqlQuery, [num], (err, result) => {
     res.send(result);
   });
@@ -471,7 +511,7 @@ app.post('/festivalDate', (req, res) => {
   var f_startdate = req.body.today;
 
   const sqlQuery =
-    'select f_contentid, f_title, f_thumbnail, f_startdate, f_enddate from festival where f_startdate >= ? order by f_startdate limit 5';
+    'select f_contentid, f_title, f_thumbnail, f_startdate, f_enddate, f_areacode  from festival where f_startdate >= ? order by f_startdate limit 5';
   db.query(sqlQuery, [f_startdate], (err, result) => {
     console.log('오류', err);
     console.log(result);
