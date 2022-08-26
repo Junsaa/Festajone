@@ -34,7 +34,7 @@
 .root .listFlex .festivalList {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   padding-top: 20px;
   padding-bottom: 20px;
 }

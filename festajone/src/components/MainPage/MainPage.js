@@ -28,7 +28,7 @@ const MainPage = () => {
   const checkDateValue = () => {
     axios
       .post('http://localhost:8008/festivalDate', {
-        today: year + month + day
+        today: year + '-' +month+ '-' + day
       })
       .then((res) => {
         const { data } = res;
