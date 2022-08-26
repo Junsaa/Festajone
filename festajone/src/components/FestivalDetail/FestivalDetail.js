@@ -13,11 +13,11 @@ const FestivalDetail = () => {
 
   let get_contentid = '';
   let get_areacode = '';
-  console.log(get_contentid, get_areacode);
+  // console.log(get_contentid, get_areacode);
   useEffect(() => {
     get_contentid = location.state.contentid;
     get_areacode = location.state.areacode;
-    console.log(get_contentid, get_areacode);
+    // console.log(get_contentid, get_areacode);
     festivalDetail();
     festivalImgs();
     recommendRestaurant();

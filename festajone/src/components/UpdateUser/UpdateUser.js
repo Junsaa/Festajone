@@ -175,9 +175,8 @@ const InfoUpdate = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
   const updateNameRef = useRef();
   const updateNicknameRef = useRef();
   const updateEmailRef = useRef();
-  const updateImgRef = useRef();
 
-  const [image_name, setImage_name] = useState('');
+  let [image_name, setImage_name] = useState('');
 
   function onImage(e) {
     setImage_name(e.target.files[0]);
@@ -223,14 +222,16 @@ const InfoUpdate = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
     if (updateEmailRef.current.value === '' || updateEmailRef.current.value === undefined) {
       updateEmailRef.current.value = user.user_email;
     }
-    if (
-      updateImgRef.current.value === '' ||
-      updateImgRef.current.value === undefined ||
-      image_name === '' ||
-      image_name === undefined
-    ) {
-      updateImgRef.current.value = user.profile_image;
-    }
+    // if (image_name === '' || image_name === undefined) {
+    //   setImage_name(user.profile_image);
+    // }
+
+    console.log(
+      updateNameRef.current.value,
+      updateNicknameRef.current.value,
+      updateEmailRef.current.value,
+      image_name
+    );
 
     const config = {
       headers: { 'Content-Type': 'multipart/form-data' }
@@ -244,6 +245,7 @@ const InfoUpdate = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
           user_name: updateNameRef.current.value,
           user_nickname: updateNicknameRef.current.value,
           user_email: updateEmailRef.current.value,
+          user_image: user.profile_image,
           image: image_name
         },
         config
@@ -312,7 +314,7 @@ const InfoUpdate = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
                     name="image"
                     accept="image/*"
                     onChange={onImage}
-                    ref={updateImgRef}
+                    required={false}
                   />
                 </Form.Group>
 

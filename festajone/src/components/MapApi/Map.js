@@ -55,7 +55,7 @@ const Map = ({ mapx, mapy }) => {
 
   return (
     <div align="center">
-      <div id="map" style={{ width: '95%', height: '200px' }}></div>
+      <div id="map" style={{ width: '95%', height: '250px' }}></div>
     </div>
   );
 };

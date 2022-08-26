@@ -26,6 +26,7 @@ const db = mysql.createPool({
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const e = require('express');
 
 try {
   fs.readdirSync('userimgFolder');
@@ -323,17 +324,31 @@ app.post('/updateuser', userimg_upload.single('image'), (req, res) => {
   var user_name = req.body.user_name;
   var user_nickname = req.body.user_nickname;
   var user_email = req.body.user_email;
+  var user_image = req.body.user_image;
 
-  const sqlQuery =
-    'update user set user_name=?, user_nickname=?, user_email=?,profile_image=? where user_id=?;';
-  db.query(
-    sqlQuery,
-    [user_name, user_nickname, user_email, req.file.filename, user_id],
-    (err, result) => {
-      res.send(result);
-      console.log('result=', result);
-    }
-  );
+  if (req.file === '' || req.file === undefined || req.file === null) {
+    const sqlQuery =
+      'update user set user_name=?, user_nickname=?, user_email=?,profile_image=? where user_id=?;';
+    db.query(
+      sqlQuery,
+      [user_name, user_nickname, user_email, user_image, user_id],
+      (err, result) => {
+        res.send(result);
+        console.log('result=', result);
+      }
+    );
+  } else {
+    const sqlQuery =
+      'update user set user_name=?, user_nickname=?, user_email=?,profile_image=? where user_id=?;';
+    db.query(
+      sqlQuery,
+      [user_name, user_nickname, user_email, req.file.filename, user_id],
+      (err, result) => {
+        res.send(result);
+        console.log('result=', result);
+      }
+    );
+  }
 });
 
 //사용자비밀번호 수정

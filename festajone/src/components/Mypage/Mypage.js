@@ -427,7 +427,7 @@ function MyBoard({ myboard }) {
       }
     });
   };
-  console.log(myboard.board_date);
+  // console.log(myboard.board_date);
   const image = 'http://localhost:8008/uploads/' + myboard.board_image1;
   return (
     <li className="list-group-item inline">

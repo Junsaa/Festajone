@@ -42,16 +42,16 @@ a:active {
   line-height: 1.4;
 }
 
-@media screen and (max-width: 920px) {
+/* @media screen and (max-width: 920px) {
   .slide_img {
     width: 80%;
     height: 200px;
   }
-}
+} */
 
 .slide_img {
   width: 80%;
-  height: 200px;
+  height: 300px;
 }
 
 .block {

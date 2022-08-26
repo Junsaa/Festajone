@@ -1,7 +1,7 @@
 import { Carousel } from 'react-bootstrap';
 import Map from '../MapApi/Map';
 import '../FestivalDetail/festivalDetail.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useReducer, useState } from 'react';
 import axios from '../../../node_modules/axios/index';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from '../../../node_modules/react-router-dom/index';
@@ -13,6 +13,9 @@ const RestaurantDetail = () => {
   let get_r_contentid = '';
   let get_r_title = '';
   // console.log(typeof get_r_contentid);
+
+  const [blogitems, setblogItems] = useState([]);
+  const [imageitems, setimageItems] = useState([]);
 
   const [restaurantD, setRestaurantD] = useState({
     r_contentid: '',
@@ -101,22 +104,19 @@ const RestaurantDetail = () => {
       });
   };
 
-  const [blogitems, setblogItems] = useState([]);
-  const [imageitems, setimageItems] = useState([]);
-
   const get_api_blog = (e) => {
     axios
       .get('http://localhost:8008/search/blog', { params: { query: get_r_title } })
       .then((res) => {
         const { data } = res;
-        // console.log('get_api =>', data);
+        // console.log('get_api_blog =>', data);
         if (res.data.items.length > 0) {
           for (var i = 0; i < res.data.items.length; i++) {
             blogitems.splice(i, 0, data.items[i]);
           }
         }
         setblogItems(blogitems);
-        // console.log(blogitems);
+        // console.log('blogitems : ', blogitems, typeof blogitems);
       })
       .catch((e) => {
         console.error(e);
@@ -136,13 +136,12 @@ const RestaurantDetail = () => {
           }
         }
         setimageItems(imageitems);
-        // console.log(imageitems);
+        // console.log('imageitems : ', imageitems, typeof imageitems);
       })
       .catch((e) => {
         console.error(e);
       });
   };
-
   useEffect(() => {
     get_r_contentid = location.state.get_r_contentid;
     get_r_title = location.state.title;
@@ -159,7 +158,7 @@ const RestaurantDetail = () => {
           {/* <td style={{ textAlign: 'center' }}>
             <img src={restaurantD.r_mainimage} style={{ width: '150px', height: '150px' }} />
           </td> */}
-          <td style={{ textAlign: 'center' }}>
+          <td style={{ textAlign: 'center', padding: '20px' }}>
             <h2>{restaurantD.r_title}</h2>
 
             {/* <span>{restaurantD.r_addr1} {restaurantD.r_addr2}</span> */}
@@ -198,6 +197,31 @@ const RestaurantDetail = () => {
           </td>
         </tr>
       </table>
+
+      <div className="detail_tab menuFixed">
+        <ul>
+          <li className="select_tab on" id="photoTab">
+            <a href="#photo_Tab">
+              <span>사진보기</span>
+            </a>
+          </li>
+          <li className="select_tab" id="detailTab">
+            <a href="#detail_Tab">
+              <span>상세정보</span>
+            </a>
+          </li>
+          <li className="select_tab" id="mapTab">
+            <a href="#map_Tab">
+              <span>지도보기</span>
+            </a>
+          </li>
+          <li className="select_tab" id="aroundResTab">
+            <a href="#blog_Tab">
+              <span>블로그 후기</span>
+            </a>
+          </li>
+        </ul>
+      </div>
 
       {/* 이미지 슬라이드 */}
       <div id="photo_Tab">
@@ -248,11 +272,11 @@ const RestaurantDetail = () => {
       </div>
 
       <br />
-      <div className="detail_div" id="aroundRes_Tab">
+      <div className="detail_div" id="blog_Tab">
         <strong>블로그 후기</strong>
         <hr style={{ height: '1px', background: 'black' }} />
         <ul className="list-group list-group-flush">
-          {blogitems === [] || blogitems === undefined || blogitems.length === 0
+          {blogitems === [] || blogitems === undefined || blogitems.length === 0 || blogitems === {}
             ? null
             : blogitems.map(function (b, i) {
                 return <BlogReview blog={b} key={i}></BlogReview>;
