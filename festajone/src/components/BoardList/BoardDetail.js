@@ -1,26 +1,41 @@
-import axios from "axios";
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 const handleDelete = (e) => {
-  console.log("handleDelete(board_num) =>", e.target.id);
+  console.log('handleDelete(board_num) =>', e.target.id);
   axios
-    .post("http://localhost:8008/delete", {
-      num: e.target.id,
+    .post('http://localhost:8008/delete', {
+      num: e.target.id
     })
     .then(() => {
-      document.location.href='/boardlist';
+      document.location.href = '/boardlist';
     })
     .catch((e) => {
       console.error(e);
     });
-  }
+};
 
-  var user_id = sessionStorage.getItem('id');
+var user_id = sessionStorage.getItem('id');
 
 const BoardDetail = ({ article, handlelist, handleupdateform }) => {
-  console.log("BoardDetail =>", article);
-  const image = "http://localhost:8008/uploads/" + article.board_image;
-  console.log("image =>", image);
-  if(user_id === article.board_writer) {
+  // console.log("BoardDetail =>", article);
+
+  // const location = useLocation();
+  // let myarticle = {};
+  // if (
+  //   location.state.article === {} ||
+  //   location.state.article === undefined ||
+  //   location.state.article === null
+  // ) {
+  //   myarticle = {};
+  // } else {
+  //   myarticle = location.state.article;
+  // }
+  // console.log(myarticle);
+
+  const image = 'http://localhost:8008/uploads/' + article.board_image;
+  console.log('image =>', image);
+  if (user_id === article.board_writer) {
     return (
       <div>
         <form>
@@ -62,12 +77,22 @@ const BoardDetail = ({ article, handlelist, handleupdateform }) => {
               </td>
             </tr>
             <tr>
-              <td colspan="2" align="center">
+              <td colSpan="2" align="center">
                 <input type="button" value="글목록" onClick={handlelist}></input>
                 &nbsp;
-                <input type="button" value="수정" id={article.board_num} onClick={handleupdateform}></input>
+                <input
+                  type="button"
+                  value="수정"
+                  id={article.board_num}
+                  onClick={handleupdateform}
+                ></input>
                 &nbsp;
-                <input type="button" value="삭제" id={article.board_num} onClick={handleDelete} ></input>
+                <input
+                  type="button"
+                  value="삭제"
+                  id={article.board_num}
+                  onClick={handleDelete}
+                ></input>
               </td>
             </tr>
           </table>
@@ -116,7 +141,7 @@ const BoardDetail = ({ article, handlelist, handleupdateform }) => {
               </td>
             </tr>
             <tr>
-              <td colspan="2" align="center">
+              <td colSpan="2" align="center">
                 <input type="button" value="글목록" onClick={handlelist}></input>
               </td>
             </tr>

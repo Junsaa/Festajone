@@ -6,7 +6,8 @@ const RestaurantListItem = (data) => {
   const onClick = () => {
     navigate('/restaurantdetail', {
       state: {
-        get_r_contentid: data.data.r_contentid
+        get_r_contentid: data.data.r_contentid,
+        title: data.data.r_title
       }
     });
   };

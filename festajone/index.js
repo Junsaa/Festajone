@@ -17,11 +17,10 @@ let corsOptions = {
 app.use(cors(corsOptions));
 
 const db = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "75303306",
-  database: "first",
-  ssl: false
+  host: 'localhost',
+  user: 'pesta',
+  password: 'Pesta123',
+  database: 'first'
 });
 
 const multer = require('multer');
@@ -55,26 +54,26 @@ const userimg_upload = multer({
 app.use('/userimgFolder', express.static('userimgFolder'));
 
 try {
-  fs.readdirSync("uploads");
+  fs.readdirSync('uploads');
 } catch (error) {
-  console.error("uploads 폴더가 없어 uploads 폴더를 생성합니다.");
-  fs.mkdirSync("uploads");
+  console.error('uploads 폴더가 없어 uploads 폴더를 생성합니다.');
+  fs.mkdirSync('uploads');
 }
 
 const upload = multer({
-    storage: multer.diskStorage({
-      destination(req, file, done) {
-        done(null, "uploads/");
-      },
-      filename(req, file, done) {
-        const ext = path.extname(file.originalname);
-        done(null, path.basename(file.originalname, ext) + Date.now() + ext);
-      },
-    }),
-    limits: { fileSize: 10 * 1024 * 1024 },
-  });
+  storage: multer.diskStorage({
+    destination(req, file, done) {
+      done(null, 'uploads/');
+    },
+    filename(req, file, done) {
+      const ext = path.extname(file.originalname);
+      done(null, path.basename(file.originalname, ext) + Date.now() + ext);
+    }
+  }),
+  limits: { fileSize: 10 * 1024 * 1024 }
+});
 
-app.use("/uploads", express.static("uploads"));
+app.use('/uploads', express.static('uploads'));
 
 app.post('/join', (req, res) => {
   console.log('/join', req.body);
@@ -201,7 +200,7 @@ app.post('/recommendRes', (req, res) => {
   console.log('맛집 지역', areacode);
 
   const sqlQuery =
-    'SELECT r_contentid, r_title, r_mainimage, r_thumbnail,r_addr1, r_addr2, r_mapx,r_mapy FROM restaurant where r_areacode=? order by rand() limit 3;';
+    'SELECT r_contentid, r_title, r_mainimage, r_thumbnail,r_addr1, r_addr2, r_mapx,r_mapy FROM restaurant where r_areacode=? order by rand() limit 5;';
   db.query(sqlQuery, [areacode], (err, result) => {
     res.send(result);
   });
@@ -296,10 +295,10 @@ app.post('/searchLikeRes', (req, res) => {
 //내가 쓴 글
 app.post('/searchMyBoard', (req, res) => {
   console.log('searchMyBoard');
-  var user_id = '';
+  var user_id = req.body.user_id;
 
   const sqlQuery =
-    'SELECT board_title, board_content, board_date, board_image1 FROM board where user_id=?;';
+    'SELECT board_num, board_title, board_content, board_writer, date_format(board_date, "%Y-%m-%d") board_date, board_image1 FROM board where board_writer=?;';
   db.query(sqlQuery, [user_id], (err, result) => {
     res.send(result);
   });
@@ -364,27 +363,22 @@ app.post('/user_login', (req, res) => {
 });
 
 // 게시판 글 갯수별 패이지 분할
-app.get("/count", (req, res) => {
-  const sqlQuery = "select count(*) as COUNT from board;";
+app.get('/count', (req, res) => {
+  const sqlQuery = 'select count(*) as COUNT from board;';
   db.query(sqlQuery, (err, result) => {
     res.send(result);
-    console.log('page => ',result);
-  })
-})
+    console.log('page => ', result);
+  });
+});
 
 // 게시판 글 리스트
-app.post("/list", (req, res) => {
-  console.log("list!!!");
+app.post('/list', (req, res) => {
+  console.log('list!!!');
   var page_num = parseInt(req.body.page_num);
   var page_size = parseInt(req.body.page_size);
-  console.log(
-    "list!!!(page_num, page_size, article_count)",
-    page_num,
-    ", ",
-    page_size
-  );
+  console.log('list!!!(page_num, page_size, article_count)', page_num, ', ', page_size);
   const start_limit = (page_num - 1) * page_size;
-  console.log("list!!!(start_limit, page_size)", start_limit, ", ", page_size);
+  console.log('list!!!(start_limit, page_size)', start_limit, ', ', page_size);
 
   const sqlQuery = `SELECT BOARD_NUM, BOARD_WRITER, BOARD_TITLE, BOARD_CONTENT, 
     DATE_FORMAT(BOARD_DATE, '%Y-%m-%d') AS BOARD_DATE FROM BOARD 
@@ -392,37 +386,35 @@ app.post("/list", (req, res) => {
   db.query(sqlQuery, [start_limit, page_size], (err, result) => {
     res.send(result);
   });
-}); 
+});
 
 // 게시판 글 작성(추가)
-app.post("/insert", upload.single("image"), (req, res) => {
-  console.log("/insert", req.file, req.body);
+app.post('/insert', upload.single('image'), (req, res) => {
+  console.log('/insert', req.file, req.body);
   var writer = req.body.writer;
   var title = req.body.title;
   var content = req.body.content;
 
   const sqlQuery1 =
-    "INSERT INTO board (board_writer, board_title, board_content, board_image1) values (?,?,?,?);";
-    db.query(
-      sqlQuery1,
-      [writer, title, content, req.file.filename], 
-      //  (err, result) => {
-      //    res.send(result);
-      //  }
-    );
-    const sqlQuery2 =
-    "SELECT BOARD_NUM, BOARD_WRITER, BOARD_TITLE, BOARD_CONTENT, board_image1, DATE_FORMAT(BOARD_DATE, '%Y-%m-%d') AS BOARD_DATE FROM BOARD where BOARD_NUM = (SELECT MAX(BOARD_NUM) FROM BOARD);";
-    db.query(
-    sqlQuery2, (err, result) => {
-      res.send(result);
-      console.log('indeta => ', result[0].BOARD_NUM+1);
-    }
+    'INSERT INTO board (board_writer, board_title, board_content, board_image1) values (?,?,?,?);';
+  db.query(
+    sqlQuery1,
+    [writer, title, content, req.file.filename]
+    //  (err, result) => {
+    //    res.send(result);
+    //  }
   );
-})
+  const sqlQuery2 =
+    "SELECT BOARD_NUM, BOARD_WRITER, BOARD_TITLE, BOARD_CONTENT, board_image1, DATE_FORMAT(BOARD_DATE, '%Y-%m-%d') AS BOARD_DATE FROM BOARD where BOARD_NUM = (SELECT MAX(BOARD_NUM) FROM BOARD);";
+  db.query(sqlQuery2, (err, result) => {
+    res.send(result);
+    console.log('indeta => ', result[0].BOARD_NUM + 1);
+  });
+});
 
 // 게시판 글 상세정보
-app.post("/detail", (req, res) => {
-  console.log("/detail", req.body);
+app.post('/detail', (req, res) => {
+  console.log('/detail', req.body);
   var num = parseInt(req.body.num);
 
   const sqlQuery =
@@ -433,25 +425,25 @@ app.post("/detail", (req, res) => {
 });
 
 // 게시판 글 수정
-app.post("/update", (req, res) => {
-  console.log("/update", req.body);
+app.post('/update', (req, res) => {
+  console.log('/update', req.body);
   var title = req.body.article.board_title;
   var content = req.body.article.board_content;
   var num = req.body.article.board_num;
 
   const sqlQuery =
-    "update BOARD set BOARD_TITLE=?, BOARD_CONTENT=?, BOARD_DATE=now() where board_num=?;";
+    'update BOARD set BOARD_TITLE=?, BOARD_CONTENT=?, BOARD_DATE=now() where board_num=?;';
   db.query(sqlQuery, [title, content, num], (err, result) => {
     res.send(result);
   });
 });
 
 // 게시판 글 삭제
-app.post("/delete", (req, res) => {
+app.post('/delete', (req, res) => {
   const num = req.body.num;
-  console.log("/delete(id) => ", num);
+  console.log('/delete(id) => ', num);
 
-  const sqlQuery = "DELETE FROM BOARD WHERE BOARD_NUM = ?;";
+  const sqlQuery = 'DELETE FROM BOARD WHERE BOARD_NUM = ?;';
   db.query(sqlQuery, [num], (err, result) => {
     console.log(err);
     res.send(result);
@@ -469,6 +461,50 @@ app.post('/festivalDate', (req, res) => {
     console.log('오류', err);
     console.log(result);
     res.send(result);
+  });
+});
+
+//naverapi-blog
+var client_id = 'ir3vWsGnql5HVjuMKodQ';
+var client_secret = '9xYnqTe25x';
+app.get('/search/blog', function (req, res) {
+  var api_url =
+    'https://openapi.naver.com/v1/search/blog?query=' + encodeURI(req.query.query) + '&display=10'; // json 결과
+  // console.log(req.query.query, '/', api_url);
+  var request = require('request');
+  var options = {
+    url: api_url,
+    headers: { 'X-Naver-Client-Id': client_id, 'X-Naver-Client-Secret': client_secret }
+  };
+  request.get(options, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      res.writeHead(200, { 'Content-Type': 'text/json;charset=utf-8' });
+      res.end(body);
+    } else {
+      res.status(response.statusCode).end();
+      console.log('error = ' + response.statusCode);
+    }
+  });
+});
+
+//naverapi-image
+app.get('/search/image', function (req, res) {
+  var api_url =
+    'https://openapi.naver.com/v1/search/image?query=' + encodeURI(req.query.query) + '&display=10'; // json 결과
+  // console.log(req.query.query);
+  var request = require('request');
+  var options = {
+    url: api_url,
+    headers: { 'X-Naver-Client-Id': client_id, 'X-Naver-Client-Secret': client_secret }
+  };
+  request.get(options, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      res.writeHead(200, { 'Content-Type': 'text/json;charset=utf-8' });
+      res.end(body);
+    } else {
+      res.status(response.statusCode).end();
+      console.log('error = ' + response.statusCode);
+    }
   });
 });
 
