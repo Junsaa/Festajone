@@ -1,0 +1,156 @@
+.board_wrap {
+  width: 1000px;
+  height: 20px auto;
+  padding-top: 0px;
+}
+
+.board_title {
+  margin-bottom: 0px;
+  font-size: 40px;
+  text-align: center;
+}
+
+/*'글수정' 간격*/
+.board_update_wrap {
+  /* width: 1000px; */
+  height: 100px auto;
+  padding-top: 20px;
+}
+
+/* '글수정' '제목' 사이 구분선*/
+.board_update {
+  border-top: 1px solid rgb(0, 0, 0);
+  padding-bottom: 20px;
+}
+
+/*'제목', '작성자', '내용' 입력창 간격 조절*/
+.board_update .title,
+.board_update .writer,
+.board_update .content {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.board_update .writer {
+}
+
+/*'제목'과 '작성자' 사이 구분선*/
+.board_update .title {
+  border-bottom: 1px dashed #ddd;
+}
+
+/*'작성자'와 '내용' 사이 구분선*/
+.board_update .content {
+  border-top: 1px dashed #ddd;
+}
+
+/*'제목','작성자','내용' 속성 설정*/
+.board_update .title dt,
+.board_update .title dd,
+.board_update .writer dt,
+.board_update .writer dd,
+.board_update .content dt,
+.board_update .content dd {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.4rem;
+}
+
+/* .board_update .title dt,
+    .board_update .content dt {
+      width: 100px;
+    } */
+
+/*'제목','작성자','내용' 위치 조정*/
+.board_update .title,
+.board_update .writer,
+.board_update .content {
+  display: flex;
+  justify-content: center;
+}
+/*입력창 제목과 입력창 간격 조절*/
+.board_update dl {
+  width: 90%;
+}
+
+/*'제목'과 입력창 사이 간격 조절*/
+.board_update .update-title {
+  width: 10%;
+}
+
+/*'제목' 입력창 길이 조절*/
+.board_update .update-txt {
+  width: 80%;
+  text-align: left;
+  padding-left: 10px;
+}
+.board_update .title input[type='text'] {
+  width: 100%;
+}
+
+/*입력창 넓이 조절*/
+.board_update .title input[type='text'] {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/*'내용' 아래 구분선*/
+.board_update .content {
+  border-bottom: 1px solid #ddd;
+}
+
+/*'내용' 입력창 크기 조절*/
+.board_update .content textarea {
+  display: block;
+  width: 100%;
+  height: 300px;
+  padding: 15px;
+  box-sizing: border-box;
+  border: 0;
+  resize: vertical;
+}
+
+.update-btn,
+.list-but {
+  display: inline-block;
+  background-color: #36a1ff;
+  border-radius: 50px;
+  border: 1px solid white;
+  color: #fff;
+  font-size: 1rem;
+  height: 50px;
+  margin-right: 20px;
+  margin-bottom: 50px;
+  border-bottom: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.update-btn:hover,
+.list-btn:hover {
+  transform: translateY(3px);
+  box-shadow: none;
+  animation: ani9 0.4s ease-in-out infinite alternate;
+}
+@keyframes ani9 {
+  0% {
+    transform: translateY(3px);
+  }
+  100% {
+    transform: translateY(5px);
+  }
+}
+
+.update-btn:hover,
+.update-btn:focus,
+.list-btn:hover,
+.list-btn:focus {
+  background: rgb(255, 255, 255);
+  border: 2px solid #36a1ff;
+  color: rgb(72, 72, 72);
+}
+
+input[type='button'] {
+  /* border: 0; */
+  border-radius: 10px;
+}
