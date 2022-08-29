@@ -1,0 +1,162 @@
+.board_wrap {
+  width: 1000px;
+  margin: 20px auto;
+  max-width: 100%;
+}
+
+.board_title {
+  margin-bottom: 0px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.board_write_wrap {
+  /* width: 1000px; */
+  height: 100px auto;
+  padding-top: 20px;
+}
+
+/* '글작성' '제목' 사이 구분선*/
+.board_write {
+  border-top: 1px solid rgb(0, 0, 0);
+}
+
+/*'제목', '내용' 입력창 간격 조절*/
+.board_write .title,
+.board_write .content {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/*'제목' '내용' 사이 경계 구분*/
+.board_write .content {
+  border-top: 1px dashed #ddd;
+  /* border-bottom: 1px dashed #ddd; */
+  font-size: 0;
+}
+
+/*'제목','내용' 속성 설정*/
+.board_write .title dt,
+.board_write .title dd,
+.board_write .content dt,
+.board_write .content dd {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.4rem;
+}
+
+/*'제목','내용' 위치 조정*/
+.board_write .title,
+.board_write .content {
+  display: flex;
+  justify-content: center;
+}
+
+.board_write dl {
+  width: 90%;
+}
+
+.board_write .write-title {
+  width: 10%;
+}
+.board_write .write-txt {
+  width: 80%;
+  padding-left: 10px;
+}
+
+.board_write .title input[type='text'] {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.board_write .title input[type='text'] {
+  width: 100%;
+}
+
+.board_write .content {
+  border-bottom: 1px solid #ddd;
+}
+
+.board_write .content textarea {
+  display: block;
+  width: 100%;
+  height: 300px;
+  padding: 15px;
+  box-sizing: border-box;
+  border: 0;
+  resize: vertical;
+}
+
+.image-file {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: right;
+}
+
+input[type='file']::file-selector-button {
+  width: 80px;
+  height: 30px;
+  background: #fff;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.insert,
+.reset,
+.list_but {
+  display: inline-block;
+  background-color: #36a1ff;
+  border-radius: 50px;
+  border: 1px solid white;
+  color: #fff;
+  font-size: 1rem;
+  height: 50px;
+  margin-right: 20px;
+  margin-bottom: 50px;
+  border-bottom: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.insert:hover,
+.reset:hover,
+.list_but:hover {
+  transform: translateY(3px);
+  box-shadow: none;
+  animation: ani9 0.4s ease-in-out infinite alternate;
+}
+@keyframes ani9 {
+  0% {
+    transform: translateY(3px);
+  }
+  100% {
+    transform: translateY(5px);
+  }
+}
+
+.insert:hover,
+.insert:focus,
+.reset:hover,
+.reset:focus,
+.list_but:hover,
+.list_but:focus {
+  background: rgb(255, 255, 255);
+  border: 2px solid #36a1ff;
+  color: rgb(72, 72, 72);
+}
+
+input[type='submit'] {
+  /* border: 0; */
+  border-radius: 10px;
+}
+
+input[type='reset'] {
+  /* border: 0; */
+  border-radius: 10px;
+}
+
+input[type='button'] {
+  border-radius: 10px;
+}

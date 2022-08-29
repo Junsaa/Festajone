@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import axios from 'axios';
+import './BoardWrite.css';
 
 const BoardWrite = ({ handlelist }) => {
   const titleRef = useRef();
@@ -24,25 +25,23 @@ const BoardWrite = ({ handlelist }) => {
     //   ...image_name,
     //   [e.target.id]: e.target.files[0]
     // });
-    if(e.target.files.length < 3){
+    if (e.target.files.length < 3) {
       for (let i = 0; i < e.target.files.length; i++) {
         upload_files.push(e.target.files[i]);
-        console.log(i,'=> ',e.target.files[i]);
-        }
+        console.log(i, '=> ', e.target.files[i]);
+      }
       for (let j = e.target.files.length; j < 3; j++) {
         upload_files.push(null);
-        console.log(j,'=> ',e.target.files[j]);
+        console.log(j, '=> ', e.target.files[j]);
       }
       console.log(upload_files);
     } else {
       for (let i = 0; i < e.target.files.length; i++) {
         upload_files.push(e.target.files[i]);
-        console.log(i,'=> ',e.target.files[i]);
-        }
+        console.log(i, '=> ', e.target.files[i]);
+      }
     }
     setImage_name22(upload_files);
-    
-   
   }
 
   const Main = (e) => {
@@ -106,55 +105,68 @@ const BoardWrite = ({ handlelist }) => {
   return (
     <div>
       <form encType="multipart/form-data">
-        <table border="1" width="700px" align="center">
-          <tr>
-            <td width="100px">제목</td>
-            <td align="left" width="550px">
-              <input
-                type="text"
-                name="title"
-                size="68"
-                ref={titleRef}
-                placeholder="제목을 입력하세요"
-              ></input>
-            </td>
-          </tr>
-          <tr>
-            <td>내용</td>
-            <td align="left">
-              <textarea
-                rows="5"
-                cols="70"
-                name="content"
-                ref={contentRef}
-                placeholder="내용을 입력하세요"
-              ></textarea>
-            </td>
-          </tr>
-          <tr>
-            <td>이미지</td>
-            <td align="left">
-              <input
-                type="file"
-                name="imgs"
-                multiple
-                id="image_0"
-                ref={imageRef}
-                accept="image/*"
-                onChange={onImage}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td colSpan="2" align="center">
-              <input type="submit" value="글쓰기" onClick={handleInsert}></input>
+        <div className="board_wrap" align="center">
+          <div className="board_title" align="left">
+            글작성
+          </div>
+
+          <div className="board_write_wrap">
+            <div className="board_write">
+              <div className="title">
+                <dl>
+                  <dt className="write-title">제목</dt>
+                  <dt className="write-txt">
+                    <input
+                      type="text"
+                      name="title"
+                      size="68"
+                      ref={titleRef}
+                      placeholder="제목을 입력하세요"
+                    />
+                  </dt>
+                </dl>
+              </div>
+
+              <div className="content">
+                <dl>
+                  <dt className="write-title">내용</dt>
+                  <dt className="write-txt" border="0">
+                    <textarea
+                      rows="5"
+                      cols="70"
+                      name="content"
+                      ref={contentRef}
+                      placeholder="내용을 입력하세요"
+                    ></textarea>
+                  </dt>
+                </dl>
+              </div>
+            </div>
+
+            <div className="image-file">
+              <dl>
+                <div onChange={onImage} align="left">
+                  <input
+                    type="file"
+                    name="imgs"
+                    mulltiple
+                    id="image_0"
+                    ref={imageRef}
+                    accept="image/*"
+                  />
+                </div>
+              </dl>
+            </div>
+
+            <td colSpan="2">
+              <input type="submit" value="글쓰기" className="insert" onClick={handleInsert}></input>
               &nbsp;
-              <input type="reset" value="취소"></input>
+              <input type="reset" value="취소" className="reset"></input>
               &nbsp;
-              <input type="button" value="리스트" onClick={Main}></input>
+              <input type="button" value="목록" className="list_but" onClick={Main}></input>
             </td>
-          </tr>
-        </table>
+          </div>
+        </div>
       </form>
     </div>
   );

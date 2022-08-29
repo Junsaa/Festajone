@@ -1,0 +1,134 @@
+.board_wrap {
+  width: 100%;
+  padding-top: 0px;
+}
+
+.board_title {
+  margin-bottom: 0px;
+  font-size: 40px;
+}
+
+.board_detail_wrap {
+  padding-top: 0px;
+}
+
+/*'내용' 아래 구분선*/
+.board_detail {
+  border-bottom: 1px dashed #ddd;
+  padding-bottom: 20px;
+}
+
+/*'제목' 속성*/
+.board_detail .title {
+  padding: 20px 15px;
+  border-bottom: 1px dashed #ddd;
+  font-size: 2rem;
+}
+
+/* */
+.board_detail .info {
+  padding: 15px;
+  border-bottom: 1px dashed #ddd;
+  font-size: 0;
+  text-align: right;
+}
+
+.board_detail .info dl {
+  position: relative;
+  display: inline-block;
+  padding: 0 20px;
+}
+
+.board_detail .info dl:first-child {
+  padding-left: 0;
+}
+
+.board_detail .info dl::before {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 0;
+  display: block;
+  width: 1px;
+  height: 13px;
+  background: #ddd;
+}
+
+.board_detail .info dl:first-child::before {
+  display: none;
+}
+
+.board_detail .info dl dt,
+.board_detail .info dl dd {
+  display: inline-block;
+  font-size: 1rem;
+}
+
+.board_detail .info dl dd {
+  margin-left: 10px;
+  color: #777;
+}
+
+.board_detail .content {
+  padding: 15px;
+  border-bottom: 1px dashed #ddd;
+  line-height: 160%;
+  font-size: 1.4rem;
+  text-align: left;
+}
+
+img {
+  max-width: 100%;
+}
+
+.select_but {
+  border-top: 10px;
+}
+
+.list_but,
+.update,
+.delete {
+  display: inline-block;
+  background-color: #36a1ff;
+  border-radius: 50px;
+  border: 1px solid white;
+  color: #fff;
+  font-size: 1rem;
+  height: 50px;
+  margin-right: 20px;
+  margin-bottom: 50px;
+  border-bottom: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.list_but:hover,
+.update:hover,
+.delete:hover {
+  transform: translateY(3px);
+  box-shadow: none;
+  animation: ani9 0.4s ease-in-out infinite alternate;
+}
+@keyframes ani9 {
+  0% {
+    transform: translateY(3px);
+  }
+  100% {
+    transform: translateY(5px);
+  }
+}
+
+.list_but:hover,
+.list_but:focus,
+.update:hover,
+.update:focus,
+.delete:hover,
+.delete:focus {
+  background: rgb(255, 255, 255);
+  border: 2px solid #36a1ff;
+  color: rgb(72, 72, 72);
+}
+
+input[type='button'] {
+  border: 0;
+}

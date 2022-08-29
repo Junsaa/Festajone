@@ -1,0 +1,153 @@
+/*BoardList**********************************************/
+/* reset */
+
+* {
+  list-style: none;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.container {
+  /* width: 1100px; */
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+/* .blind {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    margin: -1px;
+    width: 1px;
+    height: 1px;
+  } */
+
+/*BoardList*/
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/*게시판 전체적인 리스트 위치 조정*/
+section.notice {
+  padding-top: 10px;
+}
+
+/*'게시판' 글자 속성 조정*/
+.page-title h3 {
+  font-size: 28px;
+  color: #333333;
+  font-weight: 400;
+  text-align: center;
+  padding-bottom: 0px;
+}
+
+/*게시판 리스트*/
+.board-table {
+  font-size: 13px;
+  width: 100%;
+  margin-bottom: 20px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+/*게시판 리스트 간격*/
+.board-table a {
+  color: #333;
+  display: inline-block;
+  line-height: 1.4;
+  word-break: break-all;
+  vertical-align: middle;
+}
+/*리스트 밑줄*/
+.board-table a:hover {
+  text-decoration: underline;
+}
+/*'제목'글자 위치*/
+.board-table th {
+  text-align: center;
+}
+/*리스트 정렬*/
+.board-table .th-num {
+  width: 100px;
+  text-align: center;
+}
+/*리스트 위치*/
+.board-table .th-date {
+  width: 200px;
+}
+/*리스트 열 폭*/
+.board-table th,
+.board-table td {
+  padding: 14px 0;
+}
+/*리스트 '번호''등록일' 위치*/
+.board-table tbody td {
+  border-top: 1px solid #e7e7e7;
+  text-align: center;
+  width: 10%;
+}
+/*리스트 '제목' 위치*/
+.board-table tbody th {
+  padding-left: 28px;
+  padding-right: 14px;
+  border-top: 1px solid #e7e7e7;
+  text-align: center;
+  width: 60%;
+}
+
+.but {
+  display: inline-block;
+  background-color: #36a1ff;
+  border: 1px solid white;
+  color: #fff;
+  font-size: 1rem;
+  height: 50px;
+  margin-right: 20px;
+  padding: 6px 25px;
+  margin-bottom: 50px;
+  cursor: pointer;
+}
+
+.but:hover {
+  transform: translateY(3px);
+  box-shadow: none;
+  animation: ani9 0.4s ease-in-out infinite alternate;
+}
+@keyframes ani9 {
+  0% {
+    transform: translateY(3px);
+  }
+  100% {
+    transform: translateY(5px);
+  }
+}
+
+input[type='button'] {
+  /* border: 0; */
+  border-radius: 10px;
+}
+
+.input-file-but {
+  display: inline-block;
+  padding: 6px 25px;
+  background-color: #36a1ff;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+}
+.but:hover,
+.but:focus {
+  background: rgb(255, 255, 255);
+  border: 2px solid #cbcbcb;
+  color: rgb(72, 72, 72);
+}
+
+.board_page {
+  margin-top: 20px;
+  text-align: center;
+}
