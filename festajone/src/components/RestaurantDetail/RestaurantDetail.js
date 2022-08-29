@@ -151,6 +151,8 @@ const RestaurantDetail = () => {
     get_api_image();
   }, []);
 
+  // let nmap = 'nmap://search?query=' + restaurantD.r_title;
+
   return (
     <>
       <table className="table">
@@ -249,17 +251,12 @@ const RestaurantDetail = () => {
           </li>
 
           {/* <li>
-            <b className="detail_b">전화번호</b>
+            <b className="detail_b">네이버 지도 정보</b>
             <span className="detail_span">
-              010
-              <div dangerouslySetInnerHTML={{ __html: festival.f_d_tel }}></div>{' '}
-            </span>
-          </li>
-          <li>
-            <b className="detail_b">홈페이지</b>
-            <span className="detail_span">
-              ㄹㅇ
-              <div dangerouslySetInnerHTML={{ __html: festival.f_d_homepage }}></div>{' '}
+              
+              <a href={nmap} target="_blank">
+                {nmap}
+              </a>
             </span>
           </li> */}
         </ul>

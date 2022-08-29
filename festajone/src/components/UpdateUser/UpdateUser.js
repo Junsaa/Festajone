@@ -46,7 +46,38 @@ const UpdateUser = () => {
 
   return (
     <>
-      <div style={{ padding: '20px' }}>
+      <Form>
+        {['radio'].map((type) => (
+          <div
+            key={`inline-${type}`}
+            className="mb-3"
+            style={{ textAlign: 'center', padding: '20px' }}
+          >
+            <Form.Check
+              inline
+              label="비밀번호변경"
+              name="group1"
+              type={type}
+              id={`inline-${type}-1`}
+              onClick={() => {
+                setModal(1);
+              }}
+            />
+            <Form.Check
+              inline
+              label="사용자 정보 수정"
+              name="group1"
+              type={type}
+              id={`inline-${type}-2`}
+              onClick={() => {
+                setModal(2);
+              }}
+            />
+          </div>
+        ))}
+      </Form>
+
+      {/* <div style={{ padding: '20px' }}>
         <span
           onClick={() => {
             setModal(1);
@@ -62,7 +93,7 @@ const UpdateUser = () => {
         >
           정보수정
         </span>
-      </div>
+      </div> */}
       {modal === 1 ? (
         <PasswordChange
           pwboolean={pwboolean1}
@@ -123,7 +154,7 @@ const PasswordChange = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
                   getPassword();
                 }}
               >
-                password check
+                비밀번호 확인
               </Badge>
             </Form.Label>
             <Form.Control type="password" ref={passwordRef} placeholder="현재 비밀번호" />
@@ -148,15 +179,17 @@ const PasswordChange = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
                 {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
               <Form.Check type="checkbox" label="Check me out" />
             </Form.Group> */}
-                <Button
-                  variant="primary"
-                  type="button"
-                  onClick={() => {
-                    setPassword();
-                  }}
-                >
-                  변경
-                </Button>
+                <div align="center">
+                  <Button
+                    variant="primary"
+                    type="button"
+                    onClick={() => {
+                      setPassword();
+                    }}
+                  >
+                    비밀번호 변경
+                  </Button>
+                </div>
               </>
             )}
             {pwboolean === 3 && (
@@ -276,7 +309,7 @@ const InfoUpdate = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
                   getPassword();
                 }}
               >
-                password check
+                비밀번호 확인
               </Badge>
             </Form.Label>
             <Form.Control type="password" placeholder="현재 비밀번호" ref={passwordRef} />
@@ -321,9 +354,11 @@ const InfoUpdate = ({ pwboolean, getPassword, passwordRef, setmodal }) => {
                 {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group> */}
-                <Button variant="primary" type="button" onClick={setUserInfo}>
-                  Submit
-                </Button>
+                <div align="center">
+                  <Button variant="primary" type="button" onClick={setUserInfo}>
+                    정보 수정
+                  </Button>
+                </div>
               </>
             )}
             {pwboolean === 3 && (
