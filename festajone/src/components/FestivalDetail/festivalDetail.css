@@ -52,6 +52,7 @@ a:active {
 .slide_img {
   width: 80%;
   height: 300px;
+  max-width: fit-content;
 }
 
 .block {

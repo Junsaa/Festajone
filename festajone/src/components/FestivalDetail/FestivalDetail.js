@@ -234,7 +234,7 @@ const FestivalDetail = () => {
       </div>
 
       {/* 이미지 슬라이드 */}
-      <div id="photo_Tab">
+      <div id="photo_Tab" style={{ textAlign: '-webkit-center' }}>
         <DarkVariantExample fes_img={festival.f_d_image} fesImgs={fesImg}></DarkVariantExample>
       </div>
 

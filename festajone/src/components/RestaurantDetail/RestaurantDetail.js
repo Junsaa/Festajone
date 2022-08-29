@@ -226,7 +226,7 @@ const RestaurantDetail = () => {
       </div>
 
       {/* 이미지 슬라이드 */}
-      <div id="photo_Tab">
+      <div id="photo_Tab" style={{ textAlign: '-webkit-center' }}>
         <DarkVariantExample
           res_img={restaurantD.r_mainimage}
           imageitems={imageitems}
