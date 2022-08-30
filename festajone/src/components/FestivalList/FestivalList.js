@@ -105,7 +105,7 @@ const FestivalList = () => {
       <div className="root">
         <div className="searchFestival">
           <div className="region">
-            <div className="title">지역</div>
+            <div className="titles">지역</div>
             <div className="regionOption">
               <select id="selectRegion" ref={regionRef}>
                 <option value="1">서울</option>
@@ -146,7 +146,7 @@ const FestivalList = () => {
       <div className="root">
         <div className="searchFestival">
           <div className="region">
-            <div className="title">지역</div>
+            <div className="titles">지역</div>
             <div className="regionOption">
               <select id="selectRegion" ref={regionRef}>
                 <option value="1">서울</option>
