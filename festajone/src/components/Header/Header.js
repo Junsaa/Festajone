@@ -27,8 +27,8 @@ const Header = ({}) => {
     <div>
       <div className="header">
         <div className="logo"></div>
-        <div className="title" onClick={goMainPage}>
-          페스타존
+        <div className="maintitle" onClick={goMainPage}>
+          Festazone
         </div>
         <div className="userIcon" onClick={LoginOrMypage}>
           <FaUserCircle />

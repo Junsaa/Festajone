@@ -17,7 +17,6 @@
   /* width: 1100px; */
   width: 100%;
   max-width: 1100px;
-  margin: 0 auto;
 }
 /* .blind {
     position: absolute;
@@ -35,12 +34,12 @@ table {
 }
 /*게시판 전체적인 리스트 위치 조정*/
 section.notice {
-  padding-top: 10px;
+  padding-top: 40px;
 }
 
 /*'게시판' 글자 속성 조정*/
 .page-title h3 {
-  font-size: 28px;
+  font-size: 50px;
   color: #333333;
   font-weight: 400;
   text-align: center;
@@ -51,6 +50,7 @@ section.notice {
 .board-table {
   font-size: 13px;
   width: 100%;
+  margin-top: 30px;
   margin-bottom: 20px;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
@@ -148,6 +148,20 @@ input[type='button'] {
 }
 
 .board_page {
-  margin-top: 20px;
+  font-size: 20px;
+  margin-top: 50px;
   text-align: center;
+}
+
+.writer{
+  margin-top: 50px;
+  padding-right: 20px;
+}
+
+.boardtop{
+  background-color: #E0E0FB;
+}
+
+#writer{
+  margin-top: -20px;
 }

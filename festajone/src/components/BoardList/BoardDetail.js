@@ -16,25 +16,28 @@ const handleDelete = (e) => {
     });
 };
 
-var user_id = sessionStorage.getItem('id');
-
 const BoardDetail = ({ article, handlelist, handleupdateform }) => {
+  var user_id = sessionStorage.getItem('id');
   console.log('BoardDetail =>', article);
   var image1;
   var image2;
   var image3;
-  if (article.board_image2 === null && article.board_image3 === null) {
+  if(article.board_image1 === null && article.board_image2 === null && article.board_image3 === null){
+    image1 = null;
+    image2 = null;
+    image3 = null;
+  } else if (article.board_image2 === null && article.board_image3 === null) {
     image1 = 'http://localhost:8008/uploads/' + article.board_image1;
     image2 = null;
     image3 = null;
   } else if (article.board_image3 === null) {
     image1 = 'http://localhost:8008/uploads/' + article.board_image1;
     image2 = 'http://localhost:8008/uploads/' + article.board_image2;
-    image3 = null;
+    image3 =  null;
   } else {
     image1 = 'http://localhost:8008/uploads/' + article.board_image1;
     image2 = 'http://localhost:8008/uploads/' + article.board_image2;
-    image3 = image3 = 'http://localhost:8008/uploads/' + article.board_image3;
+    image3 = 'http://localhost:8008/uploads/' + article.board_image3;
   }
 
   if (user_id === article.board_writer) {
@@ -45,7 +48,7 @@ const BoardDetail = ({ article, handlelist, handleupdateform }) => {
             <div className="board_detail_wrap">
               <div className="board_detail">
                 <div className="title">
-                  <dl align="left">
+                  <dl align="center" id='title1'>
                     <dt>{article.board_title}</dt>
                     {/* <dt>{article.board_title}</dt> */}
                   </dl>
@@ -69,7 +72,7 @@ const BoardDetail = ({ article, handlelist, handleupdateform }) => {
                 </div>
 
                 <div className="content">
-                  <dl>
+                  <dl id='content1'>
                     <dt>{article.board_content}</dt>
                   </dl>
                 </div>
@@ -77,13 +80,13 @@ const BoardDetail = ({ article, handlelist, handleupdateform }) => {
                 <div className="image">
                   <dl>
                     <dt>
-                      <img src={image1} alt="image1" />
+                      <img src={image1} />
                     </dt>
                     <dt>
-                      <img src={image2} alt="image2" />
+                      <img src={image2} />
                     </dt>
                     <dt>
-                      <img src={image3} alt="image3" />
+                      <img src={image3} />
                     </dt>
                   </dl>
                 </div>
@@ -152,21 +155,21 @@ const BoardDetail = ({ article, handlelist, handleupdateform }) => {
 
                 <div className="image">
                   <dl>
-                    <dt>
-                      <img src={image1} alt="image1" />
+                  <dt>
+                      <img src={image1} />
                     </dt>
                     <dt>
-                      <img src={image2} alt="image2" />
+                      <img src={image2} />
                     </dt>
                     <dt>
-                      <img src={image3} alt="image3" />
+                      <img src={image3} />
                     </dt>
                   </dl>
                 </div>
               </div>
             </div>
 
-            <div>
+            <div className="select_btn">
               <input className="list_but" type="button" value="목록" onClick={handlelist}></input>
             </div>
           </div>

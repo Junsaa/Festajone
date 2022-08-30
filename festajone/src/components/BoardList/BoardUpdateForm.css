@@ -5,8 +5,9 @@
 }
 
 .board_title {
-  margin-bottom: 0px;
-  font-size: 40px;
+  margin-top: 50px;
+  margin-bottom: 40px;
+  font-size: 50px;
   text-align: center;
 }
 
@@ -20,7 +21,7 @@
 /* '글수정' '제목' 사이 구분선*/
 .board_update {
   border-top: 1px solid rgb(0, 0, 0);
-  padding-bottom: 20px;
+  padding-bottom: 80px;
 }
 
 /*'제목', '작성자', '내용' 입력창 간격 조절*/
@@ -153,4 +154,8 @@
 input[type='button'] {
   /* border: 0; */
   border-radius: 10px;
+}
+
+.two{
+  margin-top: 25px;
 }

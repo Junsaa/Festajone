@@ -88,7 +88,7 @@
 }
 
 .image-file {
-  padding-top: 20px;
+  padding-top: 80px;
   padding-bottom: 20px;
   display: flex;
   justify-content: right;
@@ -159,4 +159,13 @@ input[type='reset'] {
 
 input[type='button'] {
   border-radius: 10px;
+}
+
+#write{
+  margin-top: 90px;
+  font-size: 50px;
+}
+
+.three{
+  margin-top: 80px;
 }

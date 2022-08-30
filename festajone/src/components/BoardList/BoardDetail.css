@@ -22,6 +22,7 @@
 .board_detail .title {
   padding: 20px 15px;
   border-bottom: 1px dashed #ddd;
+  margin-top: 60px;
   font-size: 2rem;
 }
 
@@ -74,11 +75,12 @@
   border-bottom: 1px dashed #ddd;
   line-height: 160%;
   font-size: 1.4rem;
-  text-align: left;
+  text-align: center;
 }
 
 img {
   max-width: 100%;
+  margin-top: 5px;
 }
 
 .select_but {
@@ -131,4 +133,16 @@ img {
 
 input[type='button'] {
   border: 0;
+}
+
+.select_btn{
+  margin-top: 50px;
+}
+
+#title1{
+  margin-left: 20px;
+}
+
+#content1{
+  margin-left: 20px;
 }

@@ -20,7 +20,9 @@ function Main() {
     board_title: '',
     board_content: '',
     board_date: '',
-    board_image: ''
+    board_image1: '',
+    board_image2: '',
+    board_image3: ''
   });
 
   // 0:글쓰기, 1:상세보기, 2:글수정
@@ -28,7 +30,7 @@ function Main() {
   const [pageLink, setPageLink] = useState([]);
 
   var page_num = 1;
-  const page_size = 5;
+  const page_size = 10;
   var page_count = 1;
   var article_count = 0;
 

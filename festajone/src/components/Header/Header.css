@@ -1,15 +1,34 @@
 .header {
   padding: 10px 0;
-  font-size: 20px;
+  font-size: 60px;
+  font-weight: bold;
   background-color: #535761;
+  background: url(festa.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-position: center; */
   text-align: center;
-  color: #fff;
+  color: rgb(255, 255, 255);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-left: 30px;
   padding-right: 30px;
+  cursor: pointer;
 }
 .header .userIcon {
   margin-top: 8px;
-}/*# sourceMappingURL=Header.css.map */
+  display: flex;
+  justify-content: space-between;
+} /*# sourceMappingURL=Header.css.map */
+
+@font-face {
+  font-family: 'MYYeongnamnu';
+  src: url('/src/fonts/MYYeongnamnu.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+.maintitle {
+  font-family: 'MYYeongnamnu';
+}

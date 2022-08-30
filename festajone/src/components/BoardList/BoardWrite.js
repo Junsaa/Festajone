@@ -12,8 +12,7 @@ const BoardWrite = ({ handlelist }) => {
     image_1: '',
     image_2: ''
   });
-  // const [image2_name, setImage2_name] = useState('');
-  // const [image3_name, setImage3_name] = useState('');
+  
   const [image_name22, setImage_name22] = useState([]);
 
   var user_id = window.sessionStorage.getItem('id');
@@ -106,7 +105,7 @@ const BoardWrite = ({ handlelist }) => {
     <div>
       <form encType="multipart/form-data">
         <div className="board_wrap" align="center">
-          <div className="board_title" align="left">
+          <div className="board_title" id='write' align="left">
             글작성
           </div>
 
@@ -145,26 +144,29 @@ const BoardWrite = ({ handlelist }) => {
 
             <div className="image-file">
               <dl>
-                <div onChange={onImage} align="left">
-                  <input
-                    type="file"
-                    name="imgs"
-                    mulltiple
-                    id="image_0"
-                    ref={imageRef}
-                    accept="image/*"
-                  />
+                <div align="left">
+                <input
+                  type="file"
+                  name="imgs"
+                  multiple
+                  id="image_0"
+                  ref={imageRef}
+                  accept="image/*"
+                  onChange={onImage}
+                />
                 </div>
               </dl>
             </div>
 
-            <td colSpan="2">
-              <input type="submit" value="글쓰기" className="insert" onClick={handleInsert}></input>
-              &nbsp;
-              <input type="reset" value="취소" className="reset"></input>
-              &nbsp;
-              <input type="button" value="목록" className="list_but" onClick={Main}></input>
-            </td>
+            <div className="three">
+              <td colSpan="2">
+                <input type="submit" value="글쓰기" className="insert" onClick={handleInsert}></input>
+                &nbsp;
+                <input type="reset" value="취소" className="reset"></input>
+                &nbsp;
+                <input type="button" value="목록" className="list_but" onClick={Main}></input>
+              </td>
+            </div>
           </div>
         </div>
       </form>

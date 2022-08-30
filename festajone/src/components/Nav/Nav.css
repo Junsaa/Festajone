@@ -1,0 +1,16 @@
+.nav {
+  font-family: 'MYYeongnamnu';
+  font-size: 20px;
+}
+.tab_day {
+  height: 60px;
+  line-height: 45px;
+  font-size: 30px;
+}
+  
+  @font-face {
+    font-family: 'MYYeongnamnu';
+    src: url('/src/fonts/MYYeongnamnu.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }

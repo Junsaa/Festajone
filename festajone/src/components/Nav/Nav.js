@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Nav.css';
 
 const Nav = ({menu}) => {
 
@@ -17,8 +18,15 @@ const Nav = ({menu}) => {
   },[currentmenu])
 
   const changeBoard = useCallback (() => {
-    setCurrentMenu(3)
-    navigate("/boardlist")
+    var user = sessionStorage.getItem('id');
+
+    if(user !== null){
+      setCurrentMenu(3)
+      navigate("/boardlist")
+    }else{
+      alert('로그인 후 사용 가능합니다.');
+      navigate('/login');
+    }
   },[currentmenu])
 
    
