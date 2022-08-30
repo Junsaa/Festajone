@@ -1,21 +1,77 @@
 .container {
-  padding: 10px 0 40px 0;
+  padding: 10px 0 20px 0;
 }
 
 .SlideTitle {
   margin: 10px;
   /* display: flex; */
   text-align: center;
+  padding: 0 0 0px 0;
 }
 
 .firstimag {
   height: auto;
-  width: auto;
+  width: 80%;
   margin: auto;
-  padding: 0 0 10px 0;
+  padding: 0 0 30px 0;
   align-items: center;
 }
 
 .img {
   height: 500px;
+  width: 500px;
+}
+
+#month {
+  margin-top: 80px;
+  font-size: 60px;
+}
+
+.slidebox {
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('/src/fonts/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'YUniverse-B';
+  src: url('/src/fonts/YUniverse-B.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+/* 
+@font-face {
+  font-family: 'KITA';
+  src: url('/src/fonts/KITA.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+} */
+
+@font-face {
+  font-family: 'Hahmlet-Bold';
+  src: url('/src/fonts/Hahmlet-Bold.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+.SlideTitle {
+  font-family: 'Hahmlet-Bold';
+}
+
+.date {
+  margin-top: 25px;
+  font-size: 40px;
+  font-family: 'Hahmlet-Bold';
+}
+
+.title {
+  margin-top: 25px;
+  font-size: 40px;
+  font-family: 'Hahmlet-Bold';
+  vertical-align: center;
 }

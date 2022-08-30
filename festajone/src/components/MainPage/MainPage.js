@@ -28,7 +28,7 @@ const MainPage = () => {
   const checkDateValue = () => {
     axios
       .post('http://localhost:8008/festivalDate', {
-        today: year + '-' +month+ '-' + day
+        today: year + month + day
       })
       .then((res) => {
         const { data } = res;
@@ -59,7 +59,7 @@ const MainPage = () => {
   return (
     <div>
       {console.log(article)}
-      <Slide article={article} />
+      <Slide article={article}/>
       {/* <div onClick={checkDateValue}>but</div> */}
     </div>
   );
