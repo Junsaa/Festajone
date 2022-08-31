@@ -23,15 +23,17 @@ const Join = () => {
         pwcheck.innerText = '비밀번호가 다릅니다';
         pwcheck.style = 'color:red';
       }
-    }else{
-      pwcheck.innerText = '비밀번호와 확인용 비밀번호를 확인해주세요'
-      pwcheck.style = 'color:green';
     }
   }
 
   const handleidcheck = () => {
     var idcheck = document.getElementById('idcheck')
-    axios
+    if (idRef.current.value === '' || idRef.current.value === undefined) {
+      alert('아이디를 입력하세요');
+      idRef.current.focus();
+      return false;
+    }else{
+      axios
       .post('http://localhost:8008/idcheck', {
         id: idRef.current.value,
       })
@@ -47,6 +49,7 @@ const Join = () => {
       .catch((e) => {
         console.error(e);
       });
+    }
   }
 
   const handleJoin = () => {
@@ -135,7 +138,7 @@ const Join = () => {
 
   return (
     <div className="Join" align="center">
-      <h1>Sign Up</h1>
+      <h1 id='sign'>Sign Up</h1>
       <form>
         <div className="text-area">
           <input
@@ -211,7 +214,7 @@ const Join = () => {
               defaultValue=""
             />
           </div>
-          <input className="btn" type="button" value="회원가입" onClick={handleJoin} />
+          <input className="btn" id='signbtn' type="button" value="회원가입" onClick={handleJoin} />
         </div>
       </form>
     </div>

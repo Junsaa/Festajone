@@ -55,7 +55,7 @@ const Login = () => {
 
   return (
     <div className="Login" align="center" border-radius="22px">
-      <h1>Login</h1>
+      <h1 id='login_title'>Login</h1>
       <form>
         <div className="text-area">
           <input
@@ -78,7 +78,7 @@ const Login = () => {
           </div>
           <input type="button" value="로그인" className="btn" onClick={handleLogin} />
         </div>
-        <input type="button" value="▷계정이 없으신가요?" onClick={handleJoin} className="submit" />
+        <input type="button" id='join' value="▷계정이 없으신가요?" onClick={handleJoin} className="submit" />
       </form>
     </div>
   );
