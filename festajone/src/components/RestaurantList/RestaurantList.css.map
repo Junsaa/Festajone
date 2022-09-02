@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"RestaurantList.css"}
+{"version":3,"sources":["RestaurantList.scss","RestaurantList.css"],"names":[],"mappings":"AAAA;EACI,kBAAA;ACCJ","file":"RestaurantList.css"}
