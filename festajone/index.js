@@ -18,8 +18,8 @@ app.use(cors(corsOptions));
 
 const db = mysql.createPool({
   host: 'localhost',
-  user: 'root',
-  password: '75303306',
+  user: 'pesta',
+  password: 'Pesta123',
   database: 'first'
 });
 

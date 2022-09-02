@@ -62,9 +62,9 @@ const BoardList = ({
                 </tr>
               </thead>
             </table>
-            {/* <div align="right" width="100%">
+            <div align="right" width="100%">
               <input type="button" className="but" value="글쓰기" onClick={writer} id="writer" />
-            </div> */}
+            </div>
           </div>
         </div>
       </section>

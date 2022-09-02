@@ -24,8 +24,6 @@
 .root .searchFestival .region .regionOption select {
   width: 100px;
   font-size: 25px;
-  font-family: "MYYeongnamnu";
-  text-align: center;
 }
 .root .searchFestival .searchFinish {
   display: flex;

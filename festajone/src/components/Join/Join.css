@@ -21,7 +21,7 @@ body {
   padding: 10px;
   font-weight: 300px;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom:10px;
   padding-right: 68px;
   border-radius: 30px;
   background: #ffffff;
@@ -62,4 +62,24 @@ h1 {
   100% {
     transform: translateY(5px);
   }
+}
+
+#sign{
+  margin-top: 100px;
+  font-size: 60px;
+}
+
+#signbtn{
+  margin-bottom: 263px;
+  margin-top: 50px;
+}
+
+#idcheck{
+  font-size: 15px;
+  margin-right: 10px;
+}
+
+#pwcheck{
+  font-size: 15px;
+  margin-right: 10px;
 }

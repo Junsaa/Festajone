@@ -74,3 +74,22 @@ h1 {
   border: 1px solid white;
   cursor: pointer;
 }
+
+#login_title{
+  margin-top: 200px;
+  font-size: 80px;
+}
+
+#username {
+  margin-top: 50px;
+}
+
+#password {
+  margin-top: 20px;
+}
+
+#join {
+  margin-top: 20px;
+  margin-bottom: 356px;
+  font-size: 30px;
+}
